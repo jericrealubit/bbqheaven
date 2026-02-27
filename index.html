@@ -1,31 +1,90 @@
-<div id="header-placeholder"></div>
-<div id="hero-placeholder"></div>
-<div id="menu-placeholder"></div>
-<div id="location-placeholder"></div>
-<div id="footer-placeholder"></div>
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script>
-  async function loadComponent(id, file) {
-    try {
-      const response = await fetch(file);
-      if (!response.ok) {
-        throw new Error(`Failed to load ${file}: ${response.statusText}`);
+    <title>BBQ Heaven Mandurah | Authentic Woodfire BBQ & Ribs</title>
+    <meta
+      name="description"
+      content="Mandurah's home for slow-cooked beef brisket, sticky bourbon ribs, and woodfire BBQ. Visit us at 6/33-39 Pinjarra Rd."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "BBQ Heaven Mandurah",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "6/33-39 Pinjarra Rd",
+          "addressLocality": "Mandurah",
+          "addressRegion": "WA",
+          "postalCode": "6210",
+          "addressCountry": "AU"
+        },
+        "telephone": "+61895676048",
+        "servesCuisine": "BBQ",
+        "priceRange": "$$"
       }
-      const data = await response.text();
-      document.getElementById(id).innerHTML = data;
-      console.log(`Successfully loaded: ${file}`);
-    } catch (error) {
-      console.error("Component Load Error:", error);
-      // Display a small error message on the page for debugging
-      document.getElementById(id).innerHTML =
-        `<p class="text-red-500">Error loading ${file}</p>`;
-    }
-  }
+    </script>
+  </head>
+  <body class="bg-[#121212] text-white font-sans antialiased">
+    <div id="header-placeholder"></div>
 
-  // Using './' ensures Netlify looks in the same folder
-  loadComponent("header-placeholder", "./header.html");
-  loadComponent("hero-placeholder", "./hero.html");
-  loadComponent("menu-placeholder", "./menu.html");
-  loadComponent("location-placeholder", "./location.html");
-  loadComponent("footer-placeholder", "./footer.html");
-</script>
+    <main>
+      <div id="hero-placeholder"></div>
+      <div id="menu-placeholder"></div>
+      <div id="location-placeholder"></div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      async function loadComponent(id, file) {
+        try {
+          // The './' ensures we look in the root folder on Netlify
+          const response = await fetch(file);
+          if (!response.ok) {
+            throw new Error(`Failed to load ${file}: ${response.statusText}`);
+          }
+          const data = await response.text();
+          document.getElementById(id).innerHTML = data;
+          console.log(`Successfully loaded: ${file}`);
+        } catch (error) {
+          console.error("Component Load Error:", error);
+          document.getElementById(id).innerHTML =
+            `<div class="p-10 text-center text-red-500 bg-black/50">
+                        <p class="font-bold">Error loading section: ${file}</p>
+                        <p class="text-xs text-gray-400">Check file naming and Netlify deployment root.</p>
+                    </div>`;
+        }
+      }
+
+      // Trigger the loading of all files
+      window.addEventListener("DOMContentLoaded", () => {
+        loadComponent("header-placeholder", "./header.html");
+        loadComponent("hero-placeholder", "./hero.html");
+        loadComponent("menu-placeholder", "./menu.html");
+        loadComponent("location-placeholder", "./location.html");
+        loadComponent("footer-placeholder", "./footer.html");
+      });
+    </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
+      defer
+    ></script>
+  </body>
+</html>
