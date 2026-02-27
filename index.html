@@ -5,10 +5,27 @@
 <div id="footer-placeholder"></div>
 
 <script>
-  // Existing loading script
-  loadComponent("header-placeholder", "header.html");
-  loadComponent("hero-placeholder", "hero.html");
-  loadComponent("menu-placeholder", "menu.html");
-  loadComponent("location-placeholder", "location.html");
-  loadComponent("footer-placeholder", "footer.html");
+  async function loadComponent(id, file) {
+    try {
+      const response = await fetch(file);
+      if (!response.ok) {
+        throw new Error(`Failed to load ${file}: ${response.statusText}`);
+      }
+      const data = await response.text();
+      document.getElementById(id).innerHTML = data;
+      console.log(`Successfully loaded: ${file}`);
+    } catch (error) {
+      console.error("Component Load Error:", error);
+      // Display a small error message on the page for debugging
+      document.getElementById(id).innerHTML =
+        `<p class="text-red-500">Error loading ${file}</p>`;
+    }
+  }
+
+  // Using './' ensures Netlify looks in the same folder
+  loadComponent("header-placeholder", "./header.html");
+  loadComponent("hero-placeholder", "./hero.html");
+  loadComponent("menu-placeholder", "./menu.html");
+  loadComponent("location-placeholder", "./location.html");
+  loadComponent("footer-placeholder", "./footer.html");
 </script>
