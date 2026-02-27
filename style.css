@@ -1,0 +1,17 @@
+/* BBQ Heaven Brand Styles */
+@theme {
+  --color-primary: #d97706;
+  --color-primary-dark: #b45309;
+  --color-charcoal: #121212;
+  --color-smoke: #262626;
+  --font-display: "Oswald", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+.hero-gradient {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+}
