@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | BBQ Heaven Mandurah</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bg-charcoal text-white font-sans antialiased">
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-20">
+      <h1 class="text-5xl font-display uppercase mb-10 text-primary">
+        Privacy Policy
+      </h1>
+
+      <div class="space-y-8 text-gray-300 leading-relaxed">
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            1. Information We Collect
+          </h2>
+          <p>
+            When you order from BBQ Heaven Mandurah, we collect personal
+            information necessary to fulfill your order, including your name,
+            email address, phone number, and delivery address (if applicable).
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            2. How We Use Your Data
+          </h2>
+          <p>We use your information to:</p>
+          <ul class="list-disc ml-6 mt-2 space-y-2">
+            <li>Process and confirm your food orders.</li>
+            <li>Send you SMS/Email updates regarding your order status.</li>
+            <li>Improve our menu and service based on customer feedback.</li>
+            <li>
+              Comply with legal obligations (e.g., alcohol age verification).
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            3. Third-Party Service Providers
+          </h2>
+          <p>
+            We use **GloriaFood** to power our online ordering system. Your data
+            is processed through their secure platform to facilitate your
+            transaction. We do not sell, trade, or rent your personal
+            information to third parties for marketing purposes.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            4. Payment Security
+          </h2>
+          <p>
+            Payment transactions are processed via secure, PCI-compliant
+            third-party gateways. BBQ Heaven Mandurah does not see or store your
+            credit card or bank account details.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            5. Cookies
+          </h2>
+          <p>
+            Our website uses cookies to enhance your browsing experience, such
+            as remembering your preferences or items in your cart. You can
+            choose to disable cookies in your browser settings, but it may
+            affect site functionality.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display text-white uppercase mb-4">
+            6. Contact Us
+          </h2>
+          <p>
+            If you have questions about this policy or wish to request the
+            deletion of your data, please contact us at:
+          </p>
+          <p class="mt-2 font-bold text-primary">BBQ Heaven Mandurah</p>
+          <p>6/33-39 Pinjarra Rd, Mandurah WA 6210</p>
+          <p>Phone: (08) 9567 6048</p>
+        </section>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      async function loadComponent(id, file) {
+        const response = await fetch(file);
+        const data = await response.text();
+        document.getElementById(id).innerHTML = data;
+      }
+      loadComponent("header-placeholder", "./header.html");
+      loadComponent("footer-placeholder", "./footer.html");
+    </script>
+  </body>
+</html>

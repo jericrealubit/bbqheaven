@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordering Terms & Conditions | BBQ Heaven Mandurah</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-charcoal text-white font-sans antialiased">
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-20">
+      <h1 class="text-5xl font-display uppercase mb-4 text-primary">
+        Ordering Terms
+      </h1>
+      <p
+        class="text-gray-400 mb-12 uppercase tracking-widest text-sm font-bold italic"
+      >
+        Please read these terms carefully before placing your order.
+      </p>
+
+      <div
+        class="space-y-10 text-gray-300 leading-relaxed border-t border-white/10 pt-10"
+      >
+        <section>
+          <h2
+            class="text-2xl font-display text-white uppercase mb-4 flex items-center gap-3"
+          >
+            <span class="text-primary">01.</span> Order Fulfillment
+          </h2>
+          <p>
+            All orders are subject to availability. Because our BBQ is cooked
+            "Low and Slow" for up to 12 hours, certain items (like Brisket or
+            Ribs) may sell out. We reserve the right to contact you and offer a
+            substitution or a refund if an item becomes unavailable after your
+            order is placed.
+          </p>
+        </section>
+
+        <section>
+          <h2
+            class="text-2xl font-display text-white uppercase mb-4 flex items-center gap-3"
+          >
+            <span class="text-primary">02.</span> Pickup & Quality
+          </h2>
+          <p>
+            Orders must be collected from
+            <strong class="text-white">6/33-39 Pinjarra Rd, Mandurah</strong>.
+            To ensure the best quality, we recommend picking up your food at the
+            exact time specified in your confirmation. BBQ Heaven is not
+            responsible for the food quality if collected more than 20 minutes
+            after the scheduled time.
+          </p>
+        </section>
+
+        <section>
+          <h2
+            class="text-2xl font-display text-white uppercase mb-4 flex items-center gap-3"
+          >
+            <span class="text-primary">03.</span> Payments & Refunds
+          </h2>
+          <p>
+            Payments are processed securely via our ordering partner,
+            <strong class="text-white">GloriaFood</strong>. Refunds are only
+            issued if:
+          </p>
+          <ul class="list-disc ml-6 mt-3 space-y-2">
+            <li>The order is cancelled by the restaurant.</li>
+            <li>Items are missing from your order and cannot be replaced.</li>
+            <li>
+              There is a significant quality issue reported within 1 hour of
+              pickup.
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2
+            class="text-2xl font-display text-white uppercase mb-4 flex items-center gap-3"
+          >
+            <span class="text-primary">04.</span> Alcohol Policy
+          </h2>
+          <p>
+            If your order includes alcoholic beverages, you must be 18 years of
+            age or older. We operate under strict RSA (Responsible Service of
+            Alcohol) guidelines. Valid photo ID must be presented upon
+            collection. If ID cannot be produced, the alcohol will be removed
+            from the order and a refund for that portion will be issued.
+          </p>
+        </section>
+
+        <section class="bg-smoke p-8 border-l-4 border-primary italic">
+          <p>
+            "By clicking 'Place Order' on our digital menu, you acknowledge that
+            you have read, understood, and agreed to these terms."
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      async function loadComponent(id, file) {
+        try {
+          const response = await fetch(file);
+          if (!response.ok) throw new Error(`Failed to load ${file}`);
+          const data = await response.text();
+          document.getElementById(id).innerHTML = data;
+        } catch (error) {
+          console.error("Load Error:", error);
+        }
+      }
+
+      // Load necessary components
+      loadComponent("header-placeholder", "./header.html");
+      loadComponent("footer-placeholder", "./footer.html");
+    </script>
+  </body>
+</html>

@@ -1,17 +1,39 @@
-/* BBQ Heaven Brand Styles */
+@import "tailwindcss";
+
 @theme {
-  --color-primary: #d97706;
-  --color-primary-dark: #b45309;
-  --color-charcoal: #121212;
-  --color-smoke: #262626;
+  /* BBQ Heaven Brand Colors */
+  --color-primary: #d97706; /* Deep Amber */
+  --color-primary-dark: #b45309; /* Burnt Orange */
+  --color-charcoal: #121212; /* Pit Black */
+  --color-smoke: #1f1f1f; /* Dark Gray */
+
+  /* Typography */
   --font-display: "Oswald", sans-serif;
   --font-sans: "Inter", sans-serif;
 }
 
+/* Custom Hero Background (Smoky Overlay) */
 .hero-gradient {
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=80");
   background-size: cover;
   background-position: center;
+}
+
+/* Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar for that 'Smoky' look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+::-webkit-scrollbar-thumb {
+  background: #d97706;
+  border-radius: 10px;
 }
