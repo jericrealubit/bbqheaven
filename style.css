@@ -12,13 +12,23 @@
   --font-sans: "Inter", sans-serif;
 }
 
+.order-button {
+  background-color: var(--color-primary);
+  color: white;
+  font-family: var(--font-sans);
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+
 /* Custom Hero Background (Smoky Overlay) */
+/* Replace existing .hero-gradient rule with this */
 .hero-gradient {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1600&q=80");
+  background-color: rgba(18, 18, 18, 0.7); /* charcoal at 70% opacity */
   background-size: cover;
   background-position: center;
+  height: 35vh; /* user requested */
+  border-radius: 30px;
 }
 
 /* Scroll Behavior */
@@ -37,3 +47,65 @@ html {
   background: #d97706;
   border-radius: 10px;
 }
+
+.glf-button {
+  background-color: #d97706 !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+  padding: 5px 10px !important;
+}
+
+/* Background and global text */
+.bg-charcoal,
+body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Make primary text bright white and muted text readable on black */
+.text-white {
+  color: #ffffff !important;
+}
+.text-gray-300 {
+  color: #e5e7eb !important;
+}
+.text-gray-400 {
+  color: #d1d5db !important;
+}
+
+/* Reduce paragraph spacing and tighten leading */
+p {
+  margin-top: 0;
+  margin-bottom: 0.6rem; /* smaller gap between paragraphs */
+  line-height: 1.45; /* comfortable but compact */
+  color: inherit;
+}
+
+/* Reduce the vertical spacing applied by utility container groups */
+.space-y-8 > * + * {
+  margin-top: 0.75rem !important; /* tighter than Tailwind's default */
+}
+
+/* Slightly tighten card spacing so grid feels denser */
+.grid > div {
+  padding: 1.5rem !important; /* reduce from 2rem if needed */
+}
+
+/* Ensure headings remain visible and not too spaced */
+h1,
+h2,
+h3 {
+  color: #ffffff !important;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Optional: make small text slightly brighter for contrast */
+.text-sm {
+  color: #e6e6e6 !important;
+}
+
+/* Keep links / primary accents visible on black */
+.text-primary {
+  color: #ffb347 !important;
+} /* adjust to your brand color */

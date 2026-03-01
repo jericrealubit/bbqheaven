@@ -1,0 +1,162 @@
+:root {
+  --color-primary: #d97706;
+  --color-primary-dark: #b45309;
+  --color-charcoal: #121212;
+  --color-smoke: #1f1f1f;
+  --font-display: "Oswald", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+/* Layout + hero sizing */
+.hero {
+  position: relative;
+  height: 40vh; /* user requested */
+  overflow: hidden;
+}
+
+/* Slides container fills the hero */
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Base slide */
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    transform 6s ease-out,
+    opacity 1s ease-in-out;
+  will-change: transform, opacity;
+}
+
+/* Visible slide */
+.slide.active {
+  opacity: 1;
+}
+
+/* Zoom variants */
+.slide.zoom-in.active {
+  transform: scale(1.1);
+}
+.slide.zoom-out.active {
+  transform: scale(1);
+}
+
+/* Gradient overlay sits above slides */
+.hero .hero-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+/* Foreground content */
+.hero .hero-content {
+  position: relative;
+  z-index: 20;
+  max-width: 72rem;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* Utility fallback for debugging */
+.debug-visible .slide {
+  opacity: 1 !important;
+}
+
+/* hero background (slides) */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 40vh;
+}
+
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* overlay / foreground container */
+.hero-overlay {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* allow clicks to pass through if needed; override on interactive children */
+  padding: 2rem;
+}
+
+/* allow interactive elements inside the injected hero to receive pointer events */
+.hero-overlay * {
+  pointer-events: auto;
+}
+
+/* make sure the injected header scales nicely */
+.hero-overlay .flex, /* tailwind classes used in header.html */
+.hero-overlay header {
+  width: 50vw;
+  max-width: 1200px;
+}
+
+/* Ensure overlay fills the hero and centers content */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center; /* vertical center */
+  justify-content: center; /* horizontal center */
+  padding: 2rem;
+  pointer-events: none;
+}
+
+/* Foreground card that holds the injected header/content */
+.hero-overlay .hero-content {
+  pointer-events: auto; /* allow interaction */
+  width: min(90%, 900px); /* responsive width */
+  background: rgba(18, 18, 18, 0.55); /* semi-transparent card */
+  backdrop-filter: blur(6px); /* soft glass effect (optional) */
+  color: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 16px; /* rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* depth */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Make sure large header text scales down on small screens */
+.hero-overlay .hero-content .font-display {
+  font-size: clamp(1.6rem, 4.5vw, 3.5rem); /* responsive sizing */
+  line-height: 1;
+}
+
+/* Buttons inside the card keep their pointer events */
+.hero-overlay .hero-content a,
+.hero-overlay .hero-content .glf-button {
+  pointer-events: auto;
+}
+
+/* Optional: tighter card on very short hero heights */
+@media (max-height: 480px) {
+  .hero-overlay .hero-content {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+  }
+}

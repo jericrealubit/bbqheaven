@@ -2,34 +2,44 @@
   class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b bg-black/90 border-primary/20"
 >
   <div class="text-2xl font-display tracking-tighter uppercase">
-    <span class="text-primary">BBQ</span> Heaven
+    <a href="/" class="flex items-center gap-3">
+      <img
+        src="./images/logo.png"
+        srcset="/images/logo@2x.png 2x"
+        alt="BBQ Heaven logo"
+        class="h-10 md:h-12 lg:h-14 max-h-14 w-auto object-contain"
+        loading="eager"
+      />
+    </a>
   </div>
   <div class="hidden gap-8 text-sm font-semibold uppercase md:flex">
-    <a href="index.html" class="transition hover:text-primary">Home</a>
-    <a href="#menu" class="transition hover:text-primary">Menu</a>
-    <a href="tel:+61895676048" class="transition hover:text-primary"
+    <a href="/" class="transition hover:text-primary">Home</a>
+    <a href="/#menu" class="transition hover:text-primary">Menu</a>
+    <a href="tel:+61895609804" class="transition hover:text-primary"
       >Call Now</a
     >
   </div>
-  <a
-    href="#order"
-    class="px-6 py-2 text-xs font-bold uppercase transition rounded bg-primary hover:bg-primary-dark"
-  >
-    Order Online
-  </a>
-  <!-- If you would like to customize the button, remove or change the "class" attribute inside the <span> tag -->
-  <span
-    class="glf-button"
-    data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
-    data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
-    >See MENU & Order</span
-  >
-  <span
+  <div>
+    <!-- <span
+      class="glf-button"
+      data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
+      data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
+      >Order Now</span
+    > -->
+    <span
+      class="glf-button"
+      data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
+      data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
+      aria-label="Order now from BBQ Heaven"
+      >Order Now</span
+    >
+  </div>
+  <!-- <span
     class="glf-button reservation"
     data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
     data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
     data-glf-reservation="true"
     >Table Reservation</span
   >
-  <script src="https://www.fbgcdn.com/embedder/js/ewm2.js" defer async></script>
+   -->
 </nav>

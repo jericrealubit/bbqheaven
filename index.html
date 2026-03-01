@@ -12,15 +12,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/hero.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <link rel="stylesheet" href="./style.css" />
-
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -44,7 +43,34 @@
     <div id="header-placeholder"></div>
 
     <main>
-      <div id="hero-placeholder"></div>
+      <section id="hero" class="hero">
+        <div class="hero-slides">
+          <div
+            class="slide"
+            style="background-image: url(&quot;./images/image1.jpg&quot;)"
+            data-effect="zoom"
+          ></div>
+          <div
+            class="slide"
+            style="background-image: url(&quot;./images/image2.jpg&quot;)"
+            data-effect="fly-left"
+          ></div>
+          <div
+            class="slide"
+            style="background-image: url(&quot;./images/image3.jpg&quot;)"
+            data-effect="zoom"
+          ></div>
+          <div
+            class="slide"
+            style="background-image: url(&quot;./images/image4.jpg&quot;)"
+            data-effect="fly-right"
+          ></div>
+        </div>
+        <div class="hero-overlay">
+          <div id="hero-placeholder"></div>
+        </div>
+      </section>
+
       <div id="menu-placeholder"></div>
       <div id="location-placeholder"></div>
     </main>
@@ -86,6 +112,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
       defer
     ></script>
+    <script src="/hero.js"></script>
     <script
       src="https://www.fbgcdn.com/embedder/js/ewm2.js"
       defer
