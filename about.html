@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | BBQ Heaven Mandurah</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .font-display {
+        font-family: "Oswald", sans-serif;
+      }
+      .text-primary {
+        color: #d97706;
+      } /* Pitmaster Amber */
+      .bg-smoke {
+        background-color: #1a1a1a;
+      }
+    </style>
+  </head>
+
+  <body class="bg-black text-gray-400 font-sans leading-relaxed">
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+      <div class="mb-16 border-l-8 border-primary pl-8">
+        <h1
+          class="text-white font-display text-5xl md:text-7xl uppercase tracking-tighter mb-4"
+        >
+          Real Woodfire <span class="text-primary italic">BBQ</span>
+        </h1>
+        <p
+          class="text-xl text-white/80 font-semibold uppercase tracking-widest"
+        >
+          Welcome to BBQ Heaven
+        </p>
+      </div>
+
+      <div class="space-y-8 text-lg md:text-xl">
+        <p>
+          An innovative restaurant as our
+          <strong class="text-white">BBQ cooking table</strong> is what makes us
+          unique. We serve Australian style BBQ to cater to everybody’s taste,
+          ranging from fresh salads and entrees to our signature hotpot of the
+          day.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+          <div class="bg-smoke p-8 rounded-lg border border-white/5">
+            <h3 class="text-primary font-display uppercase tracking-wider mb-3">
+              The Experience
+            </h3>
+            <p class="text-sm">
+              Enjoy marinated thick-sliced meats on the grill, served with
+              house-made spicy pickled vegetables and seasonal sweets.
+            </p>
+          </div>
+          <div class="bg-smoke p-8 rounded-lg border border-white/5">
+            <h3 class="text-primary font-display uppercase tracking-wider mb-3">
+              The Flavours
+            </h3>
+            <p class="text-sm">
+              Our menu spans classic food, Asian and Western delights, today’s
+              specials, and our famous curry of the day.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          After a hard working week, we provide the ultimate chill-out spot. We
+          offer
+          <span class="text-white font-bold">Karaoke nights on Fridays</span>
+          and
+          <span class="text-white font-bold">Live Bands on Saturdays</span> for
+          entertainment until midnight.
+        </p>
+
+        <p class="border-t border-white/10 pt-8">
+          Chill with friends and enjoy our famous international drinks like
+          <span
+            class="text-primary font-bold uppercase underline decoration-primary/30 underline-offset-8"
+            >Red Horse</span
+          >, along side a premium selection of beer, house wine, and spirits.
+        </p>
+      </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      async function loadComponent(id, file) {
+        try {
+          const response = await fetch(file);
+          if (!response.ok) throw new Error(`Failed to load ${file}`);
+          const data = await response.text();
+          document.getElementById(id).innerHTML = data;
+        } catch (error) {
+          console.error("Load Error:", error);
+        }
+      }
+
+      loadComponent("header-placeholder", "./header.html");
+      loadComponent("footer-placeholder", "./footer.html");
+    </script>
+  </body>
+</html>

@@ -1,6 +1,9 @@
-<section id="menu" class="px-6 py-20 bg-charcoal">
+<section
+  id="menu"
+  class="px-6 py-20 bg-black/20 backdrop-blur-sm text-white relative z-10"
+>
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16 text-center">
+    <div class="mb-12 text-center">
       <h2
         class="mb-2 text-4xl font-display md:text-5xl uppercase tracking-tight"
       >
@@ -11,322 +14,101 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Individual Starter cards -->
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Garlic Bread & Cheese
-          </h3>
-          <span class="font-bold text-primary">$10 / $12</span>
+    <div class="flex flex-col items-center mb-16 gap-8">
+      <div id="category-filters" class="flex flex-wrap justify-center gap-3">
+        <button
+          onclick="setCategory('all')"
+          class="cat-btn active-cat px-6 py-2 border border-primary text-primary font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:bg-primary hover:text-white"
+        >
+          All
+        </button>
+        <button
+          onclick="setCategory('starters')"
+          class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:border-primary hover:text-primary"
+        >
+          Starters
+        </button>
+        <button
+          onclick="setCategory('mains')"
+          class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:border-primary hover:text-primary"
+        >
+          Mains
+        </button>
+        <button
+          onclick="setCategory('burgers_and_sandwiches')"
+          class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:border-primary hover:text-primary"
+        >
+          Burgers
+        </button>
+        <button
+          onclick="setCategory('heaven_boards_family_to_share')"
+          class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:border-primary hover:text-primary"
+        >
+          Platters
+        </button>
+        <button
+          onclick="setCategory('drinks')"
+          class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-xs tracking-widest rounded-full transition-all hover:border-primary hover:text-primary"
+        >
+          Drinks
+        </button>
+        <div class="flex items-center gap-2 ml-4 px-4 border-l border-white/20">
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              id="gfToggle"
+              onchange="filterMenu()"
+              class="sr-only peer"
+            />
+            <div
+              class="w-11 h-6 bg-smoke peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-400 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600 peer-checked:after:bg-white"
+            ></div>
+            <span
+              class="ml-3 text-xs font-bold uppercase tracking-widest text-gray-400 peer-checked:text-green-500"
+              >GF Only</span
+            >
+          </label>
         </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Toasted garlic bread topped with melted cheese.
-        </p>
       </div>
 
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Oyster Kilpatrick
-          </h3>
-          <span class="font-bold text-primary">$39 / $20</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Smoky Kilpatrick oysters — $39 (1 doz) / $20 (½ doz).
-        </p>
+      <div class="w-full max-w-md relative">
+        <input
+          type="text"
+          id="menuSearch"
+          onkeyup="filterMenu()"
+          placeholder="Search menu..."
+          class="w-full py-4 pl-10 pr-4 text-white rounded-lg bg-smoke border border-white/10 focus:border-primary outline-none"
+        />
       </div>
+    </div>
 
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Jalapeno Poppers
-          </h3>
-          <span class="font-bold text-primary">$14</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          6pcs filled with chorizo and trio cheese.
-        </p>
-      </div>
+    <div
+      id="menuGrid"
+      class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+    ></div>
 
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Loaded Wedges
-          </h3>
-          <span class="font-bold text-primary">$14</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Crispy wedges topped with bacon and creamy cheese.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Krispy Seafood Gyoza
-          </h3>
-          <span class="font-bold text-primary">$12</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Pan-fried seafood gyoza with dipping sauce.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Crispy Mac & Cheese Balls
-          </h3>
-          <span class="font-bold text-primary">$15</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          6pcs crumbed macaroni and cheese balls.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">Arancini</h3>
-          <span class="font-bold text-primary">$15</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          6pcs arancini with cheese, chorizo and mixed herbs.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Krispy Filled Mushroom
-          </h3>
-          <span class="font-bold text-primary">$18</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Stuffed mushrooms served with sweet chili aioli.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Lemon Pepper Calamari
-          </h3>
-          <span class="font-bold text-primary">$17 / $26</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Crispy lemon pepper calamari — entree $17 / main $26; served with
-          aioli.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Cheese Sticks
-          </h3>
-          <span class="font-bold text-primary">$19</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Golden cheese sticks served with crisp garden salad.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Krispy Chicken Wings
-          </h3>
-          <span class="font-bold text-primary">$25 / $12</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          $25 (1kg) / $12 (½ kg) — Choice of Hot & Spicy; Portuguese; BBQ.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Tapas Board
-          </h3>
-          <span class="font-bold text-primary">$50</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          To share: chorizo, wings, grilled seafood, battered fish, cheese
-          sticks, arancini, loaded wedges, calamari, jalapeno poppers, hummus,
-          dip, Turkish bread.
-        </p>
-      </div>
-
-      <!-- Mains card (single card listing mains) -->
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02] md:col-span-2 lg:col-span-3"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">Mains</h3>
-        </div>
-        <ul class="text-sm leading-relaxed text-gray-400 list-disc ml-5">
-          <li>
-            300g Pitch Black Angus Porterhouse Steak —
-            <span class="font-bold text-primary">$41.50</span>
-          </li>
-          <li>
-            300g BBQ Pitch Black Angus Porterhouse Steak —
-            <span class="font-bold text-primary">$41.50</span>
-          </li>
-          <li>
-            300g Porterhouse with BBQ Ribs —
-            <span class="font-bold text-primary">$56.00</span>
-          </li>
-          <li>
-            Sticky Pork Bourbon BBQ Ribs —
-            <span class="font-bold text-primary">$39.00</span>
-          </li>
-          <li>
-            BBQ Ribs (Beef & Pork) —
-            <span class="font-bold text-primary">$39.00</span>
-          </li>
-          <li>
-            Heaven Board (BBQ Beef, Pork Ribs & Half Chicken) —
-            <span class="font-bold text-primary">$56.00</span>
-          </li>
-          <li>
-            BBQ Mix Grill (min. 1kg) —
-            <span class="font-bold text-primary">$48.50</span>
-          </li>
-          <li>
-            Slow Roast BBQ Beef Brisket —
-            <span class="font-bold text-primary">$35.00</span>
-          </li>
-          <li>
-            Slow Roast BBQ Pork —
-            <span class="font-bold text-primary">$35.00</span>
-          </li>
-          <li>
-            BBQ Seafood Mix Grill —
-            <span class="font-bold text-primary">$37.00</span>
-          </li>
-        </ul>
-        <p class="text-sm leading-relaxed text-gray-400 mt-4">
-          All mains served with choice of beer battered chips or truffle mash
-          potato, and salad or green vegetables unless otherwise stated.
-        </p>
-      </div>
-
-      <!-- Existing individual cards retained below (example items) -->
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02] cursor-default"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Heaven Board
-          </h3>
-          <span class="font-bold text-primary">$82.80</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          The ultimate sampler: BBQ Beef, Sticky Pork Ribs, and Half Roast
-          Chicken. Perfect for sharing.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Sticky Bourbon Ribs
-          </h3>
-          <span class="font-bold text-primary">$59.05</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          12-hour slow-cooked pork ribs glazed in our signature house-made
-          bourbon BBQ sauce.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Slow Roast Brisket
-          </h3>
-          <span class="font-bold text-primary">$51.75</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Tender brisket served with truffle mash potato or beer battered chips,
-          baby carrots, and broccolini.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Jalapeno Poppers
-          </h3>
-          <span class="font-bold text-primary">$20.70</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Six crispy poppers filled with chorizo and trio cheese. A spicy
-          Rockingham favorite.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Steak Sandwich
-          </h3>
-          <span class="font-bold text-primary">$35.88</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Caramelised onion, bacon, cheese, and house dressings on toasted
-          Turkish bread. Served with chips.
-        </p>
-      </div>
-
-      <div
-        class="p-8 transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02]"
-      >
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-xl font-display tracking-wide uppercase">
-            Traditional Parmy
-          </h3>
-          <span class="font-bold text-primary">$41.86</span>
-        </div>
-        <p class="text-sm leading-relaxed text-gray-400">
-          Crumbed chicken breast topped with Napoli sauce and melted trio
-          cheese. Served with salad and chips.
-        </p>
-      </div>
+    <div id="noResults" class="hidden text-center py-20 text-gray-500">
+      <p>No items found matching your search.</p>
     </div>
   </div>
 </section>
+
+<style>
+  .bg-charcoal {
+    background-color: #1a1a1a;
+  }
+  .bg-smoke {
+    background-color: #262626;
+  }
+  .text-primary {
+    color: #d97706;
+  }
+  .border-primary {
+    border-color: #d97706;
+  }
+  .active-cat {
+    background-color: #d97706 !important;
+    color: white !important;
+    border-color: #d97706 !important;
+  }
+</style>

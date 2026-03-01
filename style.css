@@ -57,10 +57,11 @@ html {
 
 /* Background and global text */
 .bg-charcoal,
-body {
+/* body {
   background-color: #000000 !important;
   color: #ffffff !important;
-}
+} */
+
 
 /* Make primary text bright white and muted text readable on black */
 .text-white {
@@ -109,3 +110,88 @@ h3 {
 .text-primary {
   color: #ffb347 !important;
 } /* adjust to your brand color */
+
+/* background effect */
+
+/* Ensure the base layer is black */
+body {
+  background-color: #000000 !important;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* The Animated Fire Layer */
+.fire-bg-animate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/bg.png") !important;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  z-index: 1; /* Sits above the body black, but below content */
+  animation: fireFlicker 4s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Update Menu Cards to be semi-transparent */
+.menu-item {
+  background-color: rgba(
+    31,
+    31,
+    31,
+    0.8
+  ) !important; /* Smoke color at 80% opacity */
+  backdrop-filter: blur(4px); /* Adds a premium smoky glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* The Content Wrapper */
+.relative.z-10 {
+  z-index: 10 !important; /* Ensures text and buttons stay on top of the fire */
+}
+
+@keyframes fireFlicker {
+  0%,
+  100% {
+    opacity: 0.7;
+    filter: brightness(90%);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(110%);
+  }
+}
+
+#menu .menu-item {
+  /* Semi-transparent smoke color */
+  background-color: rgba(31, 31, 31, 0.7) !important;
+  /* Frosted glass effect to make text pop against the moving fire */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+#menu .menu-item:hover {
+  background-color: rgba(31, 31, 31, 0.9) !important;
+  transform: scale(1.02);
+}
+
+/* Update your existing .bg-smoke definition or add this specific helper */
+.bg-smoke\/80 {
+  background-color: rgba(31, 31, 31, 0.8) !important;
+}
+
+/* Ensure the Location section content stays above the fire layer */
+#location {
+  z-index: 10;
+}
+
+/* Optional: Make the map look more 'integrated' with the dark theme */
+iframe {
+  filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
