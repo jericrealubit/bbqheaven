@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // 1. Keep these variables at the top level
 let fullMenu = [];
-let currentCategory = "all";
+let currentCategory = "starters"; // Default category on load
 
 const categoryMap = {
   starters: "starters",
@@ -58,10 +58,17 @@ const categoryMap = {
 // 2. Define the functions GLOBALLY so buttons can find them
 window.setCategory = function (cat) {
   currentCategory = cat;
+
+  // Remove active class from ALL buttons first
   document.querySelectorAll(".cat-btn").forEach((btn) => {
-    // This checks if the button's onclick attribute contains the category string
-    btn.classList.toggle("active-cat", btn.outerHTML.includes(`'${cat}'`));
+    btn.classList.remove("active-cat");
+
+    // Add active class ONLY to the button matching the new category
+    if (btn.outerHTML.includes(`'${cat}'`)) {
+      btn.classList.add("active-cat");
+    }
   });
+
   filterMenu();
 };
 
@@ -111,7 +118,16 @@ async function loadMenu() {
       }
     });
 
-    renderMenu(fullMenu);
+    // Instead of renderMenu(fullMenu), use the filter function
+    // to apply the default 'starters' category immediately.
+    filterMenu();
+
+    // Also, ensure the 'Starters' button looks active on load
+    const starterBtn = document.querySelector(".cat-btn[onclick*='starters']");
+    const allBtn = document.querySelector(".cat-btn[onclick*='all']");
+
+    if (allBtn) allBtn.classList.remove("active-cat"); // Ensure 'All' is off
+    if (starterBtn) starterBtn.classList.add("active-cat"); // Ensure 'Starter' is on
   } catch (error) {
     console.error("Data Load Error:", error);
   }
