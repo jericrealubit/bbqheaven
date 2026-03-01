@@ -195,3 +195,26 @@ body {
 iframe {
   filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
+
+/* Back to Top - Active State */
+#backToTop.show {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Optional: Add a subtle 'ember' pulse to the button to match the fire background */
+@keyframes emberPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(217, 119, 6, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(217, 119, 6, 0);
+  }
+}
+
+#backToTop {
+  animation: emberPulse 2s infinite;
+}
