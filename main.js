@@ -1,3 +1,39 @@
+//  actual credentials from Supabase
+const SUPABASE_URL =
+  window.ENV_SUPABASE_URL || "https://cqzogkadiatpcvxgxqkc.supabase.co";
+const SUPABASE_KEY =
+  window.ENV_SUPABASE_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxem9na2FkaWF0cGN2eGd4cWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzYyMTIsImV4cCI6MjA4Nzk1MjIxMn0.u1IvDAQr7uyp6329OzfO0rV9M0zhRk3kqzKfMrV6koM";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function initLiveCounter() {
+  // Join a channel called 'online-users'
+  const channel = supabaseClient.channel("online-users", {
+    config: { presence: { key: "user" } },
+  });
+
+  channel
+    .on("presence", { event: "sync" }, () => {
+      const state = channel.presenceState();
+      // Count total unique users currently connected
+      const count = Object.keys(state).length;
+
+      const countEl = document.getElementById("user-count");
+      if (countEl) {
+        // We add a +5 or +10 base if you want it to look "busier"
+        // but for true accuracy, just use count
+        countEl.textContent = count;
+      }
+    })
+    .subscribe(async (status) => {
+      if (status === "SUBSCRIBED") {
+        // 'Track' this user so others see them
+        await channel.track({ online_at: new Date().toISOString() });
+      }
+    });
+}
+
 async function loadComponent(id, file) {
   try {
     // The './' ensures we look in the root folder on Netlify
@@ -206,6 +242,7 @@ async function loadSections() {
         // Run both automation scripts
         document.getElementById("year").textContent = new Date().getFullYear();
         updateBusinessStatus();
+        initLiveCounter(); // Start Supabase Presence
       }
       if (section === "menu") loadMenu();
     }

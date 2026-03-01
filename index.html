@@ -18,8 +18,25 @@
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="/tailwindcss" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#d97706",
+              smoke: "#1a1a1a",
+            },
+            fontFamily: {
+              display: ["Oswald", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -88,30 +105,15 @@
 
       <div id="footer-placeholder"></div>
     </div>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              charcoal: "#1a1a1a",
-              smoke: "#262626",
-              primary: "#d97706",
-            },
-            fontFamily: {
-              display: ["Oswald", "sans-serif"], // Or your preferred font
-            },
-          },
-        },
-      };
-    </script>
 
-    <script src="./main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="./main.js"></script>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
       defer
     ></script>
-    <script src="/hero.js"></script>
+    <!-- <script src="/hero.js"></script> -->
     <script
       src="https://www.fbgcdn.com/embedder/js/ewm2.js"
       defer
