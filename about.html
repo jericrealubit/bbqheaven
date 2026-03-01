@@ -18,80 +18,94 @@
       }
       .text-primary {
         color: #d97706;
-      } /* Pitmaster Amber */
-      .bg-smoke {
-        background-color: #1a1a1a;
+      }
+      /* Glass effect for the info cards */
+      .glass-card {
+        background-color: rgba(26, 26, 26, 0.7) !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
     </style>
   </head>
 
   <body class="bg-black text-gray-400 font-sans leading-relaxed">
-    <div id="header-placeholder"></div>
+    <div class="fire-bg-animate"></div>
 
-    <main class="max-w-4xl mx-auto px-6 py-24">
-      <div class="mb-16 border-l-8 border-primary pl-8">
-        <h1
-          class="text-white font-display text-5xl md:text-7xl uppercase tracking-tighter mb-4"
-        >
-          Real Woodfire <span class="text-primary italic">BBQ</span>
-        </h1>
-        <p
-          class="text-xl text-white/80 font-semibold uppercase tracking-widest"
-        >
-          Welcome to BBQ Heaven
-        </p>
-      </div>
+    <div class="relative z-10 min-h-screen bg-black/20">
+      <div id="header-placeholder"></div>
 
-      <div class="space-y-8 text-lg md:text-xl">
-        <p>
-          An innovative restaurant as our
-          <strong class="text-white">BBQ cooking table</strong> is what makes us
-          unique. We serve Australian style BBQ to cater to everybody’s taste,
-          ranging from fresh salads and entrees to our signature hotpot of the
-          day.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-          <div class="bg-smoke p-8 rounded-lg border border-white/5">
-            <h3 class="text-primary font-display uppercase tracking-wider mb-3">
-              The Experience
-            </h3>
-            <p class="text-sm">
-              Enjoy marinated thick-sliced meats on the grill, served with
-              house-made spicy pickled vegetables and seasonal sweets.
-            </p>
-          </div>
-          <div class="bg-smoke p-8 rounded-lg border border-white/5">
-            <h3 class="text-primary font-display uppercase tracking-wider mb-3">
-              The Flavours
-            </h3>
-            <p class="text-sm">
-              Our menu spans classic food, Asian and Western delights, today’s
-              specials, and our famous curry of the day.
-            </p>
-          </div>
+      <main class="max-w-4xl mx-auto px-6 py-24">
+        <div class="mb-16 border-l-8 border-primary pl-8">
+          <h1
+            class="text-white font-display text-5xl md:text-7xl uppercase tracking-tighter mb-4"
+          >
+            Real Woodfire <span class="text-primary italic">BBQ</span>
+          </h1>
+          <p
+            class="text-xl text-white/80 font-semibold uppercase tracking-widest"
+          >
+            Welcome to BBQ Heaven
+          </p>
         </div>
 
-        <p>
-          After a hard working week, we provide the ultimate chill-out spot. We
-          offer
-          <span class="text-white font-bold">Karaoke nights on Fridays</span>
-          and
-          <span class="text-white font-bold">Live Bands on Saturdays</span> for
-          entertainment until midnight.
-        </p>
+        <div
+          class="space-y-8 text-lg md:text-xl p-8 rounded-2xl glass-card border border-white/10"
+        >
+          <p>
+            An innovative restaurant as our
+            <strong class="text-white">BBQ cooking table</strong> is what makes
+            us unique. We serve Australian style BBQ to cater to everybody’s
+            taste, ranging from fresh salads and entrees to our signature hotpot
+            of the day.
+          </p>
 
-        <p class="border-t border-white/10 pt-8">
-          Chill with friends and enjoy our famous international drinks like
-          <span
-            class="text-primary font-bold uppercase underline decoration-primary/30 underline-offset-8"
-            >Red Horse</span
-          >, along side a premium selection of beer, house wine, and spirits.
-        </p>
-      </div>
-    </main>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
+            <div class="p-8 rounded-lg border border-white/5 bg-black/30">
+              <h3
+                class="text-primary font-display uppercase tracking-wider mb-3"
+              >
+                The Experience
+              </h3>
+              <p class="text-sm">
+                Enjoy marinated thick-sliced meats on the grill, served with
+                house-made spicy pickled vegetables and seasonal sweets.
+              </p>
+            </div>
+            <div class="p-8 rounded-lg border border-white/5 bg-black/30">
+              <h3
+                class="text-primary font-display uppercase tracking-wider mb-3"
+              >
+                The Flavours
+              </h3>
+              <p class="text-sm">
+                Our menu spans classic food, Asian and Western delights, today’s
+                specials, and our famous curry of the day.
+              </p>
+            </div>
+          </div>
 
-    <div id="footer-placeholder"></div>
+          <p>
+            After a hard working week, we provide the ultimate chill-out spot.
+            We offer
+            <span class="text-white font-bold">Karaoke nights on Fridays</span>
+            and
+            <span class="text-white font-bold">Live Bands on Saturdays</span>
+            for entertainment until midnight.
+          </p>
+
+          <p class="border-t border-white/10 pt-8">
+            Chill with friends and enjoy our famous international drinks like
+            <span
+              class="text-primary font-bold uppercase underline decoration-primary/30 underline-offset-8"
+            >
+              Red Horse </span
+            >, along side a premium selection of beer, house wine, and spirits.
+          </p>
+        </div>
+      </main>
+
+      <div id="footer-placeholder"></div>
+    </div>
 
     <script>
       async function loadComponent(id, file) {
