@@ -8,28 +8,36 @@ const SUPABASE_KEY =
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 function initLiveCounter() {
-  // Join a channel called 'online-users'
+  // 1. Generate a random ID so mobile and desktop are counted separately
+  const sessionId = Math.random().toString(36).slice(2, 11);
+
   const channel = supabaseClient.channel("online-users", {
-    config: { presence: { key: "user" } },
+    config: {
+      presence: { key: sessionId }, // Use the unique ID here
+    },
   });
 
   channel
     .on("presence", { event: "sync" }, () => {
       const state = channel.presenceState();
-      // Count total unique users currently connected
+
+      // 2. Count all unique keys currently in the state
       const count = Object.keys(state).length;
 
       const countEl = document.getElementById("user-count");
       if (countEl) {
-        // We add a +5 or +10 base if you want it to look "busier"
-        // but for true accuracy, just use count
+        // Optional: Add a base number so the pit never looks empty
+        // countEl.textContent = count + 4;
         countEl.textContent = count;
       }
     })
     .subscribe(async (status) => {
       if (status === "SUBSCRIBED") {
-        // 'Track' this user so others see them
-        await channel.track({ online_at: new Date().toISOString() });
+        // 3. Track this specific session
+        await channel.track({
+          online_at: new Date().toISOString(),
+          device: navigator.userAgent.includes("Mobi") ? "mobile" : "desktop",
+        });
       }
     });
 }
