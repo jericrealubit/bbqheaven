@@ -1,6 +1,6 @@
-# BBQ Heaven Mandurah - Website Mockup
+# BBQ Heaven Rockingham - Website Mockup
 
-An authentic, modern, and mobile-responsive landing page for **BBQ Heaven Mandurah**. Built with a modular architecture for easy maintenance and high-performance SEO.
+An authentic, modern, and mobile-responsive landing page for **BBQ Heaven Rockingham**. Built with a modular architecture for easy maintenance and high-performance SEO.
 
 ## 🚀 Quick Start (Local Development)
 
@@ -59,4 +59,4 @@ Replace the placeholder `#order` links in `header.html` and `hero.html` with you
 This site is optimized for **Netlify**.
 
 - **Performance:** Static HTML ensures a 100/100 Lighthouse score.
-- **Local SEO:** Ensure you update the `canonical` URL in the `index.html` head once you purchase a custom domain (e.g., `bbqheavenmandurah.com.au`).
+- **Local SEO:** Ensure you update the `canonical` URL in the `index.html` head once you purchase a custom domain (e.g., `bbqheavenRockingham.com.au`).
