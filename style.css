@@ -218,3 +218,40 @@ iframe {
 #backToTop {
   animation: emberPulse 2s infinite;
 }
+
+/* Signature Link Glow */
+footer a.text-primary:hover {
+  text-shadow: 0 0 8px rgba(217, 119, 6, 0.6);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* Fire Glow Animation */
+@keyframes fire-pulse {
+  0% {
+    text-shadow:
+      0 0 5px rgba(217, 119, 6, 0.5),
+      0 0 10px rgba(217, 119, 6, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    text-shadow:
+      0 0 15px rgba(217, 119, 6, 0.9),
+      0 0 25px rgba(217, 119, 6, 0.6);
+    transform: scale(1.1);
+  }
+  100% {
+    text-shadow:
+      0 0 5px rgba(217, 119, 6, 0.5),
+      0 0 10px rgba(217, 119, 6, 0.3);
+    transform: scale(1);
+  }
+}
+
+/* Apply this class to the icons */
+.fire-icon:hover {
+  color: #ff9d00 !important; /* Brighter orange on hover */
+  animation: fire-pulse 1.5s infinite ease-in-out;
+  filter: drop-shadow(0 0 8px #d97706);
+}
