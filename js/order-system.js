@@ -137,21 +137,22 @@ export function renderOrderList() {
     )
     .join("");
 
-  // Add the Empty Cart button at the bottom of the list if it doesn't exist
-  if (!document.getElementById("clear-cart-btn") && orderList.length > 0) {
-    const clearBtnHtml = `
-      <button id="clear-cart-btn" onclick="clearCart()" class="w-full mt-2 mb-4 py-2 border border-red-500/30 text-red-500 hover:bg-red-500 hover:text-white transition-all rounded-lg uppercase text-xs font-bold tracking-widest">
-        <i class="fa-solid fa-trash-can mr-2"></i> Empty Order List
-      </button>
-    `;
-    container.insertAdjacentHTML("beforeend", clearBtnHtml);
-  }
-
   const subtotal = orderList.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
+
   updateTotals(subtotal);
+
+  // Add the Empty Cart button at the bottom of the list if it doesn't exist
+  if (!document.getElementById("clear-cart-btn") && orderList.length > 0) {
+    const clearBtnHtml = `
+        <button id="clear-cart-btn" onclick="clearCart()" class="w-full mt-2 mb-4 py-2 border border-red-500/30 text-red-500 hover:bg-red-500 hover:text-white transition-all rounded-lg uppercase text-xs font-bold tracking-widest">
+          <i class="fa-solid fa-trash-can mr-2"></i> Empty Order List
+        </button>
+      `;
+    container.insertAdjacentHTML("beforeend", clearBtnHtml);
+  }
 }
 
 function updateTotals(subtotal) {
