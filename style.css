@@ -255,3 +255,21 @@ footer a.text-primary:hover {
   animation: fire-pulse 1.5s infinite ease-in-out;
   filter: drop-shadow(0 0 8px #d97706);
 }
+
+@keyframes smokeRise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8; /* High visibility start */
+  }
+  100% {
+    transform: translateY(-35px) scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-smoke {
+  animation: smokeRise 2.5s ease-out infinite;
+}
