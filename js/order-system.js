@@ -112,35 +112,46 @@ export function renderOrderList() {
 
   // Render the items
   container.innerHTML = orderList
-    .map(
-      (item) => `
-    <div class="flex items-center justify-between bg-white/5 p-4 rounded-lg border border-white/5 mb-3">
-      <div class="flex-1 pr-4">
-        <h4 class="font-bold text-white uppercase text-sm leading-tight">${item.name}</h4>
-        <p class="text-primary font-bold text-xs">$${item.price.toFixed(2)} ea</p>
-      </div>
+    .map((item) => {
+      // FIX: Convert price to number in case it was saved as a string (e.g. "$25.00")
+      const numericPrice =
+        typeof item.price === "number"
+          ? item.price
+          : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
 
-      <div class="flex items-center gap-3 bg-black/40 rounded-lg p-1 border border-white/10 mx-4">
-        <button onclick="updateQuantity('${item.name}', -1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">-</button>
-        <span class="text-white font-bold w-4 text-center text-sm">${item.quantity}</span>
-        <button onclick="updateQuantity('${item.name}', 1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">+</button>
-      </div>
+      return `
+        <div class="flex items-center justify-between bg-white/5 p-4 rounded-lg border border-white/5 mb-3">
+          <div class="flex-1 pr-4">
+            <h4 class="font-bold text-white uppercase text-sm leading-tight">${item.name}</h4>
+            <p class="text-primary font-bold text-xs">$${numericPrice.toFixed(2)} ea</p>
+          </div>
 
-      <div class="text-right min-w-[60px]">
-        <p class="text-white font-bold text-sm">$${(item.price * item.quantity).toFixed(2)}</p>
-        <button onclick="removeFromOrder(${item.orderId})" class="text-gray-500 hover:text-red-500 text-xs mt-1 transition-colors">
-          Remove
-        </button>
-      </div>
-    </div>
-  `,
-    )
+          <div class="flex items-center gap-3 bg-black/40 rounded-lg p-1 border border-white/10 mx-4">
+            <button onclick="updateQuantity('${item.name}', -1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">-</button>
+            <span class="text-white font-bold w-4 text-center text-sm">${item.quantity}</span>
+            <button onclick="updateQuantity('${item.name}', 1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">+</button>
+          </div>
+
+          <div class="text-right min-w-[60px]">
+            <p class="text-white font-bold text-sm">$${(numericPrice * item.quantity).toFixed(2)}</p>
+            <button onclick="removeFromOrder(${item.orderId})" class="text-gray-500 hover:text-red-500 text-xs mt-1 transition-colors">
+              Remove
+            </button>
+          </div>
+        </div>
+      `;
+    })
     .join("");
 
-  const subtotal = orderList.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  // 2. Calculate Subtotal (Safely)
+  const subtotal = orderList.reduce((sum, item) => {
+    // We define a local price variable here so it doesn't rely on the map's variable
+    const p =
+      typeof item.price === "number"
+        ? item.price
+        : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
+    return sum + p * (item.quantity || 1);
+  }, 0);
 
   updateTotals(subtotal);
 
