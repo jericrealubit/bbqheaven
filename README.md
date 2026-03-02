@@ -1,62 +1,79 @@
-# BBQ Heaven Rockingham - Website Mockup
+# 🍖 BBQ Heaven Rockingham
 
-An authentic, modern, and mobile-responsive landing page for **BBQ Heaven Rockingham**. Built with a modular architecture for easy maintenance and high-performance SEO.
+**Authentic Low & Slow Woodfire BBQ** 📍 Unit 6/6 Acute Court, Rockingham WA 6168
 
-## 🚀 Quick Start (Local Development)
-
-Because this project uses the `fetch()` API to load modular components (Header, Hero, Menu, etc.), modern browsers will block the site if opened as a local file due to **CORS security policies**.
-
-**To view the site locally, you MUST use a local server:**
-
-1.  **VS Code:** Install the **Live Server** extension. Right-click `index.html` and select "Open with Live Server".
-2.  **Python:** Run `python -m http.server` in the project folder and visit `localhost:8000`.
-3.  **Netlify:** Drag the folder into [Netlify Drop](https://app.netlify.com/drop) for instant deployment.
+🌐 Live Site: [https://bbqheaven.au](https://bbqheaven.au)
 
 ---
 
-## 📂 Project Structure
+## 📖 About the Project
 
-The project is split into reusable components to make updates simple:
+BBQ Heaven Rockingham is a premium web presence for a local smokehouse specializing in authentic Jarrah-smoked meats. The site is designed with a "dark mode" premium aesthetic to reflect the charcoal and smoke of the pit, providing customers with a seamless experience across mobile and desktop devices.
 
-- `index.html` - The main container and layout script.
-- `header.html` - Navigation bar and branding.
-- `hero.html` - The "Carousel-style" high-impact header.
-- `menu.html` - The 3-column grid of menu items and prices.
-- `location.html` - Google Maps embed and contact details.
-- `footer.html` - Social links and copyright info.
-- `style.css` - Custom Tailwind v4 theme configurations.
+## 🛠️ Tech Stack
 
----
-
-## 🛠 Tech Stack
-
-- **HTML5 & JavaScript (Vanilla):** Used for structural logic and component loading.
-- **Tailwind CSS v4:** Utility-first styling with a custom "Pitmaster" theme (Amber/Charcoal).
-- **Google Fonts:** Oswald (Headings) and Inter (Body).
-- **Font Awesome:** For social and contact icons.
-- **JSON-LD Schema:** Integrated into `index.html` for local SEO optimization.
+- **Frontend:** HTML5, CSS3, Tailwind CSS (via CDN)
+- **Interactivity:** Vanilla JavaScript (ES6 Modules)
+- **Real-time Features:** [Supabase](https://supabase.com/) (Presence & Real-time)
+- **Fonts:** Oswald (Display), Inter (Body)
+- **Deployment:** Netlify
 
 ---
 
-## 📝 How to Update
+## ✨ Key Features
 
-### **Changing Prices**
+### 📡 Real-time "Live Visitors" Counter
 
-Open `menu.html` and locate the specific item. Update the text inside the `<span>` tag.
+Using **Supabase Presence**, the site tracks and displays the number of active visitors currently browsing the menu.
 
-### **Updating Opening Hours**
+- **Unique Session Tracking:** Implemented a unique `sessionId` logic to ensure mobile and desktop devices are counted as separate visitors even on the same network.
+- **Custom UI:** A pulsing green status indicator that remains perfectly aligned across all screen sizes.
 
-Hours are located in both the `hero.html` (Info Bar) and `location.html`.
+### 🥩 Dynamic Menu System
 
-### **Adding an Ordering Link**
+The menu is built to be fast and interactive:
 
-Replace the placeholder `#order` links in `header.html` and `hero.html` with your GloriaFood or Menulog URL.
+- **Multi-Source Data:** Pulls from multiple JSON datasets (`menu1.json`, `menu2.json`).
+- **Smart Filtering:** Real-time search and category switching (Starters, Mains, Burgers, etc.).
+- **Dietary Badges:** Automatic tagging for **Gluten Free (GF)**, **Spicy**, and **Family Size** items based on item metadata.
+
+### 🕒 Smart Business Status
+
+A custom-coded logic that detects the user's local time in **Perth (AWST)** to display if the pit is currently "Open" or "Closed."
+
+- **Split Shifts:** Handles complex opening hours (Lunch and Dinner windows).
+- **Visual Feedback:** Glowing pulse animations for "Open" status and clear re-opening hints for "Closed" status.
+
+### 🗺️ Navigation & UX
+
+- **Auto-Navigation:** One-click Google Maps integration that starts turn-by-turn navigation from the user's current location.
+- **Component-Based Architecture:** Uses a custom JavaScript loader to fetch and inject reusable HTML components (Header, Hero, Menu, Footer), making the site easier to maintain.
 
 ---
 
-## 🌐 SEO & Deployment
+## 🚀 Local Development
 
-This site is optimized for **Netlify**.
+1. **Clone the repository:**
 
-- **Performance:** Static HTML ensures a 100/100 Lighthouse score.
-- **Local SEO:** Ensure you update the `canonical` URL in the `index.html` head once you purchase a custom domain (e.g., `bbqheavenRockingham.com.au`).
+```bash
+git clone https://github.com/yourusername/bbq-heaven.git
+
+```
+
+2. **Environment Variables:**
+   To enable the live counter, the site uses the following Supabase keys (in development, these are accessed via `main.js`):
+
+- `SUPABASE_URL`
+- `SUPABASE_KEY`
+
+3. **Run the project:**
+   Since the project uses ES6 modules, it must be served through a local server.
+
+- **VS Code:** Use the "Live Server" extension.
+- **Terminal:** Use `npx serve` or `python -m http.server`.
+
+---
+
+## 👨‍🍳 Built by
+
+**Jeric** [](https://linkedin.com/in/jericrealubit)
