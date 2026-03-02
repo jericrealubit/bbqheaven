@@ -273,3 +273,15 @@ footer a.text-primary:hover {
 .animate-smoke {
   animation: smokeRise 2.5s ease-out infinite;
 }
+
+/* Ensure the fire animation doesn't block clicks on the menu button */
+.fire-bg-animate {
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure the header container is definitely clickable */
+#header-placeholder {
+  position: relative;
+  z-index: 100;
+}

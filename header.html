@@ -1,19 +1,17 @@
 <nav
-  class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b bg-black/90 border-primary/20"
+  class="sticky top-0 z-[100] flex items-center justify-between px-6 py-4 border-b bg-black/95 border-primary/20"
 >
   <div class="text-2xl font-display tracking-tighter uppercase">
     <a href="/" class="flex items-center gap-3">
       <img
         src="./images/logo.jpg"
         alt="BBQ Heaven logo"
-        width="180"
-        height="48"
-        class="h-10 md:h-12 lg:h-14 max-h-14 w-auto object-contain"
-        loading="eager"
+        class="h-10 md:h-12 w-auto object-contain"
       />
     </a>
   </div>
-  <div class="hidden gap-8 text-sm font-semibold uppercase md:flex">
+
+  <div class="hidden md:flex gap-8 text-sm font-semibold uppercase">
     <a href="/" class="transition hover:text-primary">Home</a>
     <a href="/#menu" class="transition hover:text-primary">Menu</a>
     <a href="tel:+61895609804" class="transition hover:text-primary"
@@ -21,21 +19,37 @@
     >
     <a href="/about.html" class="transition hover:text-primary">About</a>
   </div>
-  <!-- <div>
-    <span
-      class="glf-button"
-      data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
-      data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
-      aria-label="Order now from BBQ Heaven"
-      >Order Now</span
-    >
-  </div> -->
-  <!-- <span
-    class="glf-button reservation"
-    data-glf-cuid="7120413f-a912-412c-9ec4-01abce4d4aed"
-    data-glf-ruid="cb37b88c-3cff-4be2-aa9f-deb1a3d7ec3c"
-    data-glf-reservation="true"
-    >Table Reservation</span
+
+  <button
+    id="mobile-menu-btn"
+    class="md:hidden text-primary p-2 focus:outline-none relative z-[110]"
   >
-   -->
+    <i class="fa-solid fa-bars text-3xl" id="menu-icon"></i>
+  </button>
+
+  <div
+    id="mobile-menu"
+    class="hidden fixed inset-0 z-[105] bg-black/30 backdrop-blur-md flex flex-col items-center justify-center gap-8 text-3xl font-display uppercase tracking-widest text-white transition-all duration-300"
+  >
+    <a href="/" class="mobile-link hover:text-primary transition">Home</a>
+    <a href="/#menu" class="mobile-link hover:text-primary transition">Menu</a>
+    <a href="tel:+61895609804" class="mobile-link hover:text-primary transition"
+      >Call Now</a
+    >
+    <a href="/about.html" class="mobile-link hover:text-primary transition"
+      >About</a
+    >
+  </div>
+  <button
+    onclick="openOrderModal()"
+    class="fixed bottom-24 right-8 z-[120] h-16 w-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 border-2 border-white/20"
+  >
+    <i class="fa-solid fa-clipboard-list text-2xl"></i>
+    <span
+      id="order-count-badge"
+      class="absolute -top-1 -right-1 bg-white text-primary text-xs font-black h-6 w-6 rounded-full flex items-center justify-center shadow-lg"
+    >
+      0
+    </span>
+  </button>
 </nav>

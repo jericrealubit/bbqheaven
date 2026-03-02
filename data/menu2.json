@@ -3,167 +3,455 @@
     {
       "name": "Hardys The Riddle Moscato (Australia)",
       "price": "$8 / $23",
-      "image": ""
+      "description": "A light and refreshing Australian Moscato featuring sweet floral notes and a zesty finish.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 23 }
+      ]
     },
     {
       "name": "Amberley Kiss and Tell Moscato (Margaret River, WA)",
       "price": "$8 / $32",
-      "image": ""
+      "description": "A premium Margaret River Moscato with vibrant fruit flavors of peach and rose petals.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 32 }
+      ]
     },
     {
       "name": "Tatachilla White Admiral Pinot Grigio (Australia)",
       "price": "$8 / $29",
-      "image": ""
+      "description": "A crisp and dry Pinot Grigio with elegant pear and citrus undertones.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 29 }
+      ]
     },
     {
       "name": "Hardys The Riddle Sauvignon Blanc (Australia)",
       "price": "$8 / $29",
-      "image": ""
+      "description": "A lively Sauvignon Blanc showcasing tropical fruit aromas and a clean, herbaceous palate.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 29 }
+      ]
     },
     {
       "name": "Ta_Ku Sauvignon Blanc (Marlborough, New Zealand)",
       "price": "$9 / $33",
-      "image": ""
+      "description": "Classic Marlborough Sauvignon Blanc with intense passionfruit and gooseberry flavors.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 33 }
+      ]
     },
     {
       "name": "Jumpin Jack Semillon Sauvignon Blanc (Victoria)",
       "price": "$8 / $29",
-      "image": ""
+      "description": "A well-balanced Victorian blend with bright acidity and a smooth citrus profile.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 29 }
+      ]
     },
     {
       "name": "Brookland Valley Semillon Sauvignon Blanc (Margaret River, WA)",
       "price": "$10 / $35",
-      "image": ""
+      "description": "An award-winning Margaret River blend offering sophisticated grassy notes and a refreshing crispness.",
+      "options": [
+        { "label": "Glass", "price": 10 },
+        { "label": "Bottle", "price": 35 }
+      ]
     },
     {
       "name": "Brookland Valley Discovery Chardonnay (Margaret River, WA)",
       "price": "$9 / $32",
-      "image": ""
+      "description": "A refined Chardonnay with delicate stone fruit flavors and a subtle hint of French oak.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 32 }
+      ]
     }
   ],
   "red_wine": [
     {
       "name": "Cupio Pink Moscato (Riverland, Australia)",
       "price": "$9 / $34",
-      "image": ""
+      "description": "A charming Pink Moscato from the Riverland with sweet strawberry aromas and a soft spritz.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 34 }
+      ]
     },
     {
       "name": "Jam Shed Red Blend (Australia)",
       "price": "$8 / $32",
-      "image": ""
+      "description": "A smooth, gluggable red blend bursting with sweet red berry flavors and a touch of spice.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 32 }
+      ]
     },
     {
       "name": "Days of Rose (South Australia)",
       "price": "$8 / $32",
-      "image": ""
+      "description": "A dry and pale South Australian Rosé with crisp notes of raspberry and pomegranate.",
+      "options": [
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 32 }
+      ]
     },
     {
       "name": "Ta_Ku Pinot Noir (Marlborough, New Zealand)",
       "price": "$9 / $35",
-      "image": ""
+      "description": "An elegant Marlborough Pinot Noir featuring silky tannins and rich black cherry notes.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 35 }
+      ]
     },
     {
       "name": "Jumpin Jack Merlot (Victoria)",
       "price": "$7.50 / $29",
-      "image": ""
+      "description": "A soft and approachable Victorian Merlot with plum fruit flavors and a velvety finish.",
+      "options": [
+        { "label": "Glass", "price": 7.5 },
+        { "label": "Bottle", "price": 29 }
+      ]
     },
     {
       "name": "Amberley Merlot (Margaret River, WA)",
       "price": "$9 / $35",
-      "image": ""
+      "description": "A classic Margaret River Merlot showcasing rich dark berries and subtle earthy tones.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 35 }
+      ]
     },
     {
       "name": "Hardys The Riddle Cabernet Merlot (Australia)",
       "price": "$7.50 / $23",
-      "image": ""
+      "description": "A medium-bodied blend with structured tannins and ripe blackcurrant fruit.",
+      "options": [
+        { "label": "Glass", "price": 7.5 },
+        { "label": "Bottle", "price": 23 }
+      ]
     },
     {
       "name": "Brookland Valley Verse 1 Cabernet Merlot (Margaret River, WA)",
       "price": "$10 / $35",
-      "image": ""
+      "description": "A premium Cabernet Merlot blend with layers of mulberry, cedar, and fine-grained tannins.",
+      "options": [
+        { "label": "Glass", "price": 10 },
+        { "label": "Bottle", "price": 35 }
+      ]
     },
     {
       "name": "Hardys The Riddle Shiraz (Australia)",
       "price": "$7.50 / $29",
-      "image": ""
+      "description": "A classic Australian Shiraz with bold plum flavors and a hint of cracked black pepper.",
+      "options": [
+        { "label": "Glass", "price": 7.5 },
+        { "label": "Bottle", "price": 29 }
+      ]
     },
     {
       "name": "St Hallett Black Clay Shiraz (Barossa Valley South Australia)",
       "price": "$9 / $40",
-      "image": ""
+      "description": "A quintessential Barossa Shiraz, rich and generous with dark chocolate and spicy cherry notes.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 40 }
+      ]
     },
-    { "name": "Penfolds Shiraz (South Australia)", "price": "$12", "image": "" }
+    {
+      "name": "Penfolds Shiraz (South Australia)",
+      "price": "$12",
+      "description": "A world-renowned Shiraz offering impeccable balance and deep, complex berry characters."
+    }
   ],
   "sparkling_wines": [
     {
       "name": "Tatachilla Brut (House Sparkling) (South Australia)",
       "price": "$28",
-      "image": ""
+      "description": "A refreshing house sparkling with bright citrus notes and a clean, crisp finish."
     },
-    { "name": "Da Luca Prosecco (Veneto, Italy)", "price": "$32", "image": "" }
+    {
+      "name": "Da Luca Prosecco (Veneto, Italy)",
+      "price": "$32",
+      "description": "Authentic Italian Prosecco with fine bubbles and aromas of lemon and jasmine."
+    }
   ],
   "spirits_liquor_shots": [
-    { "name": "Smirnoff", "price": "$10", "image": "" },
-    { "name": "Remy Martin", "price": "$10", "image": "" },
-    { "name": "Southern Comfort", "price": "$10", "image": "" },
-    { "name": "Chivas Regal", "price": "$10", "image": "" },
-    { "name": "Jack Daniel’s", "price": "$10", "image": "" },
-    { "name": "Bacardi (White)", "price": "$10", "image": "" },
-    { "name": "Jim Beam", "price": "$10", "image": "" },
-    { "name": "Fundador Sherry Cask", "price": "$10", "image": "" },
-    { "name": "Glenshiel", "price": "$10", "image": "" },
-    { "name": "Black Label", "price": "$10", "image": "" },
-    { "name": "Havana Club Especial", "price": "$10", "image": "" },
-    { "name": "Sailor Jerry Spiced Rum", "price": "$10", "image": "" },
-    { "name": "Begin Gin", "price": "$10", "image": "" },
-    { "name": "Bombay Sapphire Gin", "price": "$10", "image": "" },
-    { "name": "Gordon’s Premium Pink Gin", "price": "$10", "image": "" },
-    { "name": "Olmeca Tequila", "price": "$10", "image": "" }
+    {
+      "name": "Smirnoff",
+      "price": "$10",
+      "description": "Classic triple-distilled vodka for a smooth and clean finish."
+    },
+    {
+      "name": "Remy Martin",
+      "description": "A premium Cognac with rich oak aromas and notes of honey and fruit.",
+      "price": "$10"
+    },
+    {
+      "name": "Southern Comfort",
+      "price": "$10",
+      "description": "A unique blend of whiskey, fruit, and spice for a smooth, sweet kick."
+    },
+    {
+      "name": "Chivas Regal",
+      "price": "$10",
+      "description": "A prestigious blended Scotch whisky known for its rich and fruity taste."
+    },
+    {
+      "name": "Jack Daniel’s",
+      "price": "$10",
+      "description": "The world-famous Tennessee whiskey with distinct caramel and vanilla notes."
+    },
+    {
+      "name": "Bacardi (White)",
+      "price": "$10",
+      "description": "A light and aromatically balanced white rum, perfect for refreshing cocktails."
+    },
+    {
+      "name": "Jim Beam",
+      "price": "$10",
+      "description": "The world's finest Bourbon, aged for 4 years for a smooth, sweet flavor."
+    },
+    {
+      "name": "Fundador Sherry Cask",
+      "price": "$10",
+      "description": "A Spanish Brandy matured in sherry-soaked casks for a deep, complex sweetness."
+    },
+    {
+      "name": "Glenshiel",
+      "price": "$10",
+      "description": "A traditional blended Scotch whisky with a smooth, peaty character."
+    },
+    {
+      "name": "Black Label",
+      "price": "$10",
+      "description": "Johnnie Walker's iconic 12-year-old blend with deep, smoky flavors."
+    },
+    {
+      "name": "Havana Club Especial",
+      "price": "$10",
+      "description": "A premium Cuban rum with warm notes of honey, vanilla, and cinnamon."
+    },
+    {
+      "name": "Sailor Jerry Spiced Rum",
+      "price": "$10",
+      "description": "Bold Caribbean rum blended with notes of vanilla, cinnamon, and nutmeg."
+    },
+    {
+      "name": "Begin Gin",
+      "price": "$10",
+      "description": "A versatile gin featuring strong botanical and juniper notes."
+    },
+    {
+      "name": "Bombay Sapphire Gin",
+      "price": "$10",
+      "description": "A world-class gin infused with ten hand-selected botanicals from across the globe."
+    },
+    {
+      "name": "Gordon’s Premium Pink Gin",
+      "price": "$10",
+      "description": "A refreshing gin with the natural sweetness of raspberries and strawberries."
+    },
+    {
+      "name": "Olmeca Tequila",
+      "price": "$10",
+      "description": "High-quality Mexican tequila with a sweet and slightly smoky citrus profile."
+    }
   ],
   "beer": [
-    { "name": "San Miguel Lights", "price": "$10", "image": "" },
-    { "name": "San Miguel Pale Pilsen", "price": "$10", "image": "" },
-    { "name": "San Miguel Special", "price": "$10", "image": "" },
-    { "name": "Red Horse", "price": "$12", "image": "" },
-    { "name": "Corona", "price": "$10", "image": "" },
-    { "name": "Miller", "price": "$10", "image": "" },
-    { "name": "Great Northern", "price": "$10", "image": "" },
-    { "name": "Gage Pink Lady Apple Cider", "price": "$9", "image": "" },
-    { "name": "Gage Yeah Boy", "price": "$9", "image": "" },
-    { "name": "Guinness Draught", "price": "$12", "image": "" }
+    {
+      "name": "San Miguel Lights",
+      "price": "$10",
+      "description": "A low-calorie, crisp Filipino lager with a smooth and refreshing taste."
+    },
+    {
+      "name": "San Miguel Pale Pilsen",
+      "price": "$10",
+      "description": "An iconic, full-bodied pilsner with a rich, malty flavor and pleasant hop aroma."
+    },
+    {
+      "name": "San Miguel Special",
+      "price": "$10",
+      "description": "A premium international lager with a golden color and a balanced, clean finish."
+    },
+    {
+      "name": "Red Horse",
+      "price": "$12",
+      "description": "A world-famous high-gravity beer, known for its strong alcohol kick and rich flavor."
+    },
+    {
+      "name": "Corona",
+      "price": "$10",
+      "description": "The famous Mexican pale lager, typically served with a fresh lime wedge."
+    },
+    {
+      "name": "Miller",
+      "price": "$10",
+      "description": "A classic American-style lager known for its exceptionally smooth, light taste."
+    },
+    {
+      "name": "Great Northern",
+      "price": "$10",
+      "description": "The ultimate Australian refreshment, brewed for a clean, crisp, and refreshing finish."
+    },
+    {
+      "name": "Gage Pink Lady Apple Cider",
+      "price": "$9",
+      "description": "A naturally sweet and tart cider made from fresh Western Australian Pink Lady apples."
+    },
+    {
+      "name": "Gage Yeah Boy",
+      "price": "$9",
+      "description": "A vibrant and hoppy non-alcoholic XPA, perfect for a guilt-free refreshment."
+    },
+    {
+      "name": "Guinness Draught",
+      "price": "$12",
+      "description": "A rich and creamy Irish stout with a dark body and a velvety smooth head."
+    }
   ],
   "tap_beers": [
-    { "name": "Matso Ginger", "price": "$13.50", "image": "" },
-    { "name": "Single Fin", "price": "$12.50", "image": "" },
-    { "name": "Great Northern (tap)", "price": "$12.50", "image": "" }
+    {
+      "name": "Matso Ginger",
+      "price": "$13.50",
+      "description": "An iconic Kimberley ginger beer, famous for its spicy kick and refreshing zing."
+    },
+    {
+      "name": "Single Fin",
+      "price": "$12.50",
+      "description": "A refreshing summer ale with vibrant tropical fruit and citrus aromas."
+    },
+    {
+      "name": "Great Northern (tap)",
+      "price": "$12.50",
+      "description": "Crisp and refreshing Australian lager, served ice-cold straight from the tap."
+    }
   ],
   "soft_drinks_cans": [
-    { "name": "Coke No Sugar", "price": "$4", "image": "" },
-    { "name": "Coke Classic", "price": "$4", "image": "" },
-    { "name": "Sprite", "price": "$4", "image": "" },
-    { "name": "Fanta", "price": "$4", "image": "" },
-    { "name": "Sunkist", "price": "$4", "image": "" },
-    { "name": "Solo", "price": "$4", "image": "" },
-    { "name": "Schweppes Lemonade", "price": "$4", "image": "" },
-    { "name": "Mountain Dew", "price": "$4", "image": "" },
-    { "name": "Pepsi", "price": "$4", "image": "" },
-    { "name": "Pepsi Max", "price": "$4", "image": "" },
-    { "name": "Lemon, Lime & Bitters (glass)", "price": "$10", "image": "" },
-    { "name": "Poptops Kids", "price": "$3", "image": "" },
-    { "name": "Coconut Water", "price": "$6.5", "image": "" },
-    { "name": "Lipton Iced Tea", "price": "$4", "image": "" },
-    { "name": "Bottled Water", "price": "$3.5", "image": "" }
+    {
+      "name": "Coke No Sugar",
+      "price": "$4",
+      "description": "The classic Coca-Cola taste you love, without any of the sugar."
+    },
+    {
+      "name": "Coke Classic",
+      "price": "$4",
+      "description": "The original sparkling soft drink, refreshing since 1886."
+    },
+    {
+      "name": "Sprite",
+      "price": "$4",
+      "description": "A lemon-lime flavored soft drink with a clean, crisp, and refreshing taste."
+    },
+    {
+      "name": "Fanta",
+      "price": "$4",
+      "description": "Bubbly and refreshing orange-flavored soda, perfect for a fruit boost."
+    },
+    {
+      "name": "Sunkist",
+      "price": "$4",
+      "description": "Bold and refreshing orange soda made with real fruit flavors."
+    },
+    {
+      "name": "Solo",
+      "price": "$4",
+      "description": "The original hard-earned lemon thirst crusher, made with real lemon juice."
+    },
+    {
+      "name": "Schweppes Lemonade",
+      "price": "$4",
+      "description": "A classic, high-quality lemonade made with a signature blend of lemon oils."
+    },
+    {
+      "name": "Mountain Dew",
+      "price": "$4",
+      "description": "A high-energy citrus soda with a unique and bold flavor profile."
+    },
+    {
+      "name": "Pepsi",
+      "price": "$4",
+      "description": "A classic cola with a slightly sweeter, citrus-forward flavor profile."
+    },
+    {
+      "name": "Pepsi Max",
+      "price": "$4",
+      "description": "Maximum Pepsi taste with zero sugar, perfect for a calorie-free pick-me-up."
+    },
+    {
+      "name": "Lemon, Lime & Bitters (glass)",
+      "price": "$10",
+      "description": "A refreshing pub classic made with aromatic bitters and fresh citrus juices."
+    },
+    {
+      "name": "Poptops Kids",
+      "price": "$3",
+      "description": "Fruit-flavored juice drinks in a convenient, spill-proof bottle for the little ones."
+    },
+    {
+      "name": "Coconut Water",
+      "price": "$6.5",
+      "description": "Pure and hydrating coconut water, packed with natural electrolytes."
+    },
+    {
+      "name": "Lipton Iced Tea",
+      "price": "$4",
+      "description": "Refreshing iced tea brewed with sun-ripened tea leaves for a smooth finish."
+    },
+    {
+      "name": "Bottled Water",
+      "price": "$3.5",
+      "description": "Pure, still spring water for a clean and simple hydration option."
+    }
   ],
   "juices": [
-    { "name": "Apple Juice", "price": "", "image": "" },
-    { "name": "Mango Juice", "price": "", "image": "" },
-    { "name": "Orange Juice", "price": "", "image": "" },
-    { "name": "Pineapple Juice", "price": "", "image": "" },
-    { "name": "Cranberry Juice", "price": "", "image": "" }
+    {
+      "name": "Apple Juice",
+      "price": "$5",
+      "description": "100% pure apple juice, naturally sweet and packed with crisp orchard flavor."
+    },
+    {
+      "name": "Mango Juice",
+      "price": "$5",
+      "description": "Thick and luscious mango juice with a rich, tropical sweetness."
+    },
+    {
+      "name": "Orange Juice",
+      "price": "$5",
+      "description": "Zesty orange juice, freshly squeezed for a bright and citrusy morning boost."
+    },
+    {
+      "name": "Pineapple Juice",
+      "price": "$5",
+      "description": "Tangy and refreshing pineapple juice, like a tropical vacation in a glass."
+    },
+    {
+      "name": "Cranberry Juice",
+      "price": "$5",
+      "description": "A tart and refreshing juice with a deep ruby color and antioxidant benefits."
+    }
   ],
   "cocktails_and_mocktails": [
-    { "name": "Fire Engine Cocktail", "price": "$14 / glass", "image": "" },
-    { "name": "Mocktail", "price": "$9 / glass", "image": "" },
-    { "name": "Cocktail for Kids", "price": "$8 / glass", "image": "" }
+    {
+      "name": "Fire Engine Cocktail",
+      "price": "$14",
+      "description": "A bold and bright red cocktail featuring a sweet and zesty fruit blend."
+    },
+    {
+      "name": "Mocktail",
+      "price": "$9",
+      "description": "A sophisticated alcohol-free creation featuring seasonal fruits and botanicals."
+    },
+    {
+      "name": "Cocktail for Kids",
+      "price": "$8",
+      "description": "A fun and fruity non-alcoholic treat designed especially for our junior guests."
+    }
   ]
 }

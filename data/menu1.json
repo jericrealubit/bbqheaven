@@ -1,131 +1,315 @@
 {
   "starters": [
-    { "name": "Garlic Bread & Cheese", "price": "$10/$12", "image": "" },
+    {
+      "name": "Garlic Bread & Cheese",
+      "price": "$10 / $12",
+      "description": "Toasted artisan bread smothered in garlic butter and topped with a molten blend of melted cheeses.",
+      "options": [
+        { "label": "Standard", "price": 10 },
+        { "label": "Extra Cheese", "price": 12 }
+      ]
+    },
     {
       "name": "Oyster Kilpatrick",
-      "price": "$39 1 doz / $20 ½ doz",
-      "image": ""
+      "price": "$20 / $39",
+      "description": "Freshly shucked oysters topped with crispy bacon and our signature tangy Worcestershire-based sauce.",
+      "options": [
+        { "label": "½ Dozen", "price": 20 },
+        { "label": "1 Dozen", "price": 39 }
+      ]
     },
-    { "name": "Jalapeno Poppers (6pcs)", "price": "$14", "image": "" },
+    {
+      "name": "Jalapeno Poppers (6pcs)",
+      "price": "$14",
+      "description": "Spicy jalapenos stuffed with rich cream cheese, breaded and fried until golden and crunchy."
+    },
     {
       "name": "Loaded Wedges with Bacon Creamy Cheese",
       "price": "$14",
-      "image": ""
+      "description": "Crispy potato wedges topped with smoky bacon bits and smothered in a velvety cheese sauce."
     },
-    { "name": "Krispy Seafood Gyoza", "price": "$12", "image": "" },
-    { "name": "Crispy Mac & Cheese balls (6pcs)", "price": "$15", "image": "" },
+    {
+      "name": "Krispy Seafood Gyoza",
+      "price": "$12",
+      "description": "Japanese-style seafood dumplings, pan-seared to perfection for a delicate crunch."
+    },
+    {
+      "name": "Crispy Mac & Cheese balls (6pcs)",
+      "price": "$15",
+      "description": "Gooey, house-made mac and cheese rolled into panko crumbs and fried to melty perfection."
+    },
     {
       "name": "Arancini with Cheese Chorizo and Mix Herbs (6pcs)",
       "price": "$15",
-      "image": ""
+      "description": "Savory risotto balls stuffed with spicy chorizo, melted cheese, and fresh garden herbs."
     },
     {
       "name": "Krispy Filled Mushroom with sweet chili aioli",
       "price": "$18",
-      "image": ""
+      "description": "Plump mushrooms filled with a savory center, fried crispy and served with a zesty sweet chili aioli."
     },
     {
       "name": "Krispy Lemon Pepper Calamari",
-      "price": "$17 entree / $26 main",
-      "image": ""
+      "price": "$17 / $26",
+      "description": "Tender calamari rings lightly dusted in lemon pepper seasoning and fried for a light, zesty crunch.",
+      "options": [
+        { "label": "Entree", "price": 17 },
+        { "label": "Main", "price": 26 }
+      ]
     },
     {
       "name": "Cheese Sticks served with crisp garden salad",
       "price": "$19",
-      "image": ""
+      "description": "Breaded mozzarella sticks pulled to stringy perfection, balanced with a fresh, crisp side salad."
     },
     {
       "name": "Krispy Chicken Wings (choice of flavor)",
-      "price": "$25 1kg / $12 ½ kg",
-      "image": ""
+      "price": "$12 / $25",
+      "description": "Jumbo wings fried crisp and tossed in your choice of our signature Pit sauces.",
+      "options": [
+        { "label": "½ kg", "price": 12 },
+        { "label": "1 kg", "price": 25 }
+      ]
     },
-    { "name": "Tapas Board (To Share)", "price": "$50", "image": "" }
+    {
+      "name": "Tapas Board (To Share)",
+      "price": "$50",
+      "description": "A curated selection of our finest starters, perfect for sampling the best of the Pit with friends."
+    }
   ],
   "salad": [
-    { "name": "Caesar Salad", "price": "$18", "image": "" },
-    { "name": "Add Prawn (to salad)", "price": "$8", "image": "" },
-    { "name": "Add Chicken (to salad)", "price": "$8", "image": "" }
+    {
+      "name": "Caesar Salad",
+      "price": "$18",
+      "description": "Crisp cos lettuce, crunchy croutons, and parmesan shavings tossed in a creamy Caesar dressing."
+    },
+    {
+      "name": "Add Prawn (to salad)",
+      "price": "$8",
+      "description": "Succulent grilled prawns to add a touch of the ocean to your greens."
+    },
+    {
+      "name": "Add Chicken (to salad)",
+      "price": "$8",
+      "description": "Tender grilled chicken breast strips to make your salad a hearty meal."
+    }
   ],
   "mains": [
     {
       "name": "300g Pitch Black Angus Porterhouse Steak",
       "price": "$41.5",
-      "image": ""
+      "description": "Premium Black Angus porterhouse, flame-grilled to your liking with a rich, beefy flavor profile."
     },
     {
       "name": "300g BBQ Pitch Black Angus Porterhouse Steak",
       "price": "$41.5",
-      "image": ""
+      "description": "Our premium Angus porterhouse glazed with house BBQ sauce for an authentic smoky finish."
     },
-    { "name": "Sticky Pork Bourbon BBQ Ribs", "price": "$39", "image": "" },
-    { "name": "BBQ Ribs / Beef & Pork (GF)", "price": "$39", "image": "" },
+    {
+      "name": "Sticky Pork Bourbon BBQ Ribs",
+      "price": "$39",
+      "description": "Fall-off-the-bone pork ribs basted in a rich, sweet Bourbon-infused BBQ glaze."
+    },
+    {
+      "name": "BBQ Ribs / Beef & Pork (GF)",
+      "price": "$39",
+      "description": "A gluten-free feast of slow-smoked beef and pork ribs dripping in our signature BBQ sauce."
+    },
     {
       "name": "Heaven Board (BBQ Beef & Pork Ribs & Half Chicken)",
       "price": "$56",
-      "image": ""
+      "description": "The ultimate sampler: a massive helping of beef ribs, pork ribs, and wood-fired half chicken."
     },
-    { "name": "BBQ Mix Grill", "price": "$48.5", "image": "" },
-    { "name": "Slow Roasted BBQ Beef Brisket", "price": "$35", "image": "" },
-    { "name": "Slow Roasted Pork Ribs", "price": "$35", "image": "" },
-    { "name": "Slow Roasted Pork Ribs & BBQ Ribs", "price": "$37", "image": "" }
+    {
+      "name": "BBQ Mix Grill",
+      "price": "$48.5",
+      "description": "A carnivore's dream featuring a selection of our best wood-fired meats and smoked sausages."
+    },
+    {
+      "name": "Slow Roasted BBQ Beef Brisket",
+      "price": "$35",
+      "description": "Low and slow smoked for 12 hours over Jarrah wood until butter-tender and full of smoky depth."
+    },
+    {
+      "name": "Slow Roasted Pork Ribs",
+      "price": "$35",
+      "description": "Tender pork ribs slow-cooked in the pit to preserve maximum juiciness and flavor."
+    },
+    {
+      "name": "Slow Roasted Pork Ribs & BBQ Ribs",
+      "price": "$37",
+      "description": "A double hit of ribs: traditional slow-roasted pork paired with our glazed BBQ ribs."
+    }
   ],
   "poultry": [
-    { "name": "Traditional Chicken Parmigiana", "price": "$28", "image": "" },
+    {
+      "name": "Traditional Chicken Parmigiana",
+      "price": "$28",
+      "description": "Crumbed chicken breast topped with rich tomato sugo and a generous layer of melted mozzarella."
+    },
     {
       "name": "Chicken Schnitzel with Salad and Beer Battered Chips",
       "price": "$26",
-      "image": ""
+      "description": "Hand-crumbed golden chicken schnitzel served with a side of crispy beer-battered fries."
     },
-    { "name": "Char Grill BBQ Half Chicken", "price": "$28", "image": "" }
+    {
+      "name": "Char Grill BBQ Half Chicken",
+      "price": "$28",
+      "description": "Succulent half chicken, marinated and char-grilled over open flames for a smoky, tender finish."
+    }
   ],
   "fishermans_catch": [
-    { "name": "Grilled Tasmanian Salmon", "price": "$38", "image": "" },
-    { "name": "Grilled WA Barramundi", "price": "$32", "image": "" },
-    { "name": "Snapper Fish & Chips", "price": "$24", "image": "" },
-    { "name": "Creamy Garlic Prawn", "price": "$28", "image": "" }
+    {
+      "name": "Grilled Tasmanian Salmon",
+      "price": "$38",
+      "description": "Fresh Tasmanian salmon fillet grilled to perfection, boasting a crispy skin and flaky center."
+    },
+    {
+      "name": "Grilled WA Barramundi",
+      "price": "$32",
+      "description": "Locally sourced WA Barramundi, lightly seasoned and grilled to highlight its delicate, clean flavor."
+    },
+    {
+      "name": "Snapper Fish & Chips",
+      "price": "$24",
+      "description": "Local Snapper in a light, crispy batter, served with lemon and chunky beer-battered chips."
+    },
+    {
+      "name": "Creamy Garlic Prawn",
+      "price": "$28",
+      "description": "Plump, juicy prawns simmered in a rich and decadent garlic cream sauce."
+    }
   ],
   "burgers_and_sandwiches": [
-    { "name": "Gourmet Beef Burger", "price": "$25", "image": "" },
-    { "name": "Chicken Burger", "price": "$22", "image": "" },
-    { "name": "Steak Sandwich", "price": "$24", "image": "" },
-    { "name": "Parmy Burger", "price": "$24", "image": "" },
-    { "name": "Schnitzel BLT & Cheese", "price": "$25", "image": "" }
+    {
+      "name": "Gourmet Beef Burger",
+      "price": "$25",
+      "description": "A thick, juicy beef patty with fresh lettuce, tomato, cheese, and our secret burger sauce on a toasted bun."
+    },
+    {
+      "name": "Chicken Burger",
+      "price": "$22",
+      "description": "Grilled or crispy chicken breast with fresh greens and creamy aioli on a soft brioche bun."
+    },
+    {
+      "name": "Steak Sandwich",
+      "price": "$24",
+      "description": "Tender steak strips with caramelized onions, lettuce, and cheese between toasted artisan bread."
+    },
+    {
+      "name": "Parmy Burger",
+      "price": "$24",
+      "description": "The best of both worlds: a full chicken parmigiana inside a toasted burger bun."
+    },
+    {
+      "name": "Schnitzel BLT & Cheese",
+      "price": "$25",
+      "description": "Crispy chicken schnitzel layered with smoky bacon, fresh lettuce, tomato, and melted cheese."
+    }
   ],
   "heaven_boards_family_to_share": [
-    { "name": "Heaven Board Family To Share", "price": "$300", "image": "" },
+    {
+      "name": "Heaven Board Family To Share",
+      "price": "$300",
+      "description": "An epic feast for the whole family, featuring a mountain of ribs, brisket, chicken, and all the sides."
+    },
     {
       "name": "Heaven Seafood Board Family To Share",
       "price": "$310",
-      "image": ""
+      "description": "The ultimate ocean platter: grilled fish, prawns, calamari, and seafood gyozas for the whole table."
     }
   ],
   "bbq_table": [
     {
       "name": "Unlimited Grill (per pax)",
-      "price": "$45 per pax",
-      "image": ""
+      "price": "$45",
+      "description": "The full Pit experience: an endless supply of our premium grilled meats served straight to your table."
     },
-    { "name": "Grill for 2 (BBQ Table)", "price": "$80", "image": "" },
-    { "name": "Grill for 3 (BBQ Table)", "price": "$120", "image": "" },
-    { "name": "Grill for 4 (BBQ Table)", "price": "$160", "image": "" },
-    { "name": "Hot Pot Only (Unlimited)", "price": "$25", "image": "" }
+    {
+      "name": "Grill for 2 (BBQ Table)",
+      "price": "$80",
+      "description": "A generous shared platter of our best wood-fired cuts, perfectly portioned for two people."
+    },
+    {
+      "name": "Grill for 3 (BBQ Table)",
+      "price": "$120",
+      "description": "A massive wood-fired meat feast designed to satisfy a group of three hungry BBQ lovers."
+    },
+    {
+      "name": "Grill for 4 (BBQ Table)",
+      "price": "$160",
+      "description": "The heavy hitter: a huge assortment of smoked and grilled meats perfect for a party of four."
+    },
+    {
+      "name": "Hot Pot Only (Unlimited)",
+      "price": "$25",
+      "description": "Warm your soul with an unlimited supply of our house-made, slow-simmered pit-style hot pot."
+    }
   ],
   "kids_corner": [
-    { "name": "Kids Burger & Chips", "price": "$12", "image": "" },
-    { "name": "Kids Chicken & Chips", "price": "$12", "image": "" },
-    { "name": "Kids Fish & Chips", "price": "$12", "image": "" },
-    { "name": "Nugget & Chips (Kids)", "price": "$12", "image": "" }
+    {
+      "name": "Kids Burger & Chips",
+      "price": "$12",
+      "description": "A junior-sized beef burger with cheese, served with a side of golden chips."
+    },
+    {
+      "name": "Kids Chicken & Chips",
+      "price": "$12",
+      "description": "Tender, bite-sized chicken pieces served with a mountain of crispy chips."
+    },
+    {
+      "name": "Kids Fish & Chips",
+      "price": "$12",
+      "description": "A small portion of battered fish and chips, perfect for little explorers."
+    },
+    {
+      "name": "Nugget & Chips (Kids)",
+      "price": "$12",
+      "description": "Classic golden chicken nuggets served with a side of crunchy fries."
+    }
   ],
   "sides": [
-    { "name": "Basket of chips", "price": "$12", "image": "" },
-    { "name": "Basket Onion Rings", "price": "$12", "image": "" },
-    { "name": "Buttered Vegetables", "price": "$12", "image": "" },
-    { "name": "Broccoli & Cauliflower Gratin", "price": "$12", "image": "" }
+    {
+      "name": "Basket of chips",
+      "price": "$12",
+      "description": "A generous basket of our signature thick-cut, beer-battered golden fries."
+    },
+    {
+      "name": "Basket Onion Rings",
+      "price": "$12",
+      "description": "Thick-cut onion rings dipped in batter and fried until ultra-crunchy."
+    },
+    {
+      "name": "Buttered Vegetables",
+      "price": "$12",
+      "description": "A selection of fresh seasonal vegetables tossed in rich, melted butter."
+    },
+    {
+      "name": "Broccoli & Cauliflower Gratin",
+      "price": "$12",
+      "description": "Tender broccoli and cauliflower baked in a creamy cheese sauce with a golden crust."
+    }
   ],
   "extras": [
-    { "name": "Egg (extra)", "price": "$2", "image": "" },
-    { "name": "Rice (extra)", "price": "$4", "image": "" },
-    { "name": "Salad (extra)", "price": "$6", "image": "" },
-    { "name": "Veggies (extra)", "price": "$6", "image": "" }
+    {
+      "name": "Egg (extra)",
+      "price": "$2",
+      "description": "A perfectly fried egg to top off any burger or steak."
+    },
+    {
+      "name": "Rice (extra)",
+      "price": "$4",
+      "description": "A side of fluffy, steamed white rice."
+    },
+    {
+      "name": "Salad (extra)",
+      "price": "$6",
+      "description": "An extra serving of our fresh, crisp garden salad."
+    },
+    {
+      "name": "Veggies (extra)",
+      "price": "$6",
+      "description": "A bonus portion of our seasonal buttered vegetables."
+    }
   ]
 }

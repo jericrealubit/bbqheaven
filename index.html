@@ -106,6 +106,117 @@
       <div id="footer-placeholder"></div>
     </div>
 
+    <div
+      id="menuModal"
+      class="hidden fixed inset-0 z-[150] flex items-center justify-center p-4"
+    >
+      <div
+        class="absolute inset-0 bg-black/90 backdrop-blur-sm"
+        onclick="closeMenuModal()"
+      ></div>
+      <div
+        class="relative bg-smoke border border-white/10 w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl"
+      >
+        <button
+          onclick="closeMenuModal()"
+          class="absolute top-4 right-4 z-20 text-white/50 hover:text-white text-2xl"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="flex flex-col">
+          <div class="aspect-video bg-black overflow-hidden">
+            <img
+              id="modalImage"
+              src=""
+              alt=""
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-8">
+            <div class="flex justify-between items-start mb-4">
+              <h2
+                id="modalTitle"
+                class="text-3xl font-display uppercase tracking-tight text-white"
+              ></h2>
+              <span
+                id="modalPrice"
+                class="text-xl font-bold text-primary"
+              ></span>
+            </div>
+            <p
+              id="modalDescription"
+              class="text-gray-400 mb-8 leading-relaxed"
+            ></p>
+
+            <button
+              id="modalAddBtn"
+              class="w-full py-4 bg-primary text-white font-bold uppercase tracking-widest rounded-lg hover:bg-amber-600 transition-colors flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-plus"></i> Add to Order List
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="orderModal"
+      class="hidden fixed inset-0 z-[160] flex items-center justify-center p-4"
+    >
+      <div
+        class="absolute inset-0 bg-black/90 backdrop-blur-sm"
+        onclick="closeOrderModal()"
+      ></div>
+      <div
+        class="relative bg-smoke border border-white/10 w-full max-w-lg rounded-xl overflow-hidden shadow-2xl flex flex-col max-h-[80vh]"
+      >
+        <div
+          class="p-6 border-b border-white/10 flex justify-between items-center"
+        >
+          <h2 class="text-2xl font-display uppercase tracking-tight text-white">
+            Your Order List
+          </h2>
+          <button
+            onclick="closeOrderModal()"
+            class="text-white/50 hover:text-white text-2xl"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div
+          id="orderItemsContainer"
+          class="p-6 overflow-y-auto flex-grow flex flex-col gap-4"
+        ></div>
+
+        <div class="p-6 border-t border-white/10 bg-black/20">
+          <div class="space-y-2 mb-6">
+            <div class="flex justify-between text-gray-400 text-sm">
+              <span>Subtotal</span>
+              <span id="order-subtotal">$0.00</span>
+            </div>
+            <div class="flex justify-between text-gray-400 text-sm">
+              <span>GST (10%)</span>
+              <span id="order-tax">$0.00</span>
+            </div>
+            <div
+              class="flex justify-between text-white font-bold text-xl pt-2 border-t border-white/5"
+            >
+              <span>Total</span>
+              <span id="order-total">$0.00</span>
+            </div>
+          </div>
+
+          <button
+            class="w-full py-4 bg-primary text-white font-bold uppercase tracking-widest rounded-lg hover:bg-amber-600 transition-colors"
+          >
+            Place Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="./main.js"></script>
 
