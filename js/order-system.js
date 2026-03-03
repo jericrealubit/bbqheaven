@@ -359,23 +359,20 @@ window.handlePlaceOrder = function () {
   const name = document.getElementById("custName").value.trim();
 
   if (!name) {
-    // Alert with a bit of "BBQ Personality"
-    alert(
-      "Please let us know your Name so we know who to call when the meat is ready!",
-    );
-    document.getElementById("custName").focus();
+    alert("Please enter your name so we know who the order is for!");
     return;
   }
 
-  // Build the message
+  // --- BUILD THE WHATSAPP MESSAGE ---
+  // We use Emojis (🔥, 👤, 💰) because WhatsApp treats them as text.
   let message = `🔥 *NEW BBQ ORDER* 🔥\n`;
   message += `--------------------------\n`;
   message += `👤 *Order For:* ${name}\n`;
   message += `--------------------------\n\n`;
 
   orderList.forEach((item) => {
-    // Add quantity and subtotal for each row
-    message += `▪️ ${item.quantity}x ${item.name}\n`;
+    // Using a "Box" emoji (▪️) or "Check" (✅) works best for lists
+    message += `✅ ${item.quantity}x ${item.name}\n`;
   });
 
   const total = orderList.reduce((sum, item) => {
@@ -387,10 +384,10 @@ window.handlePlaceOrder = function () {
   }, 0);
 
   message += `\n💰 *TOTAL PAYABLE: $${total.toFixed(2)}*`;
-  message += `\n\n_Please confirm if you have received this order!_`;
+  message += `\n\n_Sent via BBQ Heaven Online_`;
 
-  // Your real phone number (no spaces, no +)
-  const whatsappNumber = "61491098073"; // Replace this!
+  // --- SEND TO WHATSAPP ---
+  const whatsappNumber = "61491098073"; // Ensure this is your number
   const encodedMsg = encodeURIComponent(message);
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
