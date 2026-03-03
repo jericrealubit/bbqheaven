@@ -390,7 +390,7 @@ window.handlePlaceOrder = function () {
   message += `\n\n_Please confirm if you have received this order!_`;
 
   // Your real phone number (no spaces, no +)
-  const whatsappNumber = "61400000000"; // Replace this!
+  const whatsappNumber = "61491098073"; // Replace this!
   const encodedMsg = encodeURIComponent(message);
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
