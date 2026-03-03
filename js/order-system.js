@@ -238,116 +238,160 @@ export function renderOrderList() {
 }
 
 // function updateTotals(subtotal) {
-//   const tax = subtotal * 0.1;
-//   const subtotalEl = document.getElementById("order-subtotal");
-//   const taxEl = document.getElementById("order-tax");
-//   const totalEl = document.getElementById("order-total");
+//   const footer = document.getElementById("orderFooter");
+//   if (!footer) return;
 
-//   if (subtotalEl) subtotalEl.textContent = `$${(subtotal - tax).toFixed(2)}`;
-//   if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
-//   if (totalEl) totalEl.textContent = `$${subtotal.toFixed(2)}`;
+//   const tax = subtotal * 0.1; // 10% GST
+//   const netAmount = subtotal - tax;
+
+//   // If cart is empty, show a simple "Continue Shopping" button instead
+//   if (subtotal === 0) {
+//     footer.innerHTML = `
+//       <button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">
+//         Continue Shopping
+//       </button>
+//     `;
+//     return;
+//   }
+
+//   footer.innerHTML = `
+//       <div class="space-y-4 mb-6">
+//         <div class="space-y-2">
+//           <input type="text" id="custName" placeholder="YOUR NAME" class="w-full p-4 bg-black/40 border-2 border-white/10 rounded-xl text-white font-bold focus:border-primary outline-none">
+//           <input type="tel" id="custPhone" placeholder="MOBILE NUMBER" class="w-full p-4 bg-black/40 border-2 border-white/10 rounded-xl text-white font-bold focus:border-primary outline-none">
+//         </div>
+
+//         <div class="pt-2 border-t border-white/10">
+//           <div class="flex justify-between text-gray-400"><span>Subtotal</span><span>$${(subtotal - tax).toFixed(2)}</span></div>
+//           <div class="flex justify-between items-center mt-1">
+//             <span class="text-xl font-black text-white uppercase">Total</span>
+//             <span class="text-3xl font-black text-primary">$${subtotal.toFixed(2)}</span>
+//           </div>
+//         </div>
+//       </div>
+
+//       <button onclick="handlePlaceOrder()" class="w-full py-5 bg-green-600 text-white text-xl font-black uppercase rounded-xl shadow-2xl hover:bg-green-500 transition-all flex items-center justify-center gap-3">
+//         <i class="fa-brands fa-whatsapp text-2xl"></i>
+//         SEND ORDER VIA WHATSAPP
+//       </button>
+//     `;
 // }
 
 function updateTotals(subtotal) {
   const footer = document.getElementById("orderFooter");
   if (!footer) return;
 
-  const tax = subtotal * 0.1; // 10% GST
-  const netAmount = subtotal - tax;
-
-  // If cart is empty, show a simple "Continue Shopping" button instead
   if (subtotal === 0) {
     footer.innerHTML = `
       <button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">
         Continue Shopping
-      </button>
-    `;
+      </button>`;
     return;
   }
 
-  // footer.innerHTML = `
-  //   <div class="space-y-2 mb-6">
-  //     <div class="flex justify-between text-gray-400 text-lg">
-  //       <span>Subtotal</span>
-  //       <span>$${netAmount.toFixed(2)}</span>
-  //     </div>
-  //     <div class="flex justify-between text-gray-400 text-lg">
-  //       <span>GST (10%)</span>
-  //       <span>$${tax.toFixed(2)}</span>
-  //     </div>
-  //     <div class="flex justify-between items-center pt-2 border-t border-white/10">
-  //       <span class="text-2xl font-black text-white uppercase">Total</span>
-  //       <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
-  //     </div>
-  //   </div>
-
-  //   <div class="flex flex-col gap-3">
-  //     <button onclick="handlePlaceOrder()" class="w-full py-5 bg-primary text-white text-xl font-black uppercase rounded-xl shadow-2xl hover:bg-amber-600 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
-  //       <i class="fa-solid fa-paper-plane"></i>
-  //       Place Order
-  //     </button>
-
-  //     <button onclick="closeOrderModal()" class="w-full py-3 text-gray-400 text-sm font-bold uppercase tracking-widest hover:text-white transition-colors">
-  //       Back to Menu
-  //     </button>
-  //   </div>
-  // `;
+  const tax = subtotal * 0.1;
 
   footer.innerHTML = `
-      <div class="space-y-4 mb-6">
-        <div class="space-y-2">
-          <input type="text" id="custName" placeholder="YOUR NAME" class="w-full p-4 bg-black/40 border-2 border-white/10 rounded-xl text-white font-bold focus:border-primary outline-none">
-          <input type="tel" id="custPhone" placeholder="MOBILE NUMBER" class="w-full p-4 bg-black/40 border-2 border-white/10 rounded-xl text-white font-bold focus:border-primary outline-none">
-        </div>
-
-        <div class="pt-2 border-t border-white/10">
-          <div class="flex justify-between text-gray-400"><span>Subtotal</span><span>$${(subtotal - tax).toFixed(2)}</span></div>
-          <div class="flex justify-between items-center mt-1">
-            <span class="text-xl font-black text-white uppercase">Total</span>
-            <span class="text-3xl font-black text-primary">$${subtotal.toFixed(2)}</span>
-          </div>
-        </div>
+    <div class="space-y-4 mb-4">
+      <div class="relative">
+        <input type="text" id="custName" placeholder="ENTER YOUR NAME"
+               class="w-full p-5 bg-black/40 border-2 border-white/20 rounded-2xl text-white text-xl font-black focus:border-primary outline-none placeholder:text-gray-600">
+        <span class="absolute -top-3 left-4 bg-smoke px-2 text-primary text-xs font-bold tracking-widest uppercase">Required for Pickup</span>
       </div>
 
-      <button onclick="handlePlaceOrder()" class="w-full py-5 bg-green-600 text-white text-xl font-black uppercase rounded-xl shadow-2xl hover:bg-green-500 transition-all flex items-center justify-center gap-3">
-        <i class="fa-brands fa-whatsapp text-2xl"></i>
-        SEND ORDER VIA WHATSAPP
-      </button>
-    `;
+      <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+        <div class="flex justify-between text-gray-400 font-bold">
+          <span>SUBTOTAL</span>
+          <span>$${(subtotal - tax).toFixed(2)}</span>
+        </div>
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-2xl font-black text-white uppercase tracking-tighter">Total Amount</span>
+          <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="handlePlaceOrder()"
+            class="w-full py-6 bg-green-600 text-white text-2xl font-black uppercase rounded-2xl shadow-[0_10px_40px_rgba(22,163,74,0.3)] hover:bg-green-500 active:scale-[0.97] transition-all flex items-center justify-center gap-3">
+      <i class="fa-brands fa-whatsapp text-3xl"></i>
+      ORDER VIA WHATSAPP
+    </button>
+  `;
 }
+
+// window.handlePlaceOrder = function () {
+//   const name = document.getElementById("custName").value.trim();
+//   const phone = document.getElementById("custPhone").value.trim();
+
+//   if (!name || !phone) {
+//     alert(
+//       "Please enter your Name and Mobile Number so we can prep your order!",
+//     );
+//     return;
+//   }
+
+//   // Build the Message String
+//   let message = `🔥 *NEW BBQ ORDER* 🔥\n`;
+//   message += `--------------------------\n`;
+//   message += `👤 *Customer:* ${name}\n`;
+//   message += `📞 *Phone:* ${phone}\n`;
+//   message += `--------------------------\n\n`;
+
+//   orderList.forEach((item) => {
+//     message += `▪️ ${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}\n`;
+//   });
+
+//   const total = orderList.reduce(
+//     (sum, item) => sum + item.price * item.quantity,
+//     0,
+//   );
+//   message += `\n💰 *TOTAL AMOUNT: $${total.toFixed(2)}*`;
+//   message += `\n\n_Please confirm if you've received this order!_`;
+
+//   // Encode for URL
+//   const encodedMsg = encodeURIComponent(message);
+//   const whatsappNumber = "61491098073"; // REPLACE WITH YOUR ACTUAL BUSINESS NUMBER (Format: CountryCode + Number)
+
+//   window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
+// };
 
 window.handlePlaceOrder = function () {
   const name = document.getElementById("custName").value.trim();
-  const phone = document.getElementById("custPhone").value.trim();
 
-  if (!name || !phone) {
+  if (!name) {
+    // Alert with a bit of "BBQ Personality"
     alert(
-      "Please enter your Name and Mobile Number so we can prep your order!",
+      "Please let us know your Name so we know who to call when the meat is ready!",
     );
+    document.getElementById("custName").focus();
     return;
   }
 
-  // Build the Message String
+  // Build the message
   let message = `🔥 *NEW BBQ ORDER* 🔥\n`;
   message += `--------------------------\n`;
-  message += `👤 *Customer:* ${name}\n`;
-  message += `📞 *Phone:* ${phone}\n`;
+  message += `👤 *Order For:* ${name}\n`;
   message += `--------------------------\n\n`;
 
   orderList.forEach((item) => {
-    message += `▪️ ${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}\n`;
+    // Add quantity and subtotal for each row
+    message += `▪️ ${item.quantity}x ${item.name}\n`;
   });
 
-  const total = orderList.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-  message += `\n💰 *TOTAL AMOUNT: $${total.toFixed(2)}*`;
-  message += `\n\n_Please confirm if you've received this order!_`;
+  const total = orderList.reduce((sum, item) => {
+    const p =
+      typeof item.price === "number"
+        ? item.price
+        : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
+    return sum + p * (item.quantity || 1);
+  }, 0);
 
-  // Encode for URL
+  message += `\n💰 *TOTAL PAYABLE: $${total.toFixed(2)}*`;
+  message += `\n\n_Please confirm if you have received this order!_`;
+
+  // Your real phone number (no spaces, no +)
+  const whatsappNumber = "61400000000"; // Replace this!
   const encodedMsg = encodeURIComponent(message);
-  const whatsappNumber = "61491098073"; // REPLACE WITH YOUR ACTUAL BUSINESS NUMBER (Format: CountryCode + Number)
 
   window.open(`https://wa.me/${whatsappNumber}?text=${encodedMsg}`, "_blank");
 };
