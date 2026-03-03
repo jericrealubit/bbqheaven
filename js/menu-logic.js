@@ -3,7 +3,7 @@ import { addToOrderList } from "./order-system.js";
 
 // 1. Module-level variables (private to this file)
 let fullMenu = [];
-let currentCategory = "starters";
+let currentCategory = "all";
 
 /**
  * Filter and Category logic

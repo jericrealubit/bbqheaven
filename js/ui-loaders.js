@@ -21,19 +21,25 @@ export async function loadSections() {
         if (section === "header") {
           initBurgerMenu();
         }
+
         if (section === "menu") {
+          // 1. Wait for the menu data to load
           await loadMenu();
-          // Force the UI to show 'Starters' as active
-          const starterBtn = document.querySelector(
-            ".cat-btn[onclick*='starters']",
-          );
-          if (starterBtn) {
-            document
-              .querySelectorAll(".cat-btn")
-              .forEach((btn) => btn.classList.remove("active-cat"));
-            starterBtn.classList.add("active-cat");
+
+          // 2. Select the "All" button or the first category button available
+          const allBtn = document.querySelector('[data-category="all"]');
+          const allCatButtons = document.querySelectorAll(".cat-btn");
+
+          if (allBtn) {
+            // Remove 'active-cat' from everyone else and give it to "All"
+            allCatButtons.forEach((btn) => btn.classList.remove("active-cat"));
+            allBtn.classList.add("active-cat");
+
+            // Trigger the click/filter logic if needed (optional if loadMenu handles it)
+            // allBtn.click();
           }
         }
+
         if (section === "footer") {
           // Update year
           const yearEl = document.getElementById("year");
