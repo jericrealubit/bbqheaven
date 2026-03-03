@@ -318,6 +318,7 @@ function updateTotals(subtotal) {
     </button>
   `;
 }
+
 window.handlePlaceOrder = function () {
   const nameInput = document.getElementById("custName");
   const name = nameInput ? nameInput.value.trim() : "";
@@ -328,20 +329,20 @@ window.handlePlaceOrder = function () {
     return;
   }
 
-  // Build the Message String
+  // BUILD THE MESSAGE USING STANDARD EMOJIS
   let message = `🔥 *NEW BBQ ORDER* 🔥\n`;
-  message += `--------------------------\n`;
+  message += `━━━━━━━━━━━━━━━━━━\n`;
   message += `👤 *Order For:* ${name}\n`;
-  message += `--------------------------\n\n`;
+  message += `━━━━━━━━━━━━━━━━━━\n\n`;
 
   orderList.forEach((item) => {
-    // Safety check to ensure price is a number
     const p =
       typeof item.price === "number"
         ? item.price
         : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
 
-    message += `▪️ ${item.quantity}x ${item.name} - $${(p * item.quantity).toFixed(2)}\n`;
+    // Use the "Check Box" emoji (✅) or "Small Orange Diamond" (🔸)
+    message += `🔸 ${item.quantity}x ${item.name} - $${(p * item.quantity).toFixed(2)}\n`;
   });
 
   const total = orderList.reduce((sum, item) => {
@@ -355,7 +356,6 @@ window.handlePlaceOrder = function () {
   message += `\n💰 *TOTAL AMOUNT: $${total.toFixed(2)}*`;
   message += `\n\n_Please confirm if you've received this order!_`;
 
-  // Encode for URL
   const encodedMsg = encodeURIComponent(message);
   const whatsappNumber = "61491098073";
 
