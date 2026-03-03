@@ -329,11 +329,9 @@ window.handlePlaceOrder = function () {
     return;
   }
 
-  // BUILD THE MESSAGE USING PURE ASCII (Keyboard Characters)
-  let message = `>>> NEW BBQ ORDER <<<\n`;
-  message += `==========================\n`;
-  message += `CUSTOMER: ${name}\n`;
-  message += `==========================\n\n`;
+  // --- KITCHEN TICKET STYLE (ASCII) ---
+  let message = `* NEW ORDER: ${name.toUpperCase()} *\n`;
+  message += `--------------------------\n\n`;
 
   orderList.forEach((item) => {
     const p =
@@ -341,8 +339,9 @@ window.handlePlaceOrder = function () {
         ? item.price
         : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
 
-    // Using simple characters like [X], -, or *
-    message += `[${item.quantity}x] ${item.name} - $${(p * item.quantity).toFixed(2)}\n`;
+    // Format: Qty on the left, Name bolded, Price below or to the right
+    message += `${item.quantity} x *${item.name.toUpperCase()}*\n`;
+    message += `     Subtotal: $${(p * item.quantity).toFixed(2)}\n\n`;
   });
 
   const total = orderList.reduce((sum, item) => {
@@ -353,11 +352,11 @@ window.handlePlaceOrder = function () {
     return sum + p * item.quantity;
   }, 0);
 
-  message += `\nTOTAL AMOUNT: $${total.toFixed(2)}`;
-  message += `\n\n--------------------------\n`;
-  message += `Sent via BBQ Heaven Online\n`;
+  message += `--------------------------\n`;
+  message += `*TOTAL TO PAY: $${total.toFixed(2)}*\n`;
+  message += `--------------------------\n`;
+  message += `Sent via BBQ Heaven Online`;
 
-  // --- CRITICAL STEP: URL ENCODING ---
   const encodedMsg = encodeURIComponent(message);
   const whatsappNumber = "61491098073";
 
