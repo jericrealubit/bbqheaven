@@ -96,56 +96,125 @@ window.clearCart = function () {
 /**
  * Updated Render Function with Empty Cart Button
  */
+// export function renderOrderList() {
+//   const container = document.getElementById("orderItemsContainer");
+//   if (!container) return;
+
+//   if (orderList.length === 0) {
+//     container.innerHTML =
+//       '<p class="text-center text-gray-500 py-10 font-display">YOUR LIST IS EMPTY</p>';
+//     updateTotals(0);
+//     // Hide the clear button if the cart is empty
+//     const clearBtn = document.getElementById("clear-cart-btn");
+//     if (clearBtn) clearBtn.classList.add("hidden");
+//     return;
+//   }
+
+//   // Render the items
+//   container.innerHTML = orderList
+//     .map((item) => {
+//       // FIX: Convert price to number in case it was saved as a string (e.g. "$25.00")
+//       const numericPrice =
+//         typeof item.price === "number"
+//           ? item.price
+//           : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
+
+//       return `
+//         <div class="flex items-center justify-between bg-white/5 p-4 rounded-lg border border-white/5 mb-3">
+//           <div class="flex-1 pr-4">
+//             <h4 class="font-bold text-white uppercase text-sm leading-tight">${item.name}</h4>
+//             <p class="text-primary font-bold text-xs">$${numericPrice.toFixed(2)} ea</p>
+//           </div>
+
+//           <div class="flex items-center gap-3 bg-black/40 rounded-lg p-1 border border-white/10 mx-4">
+//             <button onclick="updateQuantity('${item.name}', -1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">-</button>
+//             <span class="text-white font-bold w-4 text-center text-sm">${item.quantity}</span>
+//             <button onclick="updateQuantity('${item.name}', 1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">+</button>
+//           </div>
+
+//           <div class="text-right min-w-[60px]">
+//             <p class="text-white font-bold text-sm">$${(numericPrice * item.quantity).toFixed(2)}</p>
+//             <button onclick="removeFromOrder(${item.orderId})" class="text-gray-500 hover:text-red-500 text-xs mt-1 transition-colors">
+//               Remove
+//             </button>
+//           </div>
+//         </div>
+//       `;
+//     })
+//     .join("");
+
+//   // 2. Calculate Subtotal (Safely)
+//   const subtotal = orderList.reduce((sum, item) => {
+//     // We define a local price variable here so it doesn't rely on the map's variable
+//     const p =
+//       typeof item.price === "number"
+//         ? item.price
+//         : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
+//     return sum + p * (item.quantity || 1);
+//   }, 0);
+
+//   updateTotals(subtotal);
+
+//   // Add the Empty Cart button at the bottom of the list if it doesn't exist
+//   if (!document.getElementById("clear-cart-btn") && orderList.length > 0) {
+//     const clearBtnHtml = `
+//         <button id="clear-cart-btn" onclick="clearCart()" class="w-full mt-2 mb-4 py-2 border border-red-500/30 text-red-500 hover:bg-red-500 hover:text-white transition-all rounded-lg uppercase text-xs font-bold tracking-widest">
+//           <i class="fa-solid fa-trash-can mr-2"></i> Empty Order List
+//         </button>
+//       `;
+//     container.insertAdjacentHTML("beforeend", clearBtnHtml);
+//   }
+// }
+
 export function renderOrderList() {
   const container = document.getElementById("orderItemsContainer");
   if (!container) return;
 
   if (orderList.length === 0) {
-    container.innerHTML =
-      '<p class="text-center text-gray-500 py-10 font-display">YOUR LIST IS EMPTY</p>';
+    container.innerHTML = `
+      <div class="flex flex-col items-center justify-center py-20 text-gray-500">
+        <i class="fa-solid fa-cart-shopping text-5xl mb-4 opacity-20"></i>
+        <p class="text-lg uppercase tracking-widest">Your list is empty</p>
+      </div>`;
     updateTotals(0);
-    // Hide the clear button if the cart is empty
-    const clearBtn = document.getElementById("clear-cart-btn");
-    if (clearBtn) clearBtn.classList.add("hidden");
     return;
   }
 
-  // Render the items
   container.innerHTML = orderList
     .map((item) => {
-      // FIX: Convert price to number in case it was saved as a string (e.g. "$25.00")
       const numericPrice =
         typeof item.price === "number"
           ? item.price
           : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
 
       return `
-        <div class="flex items-center justify-between bg-white/5 p-4 rounded-lg border border-white/5 mb-3">
-          <div class="flex-1 pr-4">
-            <h4 class="font-bold text-white uppercase text-sm leading-tight">${item.name}</h4>
-            <p class="text-primary font-bold text-xs">$${numericPrice.toFixed(2)} ea</p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white/5 p-4 rounded-xl border border-white/10 mb-4 gap-4">
+        <div class="flex-1">
+          <h4 class="font-bold text-white uppercase text-lg leading-tight">${item.name}</h4>
+          <p class="text-primary font-bold">$${numericPrice.toFixed(2)} ea</p>
+        </div>
+
+        <div class="flex items-center justify-between w-full sm:w-auto gap-4">
+          <div class="flex items-center gap-3 bg-black/40 rounded-lg p-1 border border-white/10">
+            <button onclick="updateQuantity('${item.name}', -1)" class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md text-xl">-</button>
+            <span class="text-white font-bold w-6 text-center text-lg">${item.quantity || 1}</span>
+            <button onclick="updateQuantity('${item.name}', 1)" class="w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-md text-xl">+</button>
           </div>
 
-          <div class="flex items-center gap-3 bg-black/40 rounded-lg p-1 border border-white/10 mx-4">
-            <button onclick="updateQuantity('${item.name}', -1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">-</button>
-            <span class="text-white font-bold w-4 text-center text-sm">${item.quantity}</span>
-            <button onclick="updateQuantity('${item.name}', 1)" class="w-8 h-8 flex items-center justify-center text-white hover:bg-primary transition-colors rounded">+</button>
-          </div>
-
-          <div class="text-right min-w-[60px]">
-            <p class="text-white font-bold text-sm">$${(numericPrice * item.quantity).toFixed(2)}</p>
-            <button onclick="removeFromOrder(${item.orderId})" class="text-gray-500 hover:text-red-500 text-xs mt-1 transition-colors">
+          <div class="text-right">
+            <p class="text-white font-black text-xl">$${(numericPrice * (item.quantity || 1)).toFixed(2)}</p>
+            <button onclick="removeFromOrder(${item.orderId})" class="text-red-500/70 hover:text-red-500 text-xs uppercase mt-1 transition-colors">
               Remove
             </button>
           </div>
         </div>
-      `;
+      </div>
+    `;
     })
     .join("");
 
-  // 2. Calculate Subtotal (Safely)
+  // Re-calculate totals
   const subtotal = orderList.reduce((sum, item) => {
-    // We define a local price variable here so it doesn't rely on the map's variable
     const p =
       typeof item.price === "number"
         ? item.price
@@ -155,27 +224,80 @@ export function renderOrderList() {
 
   updateTotals(subtotal);
 
-  // Add the Empty Cart button at the bottom of the list if it doesn't exist
-  if (!document.getElementById("clear-cart-btn") && orderList.length > 0) {
-    const clearBtnHtml = `
-        <button id="clear-cart-btn" onclick="clearCart()" class="w-full mt-2 mb-4 py-2 border border-red-500/30 text-red-500 hover:bg-red-500 hover:text-white transition-all rounded-lg uppercase text-xs font-bold tracking-widest">
-          <i class="fa-solid fa-trash-can mr-2"></i> Empty Order List
-        </button>
-      `;
-    container.insertAdjacentHTML("beforeend", clearBtnHtml);
+  // Clear Cart Button - subtle but accessible
+  if (!document.getElementById("clear-cart-btn")) {
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
+      <button id="clear-cart-btn" onclick="clearCart()" class="w-full mt-4 mb-6 py-3 border border-red-500/20 text-red-500/50 hover:bg-red-500 hover:text-white transition-all rounded-lg uppercase text-xs font-bold tracking-widest">
+        Clear All Items
+      </button>
+     `,
+    );
   }
 }
 
-function updateTotals(subtotal) {
-  const tax = subtotal * 0.1;
-  const subtotalEl = document.getElementById("order-subtotal");
-  const taxEl = document.getElementById("order-tax");
-  const totalEl = document.getElementById("order-total");
+// function updateTotals(subtotal) {
+//   const tax = subtotal * 0.1;
+//   const subtotalEl = document.getElementById("order-subtotal");
+//   const taxEl = document.getElementById("order-tax");
+//   const totalEl = document.getElementById("order-total");
 
-  if (subtotalEl) subtotalEl.textContent = `$${(subtotal - tax).toFixed(2)}`;
-  if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
-  if (totalEl) totalEl.textContent = `$${subtotal.toFixed(2)}`;
+//   if (subtotalEl) subtotalEl.textContent = `$${(subtotal - tax).toFixed(2)}`;
+//   if (taxEl) taxEl.textContent = `$${tax.toFixed(2)}`;
+//   if (totalEl) totalEl.textContent = `$${subtotal.toFixed(2)}`;
+// }
+
+function updateTotals(subtotal) {
+  const footer = document.getElementById("orderFooter");
+  if (!footer) return;
+
+  const tax = subtotal * 0.1; // 10% GST
+  const netAmount = subtotal - tax;
+
+  // If cart is empty, show a simple "Continue Shopping" button instead
+  if (subtotal === 0) {
+    footer.innerHTML = `
+      <button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">
+        Continue Shopping
+      </button>
+    `;
+    return;
+  }
+
+  footer.innerHTML = `
+    <div class="space-y-2 mb-6">
+      <div class="flex justify-between text-gray-400 text-lg">
+        <span>Subtotal</span>
+        <span>$${netAmount.toFixed(2)}</span>
+      </div>
+      <div class="flex justify-between text-gray-400 text-lg">
+        <span>GST (10%)</span>
+        <span>$${tax.toFixed(2)}</span>
+      </div>
+      <div class="flex justify-between items-center pt-2 border-t border-white/10">
+        <span class="text-2xl font-black text-white uppercase">Total</span>
+        <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <button onclick="handlePlaceOrder()" class="w-full py-5 bg-primary text-white text-xl font-black uppercase rounded-xl shadow-2xl hover:bg-amber-600 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+        <i class="fa-solid fa-paper-plane"></i>
+        Place Order
+      </button>
+
+      <button onclick="closeOrderModal()" class="w-full py-3 text-gray-400 text-sm font-bold uppercase tracking-widest hover:text-white transition-colors">
+        Back to Menu
+      </button>
+    </div>
+  `;
 }
+
+// Simple placeholder for the Place Order action
+window.handlePlaceOrder = function () {
+  alert("Order Placed! (This would normally send to WhatsApp or a Server)");
+};
 
 window.openOrderModal = function () {
   renderOrderList();
