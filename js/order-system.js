@@ -329,11 +329,11 @@ window.handlePlaceOrder = function () {
     return;
   }
 
-  // BUILD THE MESSAGE USING STANDARD EMOJIS
-  let message = `🔥 *NEW BBQ ORDER* 🔥\n`;
-  message += `━━━━━━━━━━━━━━━━━━\n`;
-  message += `👤 *Order For:* ${name}\n`;
-  message += `━━━━━━━━━━━━━━━━━━\n\n`;
+  // BUILD THE MESSAGE USING PURE ASCII (Keyboard Characters)
+  let message = `>>> NEW BBQ ORDER <<<\n`;
+  message += `==========================\n`;
+  message += `CUSTOMER: ${name}\n`;
+  message += `==========================\n\n`;
 
   orderList.forEach((item) => {
     const p =
@@ -341,8 +341,8 @@ window.handlePlaceOrder = function () {
         ? item.price
         : parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;
 
-    // Use the "Check Box" emoji (✅) or "Small Orange Diamond" (🔸)
-    message += `🔸 ${item.quantity}x ${item.name} - $${(p * item.quantity).toFixed(2)}\n`;
+    // Using simple characters like [X], -, or *
+    message += `[${item.quantity}x] ${item.name} - $${(p * item.quantity).toFixed(2)}\n`;
   });
 
   const total = orderList.reduce((sum, item) => {
@@ -353,9 +353,11 @@ window.handlePlaceOrder = function () {
     return sum + p * item.quantity;
   }, 0);
 
-  message += `\n💰 *TOTAL AMOUNT: $${total.toFixed(2)}*`;
-  message += `\n\n_Please confirm if you've received this order!_`;
+  message += `\nTOTAL AMOUNT: $${total.toFixed(2)}`;
+  message += `\n\n--------------------------\n`;
+  message += `Sent via BBQ Heaven Online\n`;
 
+  // --- CRITICAL STEP: URL ENCODING ---
   const encodedMsg = encodeURIComponent(message);
   const whatsappNumber = "61491098073";
 
