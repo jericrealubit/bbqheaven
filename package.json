@@ -1,0 +1,25 @@
+{
+  "name": "bbq-heaven-ordering-system",
+  "version": "1.0.0",
+  "description": "Live ordering and kitchen dashboard for BBQ Heaven Rockingham",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "live-server",
+    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+  },
+  "keywords": [
+    "firebase",
+    "realtime-database",
+    "ordering-system"
+  ],
+  "author": "Jeric Realubit",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^10.8.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

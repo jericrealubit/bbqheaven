@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Firebase
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+ui-debug.log*
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+thumbs.db
+*.log
+
+# Build outputs (if you start using a bundler like Vite or Webpack)
+dist/
+build/

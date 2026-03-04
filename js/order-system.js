@@ -1,3 +1,9 @@
+import { db } from "../dashboard/firebase-config.js"; // Adjust path if necessary
+import {
+  ref,
+  push,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 // Global state for the cart
 export let orderList = JSON.parse(localStorage.getItem("bbqOrder")) || [];
 
@@ -186,64 +192,134 @@ export function renderOrderList() {
   }
 }
 
+// function updateTotals(subtotal) {
+//   const footer = document.getElementById("orderFooter");
+//   if (!footer) return;
+
+//   if (subtotal === 0) {
+//     footer.innerHTML = `<button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">Continue Shopping</button>`;
+//     return;
+//   }
+
+//   const tax = subtotal * 0.1;
+//   footer.innerHTML = `
+//     <div class="space-y-4 mb-4">
+//       <div class="relative">
+//         <input type="text" id="custName" placeholder="ENTER YOUR NAME" class="w-full p-5 bg-black/40 border-2 border-white/20 rounded-2xl text-white text-xl font-black focus:border-primary outline-none placeholder:text-gray-600 uppercase">
+//         <span class="absolute -top-3 left-4 bg-smoke px-2 text-primary text-xs font-bold tracking-widest uppercase">Required for Pickup</span>
+//       </div>
+//       <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
+//         <div class="flex justify-between text-gray-400 font-bold"><span>SUBTOTAL</span><span>$${(subtotal - tax).toFixed(2)}</span></div>
+//         <div class="flex justify-between items-center mt-2">
+//           <span class="text-2xl font-black text-white uppercase tracking-tighter">Total Amount</span>
+//           <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
+//         </div>
+//       </div>
+//     </div>
+//     <button onclick="handlePlaceOrder()" class="w-full py-6 bg-green-600 text-white text-2xl font-black uppercase rounded-2xl shadow-lg hover:bg-green-500 active:scale-[0.97] transition-all flex items-center justify-center gap-3">
+//       <i class="fa-brands fa-whatsapp text-3xl"></i> ORDER VIA WHATSAPP
+//     </button>`;
+// }
+
 function updateTotals(subtotal) {
   const footer = document.getElementById("orderFooter");
   if (!footer) return;
 
   if (subtotal === 0) {
-    footer.innerHTML = `<button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">Continue Shopping</button>`;
+    footer.innerHTML = `<button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">Still Hungry?</button>`;
     return;
   }
 
   const tax = subtotal * 0.1;
   footer.innerHTML = `
-    <div class="space-y-4 mb-4">
+    <div class="space-y-4 mb-4 text-left">
       <div class="relative">
         <input type="text" id="custName" placeholder="ENTER YOUR NAME" class="w-full p-5 bg-black/40 border-2 border-white/20 rounded-2xl text-white text-xl font-black focus:border-primary outline-none placeholder:text-gray-600 uppercase">
-        <span class="absolute -top-3 left-4 bg-smoke px-2 text-primary text-xs font-bold tracking-widest uppercase">Required for Pickup</span>
+        <span class="absolute -top-3 left-4 bg-[#1a1a1a] px-2 text-primary text-[10px] font-black tracking-widest uppercase">Required for Pickup</span>
       </div>
+
       <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-        <div class="flex justify-between text-gray-400 font-bold"><span>SUBTOTAL</span><span>$${(subtotal - tax).toFixed(2)}</span></div>
-        <div class="flex justify-between items-center mt-2">
-          <span class="text-2xl font-black text-white uppercase tracking-tighter">Total Amount</span>
+        <div class="flex justify-between items-center">
+          <span class="text-xl font-black text-white uppercase tracking-tighter">Total Amount</span>
           <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
         </div>
       </div>
     </div>
-    <button onclick="handlePlaceOrder()" class="w-full py-6 bg-green-600 text-white text-2xl font-black uppercase rounded-2xl shadow-lg hover:bg-green-500 active:scale-[0.97] transition-all flex items-center justify-center gap-3">
-      <i class="fa-brands fa-whatsapp text-3xl"></i> ORDER VIA WHATSAPP
-    </button>`;
+
+    <button onclick="handlePlaceOrder()" id="submitOrderBtn" class="w-full py-6 bg-primary text-white text-2xl font-black uppercase rounded-2xl shadow-xl hover:bg-red-500 active:scale-[0.97] transition-all flex flex-col items-center justify-center leading-tight">
+      <span>PLACE ORDER</span>
+      <span class="text-[10px] opacity-80 font-bold tracking-[0.2em]">SENDS TO KITCHEN DASHBOARD</span>
+    </button>
+
+    <p class="text-center text-[10px] text-zinc-500 uppercase mt-4 font-bold tracking-widest">
+      No WhatsApp? No problem. Just watch the screen!
+    </p>`;
 }
 
-window.handlePlaceOrder = function () {
+// Make sure this is attached to window so the HTML button can find it
+window.handlePlaceOrder = async function () {
   const nameInput = document.getElementById("custName");
   const name = nameInput ? nameInput.value.trim() : "";
-  if (!name) {
-    alert("Please enter your Name so we know who the order is for!");
-    if (nameInput) nameInput.focus();
-    return;
+
+  if (!name) return alert("Please enter your name for the kitchen board!");
+
+  const newOrder = {
+    customerName: name.toUpperCase(),
+    items: orderList,
+    total: orderList.reduce(
+      (sum, i) => sum + Number(i.price) * Number(i.quantity),
+      0,
+    ),
+    status: "pending",
+    timestamp: serverTimestamp(), // This requires the import from step 1
+  };
+
+  try {
+    // This 'db' variable comes from your import in step 1
+    await push(ref(db, "orders"), newOrder);
+
+    showNotification("ORDER RECEIVED! WATCH THE SCREEN.");
+
+    orderList = [];
+    localStorage.removeItem("bbqOrder");
+    closeOrderModal();
+    updateOrderCounter();
+  } catch (error) {
+    console.error("Firebase Error:", error);
+    alert("Connection error. Please try again!");
   }
-
-  let message = `* NEW ORDER: ${name.toUpperCase()} *\n`;
-  message += `━━━━━━━━━━━━━━━━━━\n\n`;
-
-  orderList.forEach((item) => {
-    const p = getNumericPrice(item.price);
-    message += `${item.quantity} x *${item.name.toUpperCase()}*\n`;
-    message += `     Subtotal: $${(p * item.quantity).toFixed(2)}\n\n`;
-  });
-
-  const total = orderList.reduce(
-    (sum, item) => sum + getNumericPrice(item.price) * item.quantity,
-    0,
-  );
-  message += `━━━━━━━━━━━━━━━━━━\n`;
-  message += `*TOTAL TO PAY: $${total.toFixed(2)}*\n`;
-  message += `━━━━━━━━━━━━━━━━━━\n`;
-  message += `Sent via BBQ Heaven Online`;
-
-  window.open(
-    `https://wa.me/61491098073?text=${encodeURIComponent(message)}`,
-    "_blank",
-  );
 };
+
+// Legacy WhatsApp order function (kept for reference or backup)admin-dashboard.htmladmin-dashboard.html
+// window.handlePlaceOrder = function () {
+//   const nameInput = document.getElementById("custName");
+//   const name = nameInput ? nameInput.value.trim() : "";
+//   if (!name) {
+//     alert("Please enter your Name so we know who the order is for!");
+//     if (nameInput) nameInput.focus();
+//     return;
+//   }
+
+//   let message = `* NEW ORDER: ${name.toUpperCase()} *\n`;
+//   message += `━━━━━━━━━━━━━━━━━━\n\n`;
+
+//   orderList.forEach((item) => {
+//     const p = getNumericPrice(item.price);
+//     message += `${item.quantity} x *${item.name.toUpperCase()}*\n`;
+//     message += `     Subtotal: $${(p * item.quantity).toFixed(2)}\n\n`;
+//   });
+
+//   const total = orderList.reduce(
+//     (sum, item) => sum + getNumericPrice(item.price) * item.quantity,
+//     0,
+//   );
+//   message += `━━━━━━━━━━━━━━━━━━\n`;
+//   message += `*TOTAL TO PAY: $${total.toFixed(2)}*\n`;
+//   message += `━━━━━━━━━━━━━━━━━━\n`;
+//   message += `Sent via BBQ Heaven Online`;
+
+//   window.open(
+//     `https://wa.me/61491098073?text=${encodeURIComponent(message)}`,
+//     "_blank",
+//   );
+// };
