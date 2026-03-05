@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "live-server",
-    "dev": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "build": "node generate-env.js"
   },
   "keywords": [
     "firebase",
@@ -17,6 +16,7 @@
   "author": "Jeric Realubit",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.3.1",
     "firebase": "^10.8.0"
   },
   "devDependencies": {
