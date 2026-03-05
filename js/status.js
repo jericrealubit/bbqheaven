@@ -1,4 +1,4 @@
-import { supabaseClient } from "./config.js";
+import { supabase } from "./config.js";
 
 /**
  * Initializes the Supabase Presence channel to track live users.
