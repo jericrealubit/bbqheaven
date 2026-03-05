@@ -257,36 +257,92 @@ function updateTotals(subtotal) {
 }
 
 // Make sure this is attached to window so the HTML button can find it
+// window.handlePlaceOrder = async function () {
+//   const nameInput = document.getElementById("custName");
+//   const name = nameInput ? nameInput.value.trim() : "";
+
+//   if (!name) return alert("Please enter your name for the kitchen board!");
+
+//   const newOrder = {
+//     customerName: name.toUpperCase(),
+//     items: orderList,
+//     total: orderList.reduce(
+//       (sum, i) => sum + Number(i.price) * Number(i.quantity),
+//       0,
+//     ),
+//     status: "pending",
+//     timestamp: serverTimestamp(), // This requires the import from step 1
+//   };
+
+//   try {
+//     // This 'db' variable comes from your import in step 1
+//     await push(ref(db, "orders"), newOrder);
+
+//     showNotification("ORDER RECEIVED! WATCH THE SCREEN.");
+
+//     orderList = [];
+//     localStorage.removeItem("bbqOrder");
+//     closeOrderModal();
+//     updateOrderCounter();
+//   } catch (error) {
+//     console.error("Firebase Error:", error);
+//     alert("Connection error. Please try again!");
+//   }
+// };
+
 window.handlePlaceOrder = async function () {
   const nameInput = document.getElementById("custName");
   const name = nameInput ? nameInput.value.trim() : "";
 
   if (!name) return alert("Please enter your name for the kitchen board!");
+  if (orderList.length === 0) return alert("Your order is empty!");
+
+  // 1. SANITIZE & CALCULATE TOTAL
+  const safeTotal = orderList.reduce((sum, item) => {
+    // Strip everything except numbers and decimals (removes $ or extra spaces)
+    const cleanPrice =
+      typeof item.price === "string"
+        ? item.price.replace(/[^0-9.]/g, "")
+        : item.price;
+
+    const price = parseFloat(cleanPrice) || 0;
+    const qty = parseInt(item.quantity) || 1;
+
+    return sum + price * qty;
+  }, 0);
+
+  // 2. FINAL VALIDATION: Ensure the total is a valid number for Firebase
+  if (isNaN(safeTotal)) {
+    console.error("Order Calculation Error: Total is NaN", orderList);
+    return alert("There was an error calculating your total. Please refresh.");
+  }
 
   const newOrder = {
     customerName: name.toUpperCase(),
     items: orderList,
-    total: orderList.reduce(
-      (sum, i) => sum + Number(i.price) * Number(i.quantity),
-      0,
-    ),
+    total: safeTotal, // Now guaranteed to be a valid Number
     status: "pending",
-    timestamp: serverTimestamp(), // This requires the import from step 1
+    timestamp: serverTimestamp(),
   };
 
   try {
-    // This 'db' variable comes from your import in step 1
+    // 3. PUSH TO FIREBASE
     await push(ref(db, "orders"), newOrder);
 
     showNotification("ORDER RECEIVED! WATCH THE SCREEN.");
 
+    // 4. CLEANUP
     orderList = [];
     localStorage.removeItem("bbqOrder");
-    closeOrderModal();
-    updateOrderCounter();
+
+    if (typeof closeOrderModal === "function") closeOrderModal();
+    if (typeof updateOrderCounter === "function") updateOrderCounter();
+
+    // Optional: Refresh the UI list if you have a render function
+    if (typeof renderOrderList === "function") renderOrderList();
   } catch (error) {
     console.error("Firebase Error:", error);
-    alert("Connection error. Please try again!");
+    alert("Connection error. Please check your internet and try again!");
   }
 };
 
