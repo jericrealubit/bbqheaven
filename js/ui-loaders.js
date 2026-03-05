@@ -2,7 +2,7 @@ import { loadMenu } from "./menu-logic.js";
 import { updateBusinessStatus, initLiveCounter } from "./status.js";
 
 export async function loadSections() {
-  const sections = ["header", "hero", "menu", "location", "footer"];
+  const sections = ["header", "menu", "location", "footer"];
 
   for (const section of sections) {
     try {
