@@ -1,10 +1,6 @@
 // Global Configuration
-export const SUPABASE_URL =
-  window.ENV_SUPABASE_URL || "https://cqzogkadiatpcvxgxqkc.supabase.co";
-
-export const SUPABASE_KEY =
-  window.ENV_SUPABASE_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxem9na2FkaWF0cGN2eGd4cWtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzYyMTIsImV4cCI6MjA4Nzk1MjIxMn0.u1IvDAQr7uyp6329OzfO0rV9M0zhRk3kqzKfMrV6koM";
+export const SUPABASE_URL = env.SUPABASE_URL;
+export const SUPABASE_KEY = env.SUPABASE_KEY;
 
 export const categoryMap = {
   starters: "starters",

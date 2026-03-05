@@ -2,15 +2,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCyc98O9272jR7z7sgFwC8agjQTFg5AUO0",
-  authDomain: "bbqheavenrockingham.firebaseapp.com",
-  projectId: "bbqheavenrockingham",
-  databaseURL:
-    "https://bbqheavenrockingham-default-rtdb.asia-southeast1.firebasedatabase.app/", // Ensure this matches your Firebase console
-  storageBucket: "bbqheavenrockingham.firebasestorage.app",
-  messagingSenderId: "208843072347",
-  appId: "1:208843072347:web:ce1e73ecf747d04d9e307e",
+export const firebaseConfig = {
+  apiKey: env.ADMIN_FIREBASE_API_KEY,
+  authDomain: env.ADMIN_FIREBASE_AUTH_DOMAIN,
+  databaseURL: env.ADMIN_FIREBASE_DATABASE_URL,
+  projectId: env.ADMIN_FIREBASE_PROJECT_ID,
+  storageBucket: env.ADMIN_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: env.ADMIN_FIREBASE_MESSAGING_SENDER_ID,
+  appId: env.ADMIN_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
