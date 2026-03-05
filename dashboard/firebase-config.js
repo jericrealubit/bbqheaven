@@ -2,14 +2,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+// Use the injected variables
+const config = window.env;
+
 export const firebaseConfig = {
-  apiKey: process.env.ADMIN_FIREBASE_API_KEY,
-  authDomain: process.env.ADMIN_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.ADMIN_FIREBASE_DATABASE_URL,
-  projectId: process.env.ADMIN_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.ADMIN_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.ADMIN_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.ADMIN_FIREBASE_APP_ID,
+  apiKey: config.ADMIN_FIREBASE_API_KEY,
+  authDomain: config.ADMIN_FIREBASE_AUTH_DOMAIN,
+  databaseURL: config.ADMIN_FIREBASE_DATABASE_URL,
+  projectId: config.ADMIN_FIREBASE_PROJECT_ID,
+  storageBucket: config.ADMIN_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: config.ADMIN_FIREBASE_MESSAGING_SENDER_ID,
+  appId: config.ADMIN_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

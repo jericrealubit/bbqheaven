@@ -1,7 +1,16 @@
-// Global Configuration
-export const SUPABASE_URL = process.env.SUPABASE_URL;
-export const SUPABASE_KEY = process.env.SUPABASE_KEY;
+// 1. Safe Access to Environment Variables
+// Provides fallbacks to prevent the app from crashing locally
+const env = window.env || {
+  SUPABASE_URL: "",
+  SUPABASE_KEY: "",
+};
 
+export const supabaseConfig = {
+  url: env.SUPABASE_URL,
+  key: env.SUPABASE_KEY,
+};
+
+// 2. Category Mapping
 export const categoryMap = {
   starters: "starters",
   salad: "starters",
@@ -25,18 +34,24 @@ export const categoryMap = {
 };
 
 /**
- * We export a function or a getter to ensure 'supabase' is defined
- * when it is actually called by other modules.
+ * Helper to initialize the client.
+ * We use supabaseConfig.url/key to ensure variables are correctly scoped.
  */
-export const supabaseClient = window.supabase
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-  : null;
-
-// If the client fails to initialize here, we can export a helper to get it
 export const getSupabaseClient = () => {
   if (window.supabase) {
-    return window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    if (!supabaseConfig.url || !supabaseConfig.key) {
+      console.warn(
+        "Supabase Config missing. Check Netlify Environment Variables.",
+      );
+      return null;
+    }
+    return window.supabase.createClient(supabaseConfig.url, supabaseConfig.key);
   }
-  console.error("Supabase SDK not loaded yet.");
+  console.error(
+    "Supabase SDK not loaded. Ensure the script tag is in your HTML.",
+  );
   return null;
 };
+
+// Export the instance immediately if possible
+export const supabase = getSupabaseClient();
