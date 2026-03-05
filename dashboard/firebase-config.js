@@ -3,13 +3,13 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 export const firebaseConfig = {
-  apiKey: env.ADMIN_FIREBASE_API_KEY,
-  authDomain: env.ADMIN_FIREBASE_AUTH_DOMAIN,
-  databaseURL: env.ADMIN_FIREBASE_DATABASE_URL,
-  projectId: env.ADMIN_FIREBASE_PROJECT_ID,
-  storageBucket: env.ADMIN_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: env.ADMIN_FIREBASE_MESSAGING_SENDER_ID,
-  appId: env.ADMIN_FIREBASE_APP_ID,
+  apiKey: process.env.ADMIN_FIREBASE_API_KEY,
+  authDomain: process.env.ADMIN_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.ADMIN_FIREBASE_DATABASE_URL,
+  projectId: process.env.ADMIN_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.ADMIN_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.ADMIN_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.ADMIN_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
