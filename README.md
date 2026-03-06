@@ -8,9 +8,7 @@
 
 ## 🔥 Overview
 
-BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management ecosystem built for a high-traffic Western Australian smokehouse. Originally a static menu, it evolved into a real-time **Customer-to-Pit Pipeline** designed to handle peak service hours with sub-second synchronization.
-
-The system emphasizes **Operational Security**, specifically preventing non-local orders through silent geolocation, and features a "Kitchen Dashboard" for live order tracking.
+BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management ecosystem built for a high-traffic Western Australian smokehouse. The platform facilitates a real-time **Customer-to-Pit Pipeline**, designed to handle peak service hours with sub-second synchronization and localized security.
 
 ---
 
@@ -18,16 +16,16 @@ The system emphasizes **Operational Security**, specifically preventing non-loca
 
 ### Frontend & UI
 
-- **Architecture:** Vanilla JavaScript (ES6 Modules) for lightweight, high-speed performance.
-- **Styling:** Tailwind CSS v3 (CDN-optimized) with a mobile-first, "dark-mode" smokehouse aesthetic.
-- **Typography:** Oswald (Headings) and Inter (Body) for high readability in kitchen environments.
-- **Assets:** Optimized `.webp` imagery and **SVG Line-Art Fallbacks** for missing product photos.
+- **Architecture:** Vanilla JavaScript (ES6 Modules).
+- **Styling:** Tailwind CSS v3 (CDN-optimized) with a mobile-first, "dark-mode" aesthetic.
+- **Typography:** Oswald (Headings) and Inter (Body).
+- **Assets:** Optimized `.webp` imagery with **SVG Line-Art Fallbacks** for missing product photos.
 
 ### Backend & Real-Time
 
-- **Database:** Firebase Realtime Database (NoSQL) for sub-second order syncing.
+- **Database:** Firebase Realtime Database (NoSQL) for instant order syncing.
 - **Authentication:** Firebase Auth for secure Multi-User Staff/Admin access.
-- **Security:** Role-based access control (RBAC) and IP-based geofencing.
+- **Security:** Role-based access control (RBAC) and **GPS Geofencing**.
 
 ### Deployment & DevOps
 
@@ -38,17 +36,18 @@ The system emphasizes **Operational Security**, specifically preventing non-loca
 
 ## ✨ Core Features
 
-### 📍 Location-Based Security (Geofencing)
+### 📍 Precise GPS Geofencing (NEW)
 
-To prevent accidental international or interstate orders, the system uses a **Silent IP-Check** (`ipapi.co`).
+To solve "Mobile IP Routing" errors where WA users incorrectly appear in Melbourne/Sydney, the system utilizes the **Web Geolocation API**.
 
-- **Automatic Detection:** Verifies if a user is within **Western Australia**.
-- **Safety Lock:** If a user is outside the service area, the system dynamically injects a "Local Pickup Only" warning and disables the "Place Order" button.
+- **Distance Logic:** Uses the **Haversine Formula** to calculate the mathematical distance between the user's GPS coordinates and the Rockingham smokehouse.
+- **Radius Lock:** Orders are restricted to a **60km radius** (covering Perth to Mandurah).
+- **Safety Lock:** If a user is outside the radius, the system dynamically disables the "Place Order" button and updates the UI to **"PICKUP ONLY (OUTSIDE AREA)"**.
 
 ### 🛒 Intelligent Ordering Engine
 
 - **Persistent State:** Cart items survive page refreshes using `localStorage`.
-- **Sanitized Logic:** Prevents `NaN` pricing errors through strict type-casting before Firebase pushes.
+- **Sanitized Logic:** Prevents `NaN` pricing errors through strict type-casting before Firebase writes.
 - **Dynamic Modals:** Complex order options (meat weights, sides, sauces) are handled via a modular UI.
 
 ### 👨‍🍳 Real-Time Kitchen Dashboard
@@ -72,12 +71,10 @@ BBQHEAVEN/
 │   ├── admin-logic.js       # Firebase listeners & order rendering
 │   └── firebase-config.js   # Secure admin credentials
 ├── js/                      # Core Logic
-│   ├── location-security.js # IP Geofencing & checkout locking
+│   ├── location-security.js # GPS Geofencing, Haversine logic & UI locking
 │   ├── order-system.js      # Cart management & Firebase write-logic
 │   ├── status.js            # AWST-aware business hours logic
 │   └── menu-logic.js        # Category filtering & dynamic rendering
-├── data/                    # Menu datasets (JSON)
-├── images/                  # Brand assets & SVG placeholders
 ├── index.html               # Main Customer UI
 └── admin-dashboard.html     # Staff-facing order management
 
@@ -92,7 +89,7 @@ BBQHEAVEN/
 
 ---
 
-## 🚀 Deployment & Local Setup
+## 🚀 Local Setup
 
 1. **Clone & Install:** `git clone` followed by `pnpm install`.
 2. **Environment:** Add your Firebase credentials to `js/config.js`.
@@ -103,3 +100,7 @@ BBQHEAVEN/
 ## 👨‍💻 Built By
 
 **Jeric Realubit** _Full-Stack Web Developer & AI Integration Specialist_ **Last Updated:** March 2026 (Launch Ready)
+
+---
+
+### **Final Launch Tip (Monday, March 9th):**
