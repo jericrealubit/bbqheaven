@@ -75,17 +75,23 @@ export async function loadMenu() {
 }
 
 /**
- * Helper to handle missing images with an animated placeholder
+ * Helper to handle missing images with a placeholder
+ * This version ensures the "Add" button stays visible
  */
 window.handleImageError = function (img) {
   const container = img.parentElement;
-  // Replace the image with an animated "No Image" UI
-  container.innerHTML = `
-    <div class="flex flex-col items-center justify-center w-full h-full bg-black/40 text-gray-600">
-      <i class="fa-solid fa-image text-4xl mb-2 animate-pulse"></i>
-      <span class="text-[10px] uppercase tracking-widest font-bold opacity-50">Image coming soon</span>
-    </div>
+
+  // Create the placeholder div
+  const placeholder = document.createElement("div");
+  placeholder.className =
+    "flex flex-col items-center justify-center w-full h-full bg-black/60 text-gray-500";
+  placeholder.innerHTML = `
+    <i class="fa-solid fa-utensils text-3xl mb-2 opacity-20"></i>
+    <span class="text-[9px] uppercase tracking-widest font-bold opacity-40">Photo Coming Soon</span>
   `;
+
+  // Replace ONLY the image tag, not the whole container content
+  img.replaceWith(placeholder);
 };
 
 /**
@@ -99,46 +105,40 @@ function renderMenu(items) {
     .map((item, index) => {
       let cleanName = item.name.split("(")[0].trim();
       const folderName = item.originalCategory || item.uiCategory;
-      //const imagePath = `./images/${folderName}/${cleanName}-th.jpg`;
       const imagePath = `./images/${folderName}/${cleanName}.webp`;
 
+      // Badge Logic
       const nameUpper = item.name.toUpperCase();
-      const descUpper = (item.description || "").toUpperCase();
-
       const isGF = nameUpper.includes("(GF)");
-      const isSpicy =
-        nameUpper.includes("HOT") ||
-        nameUpper.includes("SPICY") ||
-        descUpper.includes("SPICY");
-      const isFamily = nameUpper.includes("FAMILY");
+      const isSpicy = nameUpper.includes("SPICY") || nameUpper.includes("HOT");
 
       return `
-        <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.02] overflow-hidden group shadow-lg relative">
+        <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.01] overflow-hidden group shadow-lg relative">
 
-          <div class="absolute top-2 left-2 z-10 flex flex-col gap-1">
+          <div class="absolute top-2 left-2 z-30 flex flex-col gap-1">
              ${isGF ? '<span class="bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md">GF</span>' : ""}
-             ${isSpicy ? `<span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase flex items-center italic"><i class="fa-solid fa-pepper-hot mr-1"></i>Spicy</span>` : ""}
-             ${isFamily ? '<span class="bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase italic">Family</span>' : ""}
+             ${isSpicy ? '<span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase flex items-center italic"><i class="fa-solid fa-pepper-hot mr-1"></i>Spicy</span>' : ""}
           </div>
 
-          <div class="aspect-video bg-black/40 relative overflow-hidden flex items-center justify-center">
+          <div class="aspect-video bg-black/20 relative overflow-hidden flex items-center justify-center">
             <img
               src="${imagePath}"
-              class="absolute inset-0 object-cover w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+              loading="lazy"
+              class="absolute inset-0 object-cover w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
               onerror="handleImageError(this)"
             />
 
             <button
               onclick="event.stopPropagation(); ${item.options ? `openMenuModal(${index})` : `handleQuickAdd(${index})`}"
-              class="absolute bottom-3 right-3 z-20 h-10 w-10 bg-primary text-white rounded-full shadow-xl flex items-center justify-center hover:bg-amber-600 transition-colors"
+              class="absolute bottom-3 right-3 z-40 h-10 w-10 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-amber-600 active:scale-90 transition-all"
             >
               <i class="fa-solid ${item.options ? "fa-ellipsis" : "fa-plus"}"></i>
             </button>
           </div>
 
-          <div class="p-6">
-            <div class="flex items-start justify-between gap-4 mb-2">
-              <h3 class="text-lg font-display tracking-wide uppercase leading-tight">${item.name}</h3>
+          <div class="p-4">
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="text-md font-display tracking-wide uppercase leading-tight">${item.name}</h3>
               <span class="font-bold text-primary whitespace-nowrap">${item.price || ""}</span>
             </div>
           </div>
@@ -158,21 +158,30 @@ window.openMenuModal = function (index) {
   const modal = document.getElementById("menuModal");
   if (!modal) return;
 
-  let cleanName = item.name.split("(")[0].trim();
+  const cleanName = item.name.split("(")[0].trim();
   const folderName = item.originalCategory || item.uiCategory;
+  const modalImg = document.getElementById("modalImage");
 
-  // document.getElementById("modalImage").src =
-  //   `./images/${folderName}/${cleanName}.jpg`;
-  // This remains the same as it already points to the full image
-  document.getElementById("modalImage").src =
-    `./images/${folderName}/${cleanName}.webp`;
+  // 1. Reset Modal State
+  // This prevents the previous item's image from showing while the new one loads
+  modalImg.classList.remove("hidden");
+
+  // 2. Set Basic Content
   document.getElementById("modalTitle").textContent = item.name;
   document.getElementById("modalDescription").textContent =
     item.description || "Authentic Smokehouse flavor.";
 
-  const priceContainer = document.getElementById("modalPrice");
+  // 3. Image Handling with Error Fallback
+  // We define the error handler BEFORE setting the src
+  modalImg.onerror = function () {
+    this.src = "./images/placeholder-bbq.webp";
+    // If you prefer to hide the image area entirely when missing, use:
+    // this.classList.add('hidden');
+  };
+  modalImg.src = `./images/${folderName}/${cleanName}.webp`;
 
-  // Clean up old options
+  // 4. Price & Options Logic
+  const priceContainer = document.getElementById("modalPrice");
   const existingOptions = document.getElementById("price-options");
   if (existingOptions) existingOptions.remove();
 
@@ -200,7 +209,7 @@ window.openMenuModal = function (index) {
     priceContainer.textContent = item.price || "";
   }
 
-  // Set the "Add to Order" button action
+  // 5. Add to Order Action
   document.getElementById("modalAddBtn").onclick = () => {
     let selectedOption = null;
     if (item.options) {
@@ -209,10 +218,13 @@ window.openMenuModal = function (index) {
       ).value;
       selectedOption = item.options[selectedIndex];
     }
+
+    // Add to list and close
     addToOrderList(item, selectedOption);
     closeMenuModal();
   };
 
+  // 6. Show Modal
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 };
