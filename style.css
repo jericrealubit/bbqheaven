@@ -283,3 +283,11 @@ footer a.text-primary:hover {
   position: relative;
   z-index: 100;
 }
+
+/* Update menu item images to use the new webp format and ensure they are optimized for performance */
+.menu-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This prevents the BBQ from looking "squashed" */
+  loading: lazy; /* Critical: only loads images as the user scrolls */
+}

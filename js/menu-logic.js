@@ -99,7 +99,8 @@ function renderMenu(items) {
     .map((item, index) => {
       let cleanName = item.name.split("(")[0].trim();
       const folderName = item.originalCategory || item.uiCategory;
-      const imagePath = `./images/${folderName}/${cleanName}-th.jpg`;
+      //const imagePath = `./images/${folderName}/${cleanName}-th.jpg`;
+      const imagePath = `./images/${folderName}/${cleanName}.webp`;
 
       const nameUpper = item.name.toUpperCase();
       const descUpper = (item.description || "").toUpperCase();
@@ -160,8 +161,11 @@ window.openMenuModal = function (index) {
   let cleanName = item.name.split("(")[0].trim();
   const folderName = item.originalCategory || item.uiCategory;
 
+  // document.getElementById("modalImage").src =
+  //   `./images/${folderName}/${cleanName}.jpg`;
+  // This remains the same as it already points to the full image
   document.getElementById("modalImage").src =
-    `./images/${folderName}/${cleanName}.jpg`;
+    `./images/${folderName}/${cleanName}.webp`;
   document.getElementById("modalTitle").textContent = item.name;
   document.getElementById("modalDescription").textContent =
     item.description || "Authentic Smokehouse flavor.";
