@@ -1,64 +1,66 @@
 # 🍖 BBQ Heaven Rockingham
 
-**Authentic Low & Slow Woodfire BBQ**
-📍 Unit 6/6 Acute Court, Rockingham WA 6168
-🌐 **Live Site:** https://bbqheaven.au
+**Authentic Low & Slow Woodfire BBQ Ordering System** 📍 Unit 6/6 Acute Court, Rockingham WA 6168
+
+🌐 **Live Site:** [bbqheaven.au](https://bbqheaven.au)
 
 ---
 
 ## 🔥 Overview
 
-BBQ Heaven Rockingham is a full‑stack, real‑time ordering and kitchen management system built for a high‑traffic smokehouse specializing in Jarrah‑smoked meats. The platform evolved from a static menu into a complete **Ordering + Admin Dashboard** designed for speed, reliability, and seamless staff workflow during peak service.
+BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management ecosystem built for a high-traffic Western Australian smokehouse. Originally a static menu, it evolved into a real-time **Customer-to-Pit Pipeline** designed to handle peak service hours with sub-second synchronization.
 
-The system connects customers, staff, and the kitchen pit through a unified Firebase backend, delivering sub‑second updates, secure multi‑user access, and a frictionless ordering experience.
+The system emphasizes **Operational Security**, specifically preventing non-local orders through silent geolocation, and features a "Kitchen Dashboard" for live order tracking.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
+### Frontend & UI
 
-- HTML5, CSS3
-- **Tailwind CSS v3 (CDN-based Production)**
-- Vanilla JavaScript (ES6 Modules)
-- Google Fonts: **Oswald** (Headings), **Inter** (Body)
+- **Architecture:** Vanilla JavaScript (ES6 Modules) for lightweight, high-speed performance.
+- **Styling:** Tailwind CSS v3 (CDN-optimized) with a mobile-first, "dark-mode" smokehouse aesthetic.
+- **Typography:** Oswald (Headings) and Inter (Body) for high readability in kitchen environments.
+- **Assets:** Optimized `.webp` imagery and **SVG Line-Art Fallbacks** for missing product photos.
 
-### Backend
+### Backend & Real-Time
 
-- **Firebase Realtime Database** (NoSQL)
-- **Firebase Authentication** (Multi-user Staff Access)
-- Firebase Security Rules (Role-based read/write logic)
+- **Database:** Firebase Realtime Database (NoSQL) for sub-second order syncing.
+- **Authentication:** Firebase Auth for secure Multi-User Staff/Admin access.
+- **Security:** Role-based access control (RBAC) and IP-based geofencing.
 
-### Deployment
+### Deployment & DevOps
 
-- Netlify (CI/CD + SSL + Global CDN)
+- **Platform:** Netlify (CI/CD + SSL + Global CDN).
+- **Package Management:** `pnpm` for efficient dependency handling.
 
 ---
 
 ## ✨ Core Features
 
-### 🛒 Real-Time Ordering System
+### 📍 Location-Based Security (Geofencing)
 
-- **Sanitized Price Calculations** to prevent `NaN` errors and ensure clean Firebase writes.
-- **Persistent Cart** using `localStorage` to survive refreshes.
-- **Instant Toast Notifications** confirming every “Add to Order” action.
+To prevent accidental international or interstate orders, the system uses a **Silent IP-Check** (`ipapi.co`).
 
-### 👨‍🍳 Kitchen & Admin Dashboard
+- **Automatic Detection:** Verifies if a user is within **Western Australia**.
+- **Safety Lock:** If a user is outside the service area, the system dynamically injects a "Local Pickup Only" warning and disables the "Place Order" button.
 
-- **Sub-Second Sync** using Firebase `onValue` listeners.
-- **Multi-User Support** for owner + staff across multiple devices.
-- **Role-Based Access** restricting order management to authorized UIDs.
+### 🛒 Intelligent Ordering Engine
 
-### 🥩 Dynamic Menu & Search
+- **Persistent State:** Cart items survive page refreshes using `localStorage`.
+- **Sanitized Logic:** Prevents `NaN` pricing errors through strict type-casting before Firebase pushes.
+- **Dynamic Modals:** Complex order options (meat weights, sides, sauces) are handled via a modular UI.
 
-- **Category Filtering** (Mains, Starters, Burgers, Poultry, etc.)
-- **Instant Search** by title or description.
-- **Optimized Rendering** for smooth mobile performance.
+### 👨‍🍳 Real-Time Kitchen Dashboard
 
-### 🕒 Smart Business Status
+- **Live Stream:** Kitchen staff see orders arrive instantly via `onValue` listeners.
+- **Status Management:** One-tap order fulfillment tracking.
+- **Device Agnostic:** Optimized for tablets and wall-mounted monitors in the pit.
 
-- **AWST-Aware Logic** for open/closed detection.
-- **Visual Indicators** including pulse animations and “Re-opening soon” hints.
+### 🕒 AWST-Aware Business Logic
+
+- **Smart Status:** Automatically detects if the shop is Open/Closed based on Perth time (AWST).
+- **Visual Pulse:** Animated UI indicators show real-time business availability.
 
 ---
 
@@ -66,98 +68,38 @@ The system connects customers, staff, and the kitchen pit through a unified Fire
 
 ```text
 BBQHEAVEN/
-├── dashboard/
-│   ├── admin-logic.js          # Kitchen dashboard logic (listeners, order rendering)
-│   └── firebase-config.js      # Firebase config for admin-only environment
-│
-├── data/
-│   ├── menu1.json              # Primary menu dataset
-│   └── menu2.json              # Secondary/seasonal menu dataset
-│
-├── images/                     # Brand assets, menu photos, icons
-│
-├── js/
-│   ├── config.js               # Public Firebase config + global constants
-│   ├── menu-logic.js           # Dynamic menu rendering + category filtering
-│   ├── order-system.js         # Cart logic, sanitization, Firebase pushes
-│   ├── status.js               # Open/Closed business logic (AWST-aware)
-│   └── ui-loaders.js           # Skeleton loaders + UI transitions
-│
-├── node_modules/               # Local dependencies (if running locally)
-│
-├── about.html                  # About the smokehouse
-├── admin-dashboard.html        # Real-time kitchen/staff dashboard
-├── footer.html                 # Shared footer component
-├── header.html                 # Shared header component
-├── hero.html                   # Hero section partial
-├── index.html                  # Main customer-facing menu + ordering UI
-├── location.html               # Map + store info
-├── menu.html                   # Full menu page
-├── privacy.html                # Privacy policy
-├── terms.html                  # Terms & conditions
-│
-├── hero.css                    # Hero section styling
-├── style.css                   # Global styles (Tailwind overrides, layout)
-│
-├── hero.js                     # Hero animations + interactions
-├── main.js                     # App bootstrap + initializers
-│
-├── package.json                # Project metadata
-├── package-lock.json           # Dependency lockfile
-└── README.md                   # Project documentation
+├── dashboard/               # Kitchen/Admin-only environment
+│   ├── admin-logic.js       # Firebase listeners & order rendering
+│   └── firebase-config.js   # Secure admin credentials
+├── js/                      # Core Logic
+│   ├── location-security.js # IP Geofencing & checkout locking
+│   ├── order-system.js      # Cart management & Firebase write-logic
+│   ├── status.js            # AWST-aware business hours logic
+│   └── menu-logic.js        # Category filtering & dynamic rendering
+├── data/                    # Menu datasets (JSON)
+├── images/                  # Brand assets & SVG placeholders
+├── index.html               # Main Customer UI
+└── admin-dashboard.html     # Staff-facing order management
+
 ```
 
-This structure cleanly separates customer logic, admin logic, shared components, and data sources, making the project scalable and easy to maintain.
+---
+
+## 🔒 Security Rules
+
+- **Orders Node:** Public `Write-Only` access (prevents users from seeing other orders). Staff/Admin `Read/Write` access via UID validation.
+- **Users Node:** Scoped to `auth.uid` to protect staff profile data.
 
 ---
 
-## 🔒 Security Rules (Summary)
+## 🚀 Deployment & Local Setup
 
-- **Orders Node**
-  - Public: Write-only (customers can place orders)
-  - Staff/Admin: Read + Write (restricted by UID)
-
-- **Users Node**
-  - Each user can only read/write their own profile (`auth.uid` scoped)
-
----
-
-## 🚀 Local Development
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/bbq-heaven.git
-   ```
-
-2. **Add Firebase Configuration**
-   Insert your `firebaseConfig` object into:
-   - `js/config.js`
-   - `dashboard/firebase-config.js`
-
-   Required fields:
-   - `apiKey`
-   - `authDomain`
-   - `databaseURL`
-   - `projectId`
-
-3. **Run a Local Server**
-   ES6 modules require a server environment.
-   - VS Code: Use **Live Server**
-   - Terminal:
-     ```bash
-     npx serve
-     ```
+1. **Clone & Install:** `git clone` followed by `pnpm install`.
+2. **Environment:** Add your Firebase credentials to `js/config.js`.
+3. **Execution:** ES6 Modules require a server (VS Code Live Server or `npx serve`).
 
 ---
 
 ## 👨‍💻 Built By
 
-**Jeric Realubit**
-_Full-Stack Web Developer & AI Integration Specialist_
-
----
-
-## 📝 Last Updated
-
-**March 2026**
+**Jeric Realubit** _Full-Stack Web Developer & AI Integration Specialist_ **Last Updated:** March 2026 (Launch Ready)

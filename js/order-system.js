@@ -192,35 +192,6 @@ export function renderOrderList() {
   }
 }
 
-// function updateTotals(subtotal) {
-//   const footer = document.getElementById("orderFooter");
-//   if (!footer) return;
-
-//   if (subtotal === 0) {
-//     footer.innerHTML = `<button onclick="closeOrderModal()" class="w-full py-4 bg-white/10 text-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/20 transition-all">Continue Shopping</button>`;
-//     return;
-//   }
-
-//   const tax = subtotal * 0.1;
-//   footer.innerHTML = `
-//     <div class="space-y-4 mb-4">
-//       <div class="relative">
-//         <input type="text" id="custName" placeholder="ENTER YOUR NAME" class="w-full p-5 bg-black/40 border-2 border-white/20 rounded-2xl text-white text-xl font-black focus:border-primary outline-none placeholder:text-gray-600 uppercase">
-//         <span class="absolute -top-3 left-4 bg-smoke px-2 text-primary text-xs font-bold tracking-widest uppercase">Required for Pickup</span>
-//       </div>
-//       <div class="p-4 bg-white/5 rounded-2xl border border-white/5">
-//         <div class="flex justify-between text-gray-400 font-bold"><span>SUBTOTAL</span><span>$${(subtotal - tax).toFixed(2)}</span></div>
-//         <div class="flex justify-between items-center mt-2">
-//           <span class="text-2xl font-black text-white uppercase tracking-tighter">Total Amount</span>
-//           <span class="text-4xl font-black text-primary">$${subtotal.toFixed(2)}</span>
-//         </div>
-//       </div>
-//     </div>
-//     <button onclick="handlePlaceOrder()" class="w-full py-6 bg-green-600 text-white text-2xl font-black uppercase rounded-2xl shadow-lg hover:bg-green-500 active:scale-[0.97] transition-all flex items-center justify-center gap-3">
-//       <i class="fa-brands fa-whatsapp text-3xl"></i> ORDER VIA WHATSAPP
-//     </button>`;
-// }
-
 function updateTotals(subtotal) {
   const footer = document.getElementById("orderFooter");
   if (!footer) return;
@@ -254,41 +225,13 @@ function updateTotals(subtotal) {
     <p class="text-center text-[10px] text-zinc-500 uppercase mt-4 font-bold tracking-widest">
       No WhatsApp? No problem. Just watch the screen!
     </p>`;
+
+  // 2. CRITICAL FIX: Re-apply the location lock to the NEW button
+  // Make sure this function name matches exactly what we defined earlier
+  if (typeof updateCheckoutUI === "function") {
+    updateCheckoutUI();
+  }
 }
-
-// Make sure this is attached to window so the HTML button can find it
-// window.handlePlaceOrder = async function () {
-//   const nameInput = document.getElementById("custName");
-//   const name = nameInput ? nameInput.value.trim() : "";
-
-//   if (!name) return alert("Please enter your name for the kitchen board!");
-
-//   const newOrder = {
-//     customerName: name.toUpperCase(),
-//     items: orderList,
-//     total: orderList.reduce(
-//       (sum, i) => sum + Number(i.price) * Number(i.quantity),
-//       0,
-//     ),
-//     status: "pending",
-//     timestamp: serverTimestamp(), // This requires the import from step 1
-//   };
-
-//   try {
-//     // This 'db' variable comes from your import in step 1
-//     await push(ref(db, "orders"), newOrder);
-
-//     showNotification("ORDER RECEIVED! WATCH THE SCREEN.");
-
-//     orderList = [];
-//     localStorage.removeItem("bbqOrder");
-//     closeOrderModal();
-//     updateOrderCounter();
-//   } catch (error) {
-//     console.error("Firebase Error:", error);
-//     alert("Connection error. Please try again!");
-//   }
-// };
 
 window.handlePlaceOrder = async function () {
   const nameInput = document.getElementById("custName");
