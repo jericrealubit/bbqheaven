@@ -80,45 +80,87 @@ if (document.readyState === "loading") {
  * Global function to check user's region and show a pickup disclaimer if they're outside WA
  * This is called from the header component after it loads, ensuring it runs early in the user journey.
  */
-// --- LOCATION SECURITY SYSTEM ---
-// 1. Global Safety Lock
+// --- LOCATION SECURITY SYSTEM (GPS GEOFENCING) ---
+
+// 1. Store Coordinates (Unit 6/6 Acute Court, Rockingham WA 6168)
+const STORE_LAT = -32.2858;
+const STORE_LON = 115.7533;
+const MAX_RADIUS_KM = 60; // Allows orders from Perth to Mandurah
+
+// 2. Global Safety Lock
 window.isOutsideServiceArea = false;
 
-window.checkUserRegion = function () {
-  fetch("https://ipapi.co/json/")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Location Data Received:", data);
+window.checkGPSLocation = function () {
+  if (!navigator.geolocation) {
+    console.log("Geolocation is not supported by this browser.");
+    return;
+  }
 
-      const userRegion = data.region_code; // e.g., "WA"
-      const userCountry = data.country_code; // e.g., "AU"
+  const geoOptions = {
+    enableHighAccuracy: true,
+    timeout: 10000,
+    maximumAge: 0,
+  };
 
-      // LOGIC FIX: Trigger if NOT in WA or NOT in Australia
-      const isOutsideWA = userRegion !== "WA";
-      const isOutsideAU = userCountry !== "AU";
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const userLat = position.coords.latitude;
+      const userLon = position.coords.longitude;
 
-      if (isOutsideWA || isOutsideAU) {
-        window.isOutsideServiceArea = true; // Set the lock
-        showPickupWarning(data.city);
-        updateCheckoutUI(); // Disable buttons immediately
-      }
-
-      console.log(
-        `User Location: ${data.city}, ${data.region}, ${data.country_name}`,
+      const distance = calculateDistance(
+        STORE_LAT,
+        STORE_LON,
+        userLat,
+        userLon,
       );
-    })
-    .catch((err) => console.log("Location check bypassed or blocked."));
+      console.log(`User is ${distance.toFixed(2)}km away from the smokehouse.`);
+
+      // If user is further than 60km, lock the checkout
+      if (distance > MAX_RADIUS_KM) {
+        window.isOutsideServiceArea = true;
+        showPickupWarning("Outside Service Area");
+        window.updateCheckoutUI(); // Lock the button immediately
+      }
+    },
+    (error) => {
+      console.warn(
+        "GPS Access Denied. Defaulting to safe state for local users.",
+      );
+      // We don't lock the UI if GPS is denied, as many local users prefer privacy.
+      // We just show a reminder.
+      showPickupWarning("Location Hidden");
+    },
+    geoOptions,
+  );
 };
 
-function showPickupWarning(city) {
-  // Prevent duplicate banners
+// 3. Distance Calculation (Haversine Formula)
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth's radius in km
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function showPickupWarning(status) {
   if (document.getElementById("location-banner")) return;
 
   const warning = document.createElement("div");
   warning.id = "location-banner";
   warning.className =
     "bg-amber-600 text-white text-[10px] py-2 px-4 text-center font-bold uppercase tracking-widest sticky top-0 z-[100]";
-  warning.innerHTML = `Noticed you're in ${city || "outside WA"}? Orders are LOCAL PICKUP ONLY in Rockingham.`;
+
+  warning.innerHTML =
+    status === "Outside Service Area"
+      ? `📍 OUTSIDE RADIUS: Orders are LOCAL PICKUP ONLY in Rockingham.`
+      : `📍 LOCAL PICKUP ONLY: Please ensure you can collect from Rockingham.`;
 
   document.body.prepend(warning);
 }
@@ -127,20 +169,15 @@ window.updateCheckoutUI = function () {
   const submitBtn = document.getElementById("submitOrderBtn");
 
   if (submitBtn && window.isOutsideServiceArea) {
-    // Disable the button
     submitBtn.disabled = true;
-
-    // Apply "Locked" styles
     submitBtn.classList.remove("bg-primary", "hover:bg-red-500");
     submitBtn.classList.add("bg-zinc-800", "cursor-not-allowed", "opacity-50");
 
-    // Update Text
     submitBtn.innerHTML = `
       <span>PICKUP ONLY (OUTSIDE AREA)</span>
       <span class="text-[10px] opacity-80 font-bold tracking-[0.2em]">ROCKINGHAM, WA LOCAL ORDERS ONLY</span>
     `;
 
-    // Add red text notification below if not already there
     if (!document.getElementById("location-error-msg")) {
       const errorMsg = document.createElement("p");
       errorMsg.id = "location-error-msg";
@@ -155,5 +192,5 @@ window.updateCheckoutUI = function () {
 
 // --- INITIALIZE ON LOAD ---
 document.addEventListener("DOMContentLoaded", () => {
-  window.checkUserRegion();
+  window.checkGPSLocation();
 });
