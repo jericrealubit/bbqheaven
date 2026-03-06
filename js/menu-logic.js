@@ -79,19 +79,32 @@ export async function loadMenu() {
  * This version ensures the "Add" button stays visible
  */
 window.handleImageError = function (img) {
-  const container = img.parentElement;
+  const pathParts = img.src.split("/");
+  const folder = (pathParts[pathParts.length - 2] || "").toLowerCase();
 
-  // Create the placeholder div
-  const placeholder = document.createElement("div");
-  placeholder.className =
-    "flex flex-col items-center justify-center w-full h-full bg-black/60 text-gray-500";
-  placeholder.innerHTML = `
-    <i class="fa-solid fa-utensils text-3xl mb-2 opacity-20"></i>
-    <span class="text-[9px] uppercase tracking-widest font-bold opacity-40">Photo Coming Soon</span>
+  // 1. Determine if we show a "Drink" sketch or a "Food" sketch
+  const isDrink =
+    folder.includes("wine") ||
+    folder.includes("beer") ||
+    folder.includes("spirit");
+
+  // 2. Create the Sketch UI
+  const sketchContainer = document.createElement("div");
+  sketchContainer.className =
+    "flex flex-col items-center justify-center w-full h-full bg-[#1a1a1a] text-primary/20 border border-white/5";
+
+  // SVG Sketches: Minimalist "Line Art"
+  const foodSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-16 h-16 mb-2 opacity-40"><path d="M3 11h18M5 11V7a3 3 0 013-3h8a3 3 0 013 3v4M4 11v1a8 8 0 0016 0v-1M9 19v1M15 19v1"/></svg>`;
+  const drinkSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-16 h-16 mb-2 opacity-40"><path d="M7 3h10l-1 9h-8l-1-9zM7 3L5 21h14l-2-18M9 21v-4M15 21v-4"/></svg>`;
+
+  sketchContainer.innerHTML = `
+    ${isDrink ? drinkSketch : foodSketch}
+    <span class="text-[8px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>
   `;
 
-  // Replace ONLY the image tag, not the whole container content
-  img.replaceWith(placeholder);
+  // 3. Swap the image for the sketch
+  // This ensures the sibling button (z-20) remains on top and clickable
+  img.replaceWith(sketchContainer);
 };
 
 /**
@@ -163,21 +176,44 @@ window.openMenuModal = function (index) {
   const modalImg = document.getElementById("modalImage");
 
   // 1. Reset Modal State
-  // This prevents the previous item's image from showing while the new one loads
+  // Remove hidden class and clear any previous sketch if it was injected
   modalImg.classList.remove("hidden");
+  const existingSketch = modal.querySelector(".modal-sketch-placeholder");
+  if (existingSketch) existingSketch.remove();
 
   // 2. Set Basic Content
   document.getElementById("modalTitle").textContent = item.name;
   document.getElementById("modalDescription").textContent =
     item.description || "Authentic Smokehouse flavor.";
 
-  // 3. Image Handling with Error Fallback
-  // We define the error handler BEFORE setting the src
+  // 3. Image Handling with SVG Sketch Fallback
   modalImg.onerror = function () {
-    this.src = "./images/placeholder-bbq.webp";
-    // If you prefer to hide the image area entirely when missing, use:
-    // this.classList.add('hidden');
+    // Hide the broken image tag
+    this.classList.add("hidden");
+
+    // Determine category for the right sketch
+    const isDrink =
+      folderName.toLowerCase().includes("wine") ||
+      folderName.toLowerCase().includes("beer") ||
+      folderName.toLowerCase().includes("spirit");
+
+    // Create the Sketch Container
+    const sketchContainer = document.createElement("div");
+    sketchContainer.className =
+      "modal-sketch-placeholder flex flex-col items-center justify-center w-full aspect-video bg-[#1a1a1a] text-primary/20 border border-white/5 rounded-lg mb-4";
+
+    const foodSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-24 h-24 mb-2 opacity-40"><path d="M3 11h18M5 11V7a3 3 0 013-3h8a3 3 0 013 3v4M4 11v1a8 8 0 0016 0v-1M9 19v1M15 19v1"/></svg>`;
+    const drinkSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-24 h-24 mb-2 opacity-40"><path d="M7 3h10l-1 9h-8l-1-9zM7 3L5 21h14l-2-18M9 21v-4M15 21v-4"/></svg>`;
+
+    sketchContainer.innerHTML = `
+      ${isDrink ? drinkSketch : foodSketch}
+      <span class="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>
+    `;
+
+    // Insert the sketch before the title
+    this.parentElement.insertBefore(sketchContainer, this);
   };
+
   modalImg.src = `./images/${folderName}/${cleanName}.webp`;
 
   // 4. Price & Options Logic
@@ -219,7 +255,6 @@ window.openMenuModal = function (index) {
       selectedOption = item.options[selectedIndex];
     }
 
-    // Add to list and close
     addToOrderList(item, selectedOption);
     closeMenuModal();
   };
