@@ -1,27 +1,12 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "bbqheaven",
   "compatibility_date": "2025-09-27",
+  "pages_build_output_dir": ".",
   "assets": {
     "directory": ".",
-    "binding": "ASSETS",
   },
-  // Add this section to exclude the heavy folders
-  "upload": {
-    "dir": ".",
-    "ignore_dotfiles": false,
-    "include": [
-      "*.html",
-      "*.css",
-      "*.js",
-      "images/**/*",
-      "data/**/*",
-      "env.js",
-    ],
-    "exclude": [
-      "node_modules",
-      "package-lock.json",
-      "package.json",
-      "generate-env.js",
-    ],
+  "observability": {
+    "enabled": true,
   },
 }
