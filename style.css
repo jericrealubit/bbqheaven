@@ -1,156 +1,129 @@
 @theme {
   /* BBQ Heaven Brand Colors */
-  --color-primary: #d97706; /* Deep Amber */
-  --color-primary-dark: #b45309; /* Burnt Orange */
-  --color-charcoal: #121212; /* Pit Black */
-  --color-smoke: #1f1f1f; /* Dark Gray */
+  --color-primary: #d97706;
+  --color-primary-dark: #b45309;
+  --color-charcoal: #121212;
+  --color-smoke: #1f1f1f;
 
   /* Typography */
   --font-display: "Oswald", sans-serif;
   --font-sans: "Inter", sans-serif;
 }
 
-.order-button {
-  background-color: var(--color-primary);
-  color: white;
-  font-family: var(--font-sans);
-  padding: 0.5rem 0.75rem;
-  border-radius: 9999px;
-  transition: background-color 0.3s ease;
-}
-
-/* Custom Hero Background (Smoky Overlay) */
-/* Replace existing .hero-gradient rule with this */
-.hero-gradient {
-  background-color: rgba(18, 18, 18, 0.7); /* charcoal at 70% opacity */
-  background-size: cover;
-  background-position: center;
-  height: 35vh; /* user requested */
-  border-radius: 30px;
-}
-
-/* Scroll Behavior */
+/* --- Global & Scroll --- */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar for that 'Smoky' look */
+body {
+  background-color: #000000 !important;
+  margin: 0;
+  overflow-x: hidden;
+  color: #ffffff !important;
+  font-family: var(--font-sans);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: var(--color-charcoal);
 }
 ::-webkit-scrollbar-thumb {
-  background: #d97706;
+  background: var(--color-primary);
   border-radius: 10px;
 }
 
-.glf-button {
-  background-color: #d97706 !important;
-  color: #fff !important;
-  border-radius: 5px !important;
-  padding: 5px 10px !important;
+/* --- Layout Hierachy (Z-Index Management) --- */
+.fire-bg-animate {
+  z-index: 0;
+  pointer-events: none;
+} /* Bottom */
+#hero {
+  z-index: 10;
+  position: relative;
+} /* Middle-Back */
+#menu,
+#location {
+  z-index: 20;
+  position: relative;
+} /* Middle-Front */
+#header-placeholder {
+  z-index: 100;
+  position: relative;
+} /* Top Nav */
+.z-50 {
+  z-index: 50 !important;
+}
+#menuModal {
+  z-index: 150;
+}
+#orderModal {
+  z-index: 1000;
 }
 
-/* Background and global text */
-.bg-charcoal,
-/* body {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-} */
+/* --- Hero & Menu Overlay Logic --- */
+.hero-gradient {
+  background-color: rgba(18, 18, 18, 0.7);
+  background-size: cover;
+  background-position: center;
+  height: 35vh;
+  border-radius: 30px;
+}
 
+#menu {
+  margin-top: -120px; /* Pulls menu up over hero */
+}
 
-/* Make primary text bright white and muted text readable on black */
+/* --- Components & Glassmorphism --- */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.menu-item {
+  background-color: rgba(31, 31, 31, 0.7) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.menu-item:hover {
+  background-color: rgba(31, 31, 31, 0.9) !important;
+  transform: scale(1.02);
+}
+
+.bg-smoke {
+  background-color: #262626;
+}
+.bg-smoke\/80 {
+  background-color: rgba(31, 31, 31, 0.8) !important;
+}
+
+/* --- Typography & Spacing --- */
+p {
+  margin-bottom: 0.6rem;
+  line-height: 1.45;
+}
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+.text-primary {
+  color: #ffb347 !important;
+}
 .text-white {
   color: #ffffff !important;
-}
-.text-gray-300 {
-  color: #e5e7eb !important;
 }
 .text-gray-400 {
   color: #d1d5db !important;
 }
 
-/* Reduce paragraph spacing and tighten leading */
-p {
-  margin-top: 0;
-  margin-bottom: 0.6rem; /* smaller gap between paragraphs */
-  line-height: 1.45; /* comfortable but compact */
-  color: inherit;
-}
-
-/* Reduce the vertical spacing applied by utility container groups */
-.space-y-8 > * + * {
-  margin-top: 0.75rem !important; /* tighter than Tailwind's default */
-}
-
-/* Slightly tighten card spacing so grid feels denser */
-.grid > div {
-  padding: 1.5rem !important; /* reduce from 2rem if needed */
-}
-
-/* Ensure headings remain visible and not too spaced */
-h1,
-h2,
-h3 {
-  color: #ffffff !important;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-}
-
-/* Optional: make small text slightly brighter for contrast */
-.text-sm {
-  color: #e6e6e6 !important;
-}
-
-/* Keep links / primary accents visible on black */
-.text-primary {
-  color: #ffb347 !important;
-} /* adjust to your brand color */
-
-/* background effect */
-
-/* Ensure the base layer is black */
-body {
-  background-color: #000000 !important;
-  margin: 0;
-  overflow-x: hidden;
-}
-
-/* The Animated Fire Layer */
-.fire-bg-animate {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("./images/bg.png") !important;
-  background-size: cover;
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  z-index: 1; /* Sits above the body black, but below content */
-  animation: fireFlicker 4s infinite ease-in-out;
-  pointer-events: none;
-}
-
-/* Update Menu Cards to be semi-transparent */
-.menu-item {
-  background-color: rgba(
-    31,
-    31,
-    31,
-    0.8
-  ) !important; /* Smoke color at 80% opacity */
-  backdrop-filter: blur(4px); /* Adds a premium smoky glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* The Content Wrapper */
-.relative.z-10 {
-  z-index: 10 !important; /* Ensures text and buttons stay on top of the fire */
-}
-
+/* --- Animations --- */
 @keyframes fireFlicker {
   0%,
   100% {
@@ -163,44 +136,6 @@ body {
   }
 }
 
-#menu .menu-item {
-  /* Semi-transparent smoke color */
-  background-color: rgba(31, 31, 31, 0.7) !important;
-  /* Frosted glass effect to make text pop against the moving fire */
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition:
-    transform 0.3s ease,
-    background-color 0.3s ease;
-}
-
-#menu .menu-item:hover {
-  background-color: rgba(31, 31, 31, 0.9) !important;
-  transform: scale(1.02);
-}
-
-/* Update your existing .bg-smoke definition or add this specific helper */
-.bg-smoke\/80 {
-  background-color: rgba(31, 31, 31, 0.8) !important;
-}
-
-/* Ensure the Location section content stays above the fire layer */
-#location {
-  z-index: 10;
-}
-
-/* Optional: Make the map look more 'integrated' with the dark theme */
-iframe {
-  filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
-}
-
-/* Back to Top - Active State */
-#backToTop.show {
-  opacity: 1;
-  translate: 0 0;
-}
-
-/* Optional: Add a subtle 'ember' pulse to the button to match the fire background */
 @keyframes emberPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7);
@@ -213,128 +148,81 @@ iframe {
   }
 }
 
-#backToTop {
-  animation: emberPulse 2s infinite;
-}
-
-/* Signature Link Glow */
-footer a.text-primary:hover {
-  text-shadow: 0 0 8px rgba(217, 119, 6, 0.6);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-}
-
-/* Fire Glow Animation */
 @keyframes fire-pulse {
-  0% {
-    text-shadow:
-      0 0 5px rgba(217, 119, 6, 0.5),
-      0 0 10px rgba(217, 119, 6, 0.3);
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(217, 119, 6, 0.5);
     transform: scale(1);
   }
   50% {
-    text-shadow:
-      0 0 15px rgba(217, 119, 6, 0.9),
-      0 0 25px rgba(217, 119, 6, 0.6);
+    text-shadow: 0 0 20px rgba(217, 119, 6, 0.9);
     transform: scale(1.1);
-  }
-  100% {
-    text-shadow:
-      0 0 5px rgba(217, 119, 6, 0.5),
-      0 0 10px rgba(217, 119, 6, 0.3);
-    transform: scale(1);
   }
 }
 
-/* Apply this class to the icons */
+.fire-bg-animate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./images/bg.png") bottom center / cover no-repeat;
+  animation: fireFlicker 4s infinite ease-in-out;
+}
+
 .fire-icon:hover {
-  color: #ff9d00 !important; /* Brighter orange on hover */
+  color: #ff9d00 !important;
   animation: fire-pulse 1.5s infinite ease-in-out;
   filter: drop-shadow(0 0 8px #d97706);
 }
 
+/* --- UI Elements --- */
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  animation: emberPulse 2s infinite;
+}
+
+#backToTop.back-to-top-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0);
+}
+
+/* Map Integration */
+iframe {
+  filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* --- Smoke Animation for Signature --- */
 @keyframes smokeRise {
   0% {
-    transform: translateY(0) scale(1);
+    /* Centered horizontally, at the bottom vertically */
+    transform: translateX(-50%) translateY(0) scale(0.8);
     opacity: 0;
   }
   20% {
-    opacity: 0.8; /* High visibility start */
+    opacity: 0.6;
   }
   100% {
-    transform: translateY(-35px) scale(2);
+    /* Keeps horizontal center while rising and scaling */
+    transform: translateX(-50%) translateY(-40px) scale(2);
     opacity: 0;
   }
 }
 
 .animate-smoke {
-  animation: smokeRise 2.5s ease-out infinite;
+  position: absolute;
+  left: 50%; /* Position the left edge at the center of the container */
+  animation: smokeRise 3s ease-out infinite;
+  transform-origin: bottom center;
 }
 
-/* Ensure the fire animation doesn't block clicks on the menu button */
-.fire-bg-animate {
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Ensure the header container is definitely clickable */
-#header-placeholder {
-  position: relative;
-  z-index: 100;
-}
-
-/* Update menu item images to use the new webp format and ensure they are optimized for performance */
-.menu-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* This prevents the BBQ from looking "squashed" */
-  loading: lazy; /* Critical: only loads images as the user scrolls */
-}
-
-/* Ensure the menu controls (like category filters) are above the hero background */
-.menu-controls-container {
-  position: relative;
-  z-index: 10; /* Ensures it stays on top of the hero background */
-  margin-top: -150px; /* Adjust this value based on your hero height */
-  text-align: center;
-  padding: 20px;
-}
-
-/* Ensure the Hero section doesn't hide the overlay */
-.hero {
-  position: relative;
-  z-index: 1;
-}
-
-/* Specific color for the search input background */
-.bg-smoke {
-  background-color: #262626;
-}
-
-/* Glassmorphism effect */
-.backdrop-blur-md {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Ensure the Hero is below the Nav but behind the Menu Pull-up */
-.hero {
-  z-index: 10;
-}
-
-/* The Menu section pulls up over the Hero */
-#menu {
-  z-index: 20;
-}
-
-/* Navigation and Top Buttons stay on top of everything */
-.z-50 {
-  z-index: 50 !important;
-}
-
-/* Show Back to Top button when scrolling */
-.back-to-top-visible {
-  opacity: 1 !important;
-  pointer-events: auto !important;
+/* Ensure the container is wide enough to act as a proper anchor */
+.relative.inline-flex.w-6.h-6 {
+  overflow: visible !important;
 }
