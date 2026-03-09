@@ -317,3 +317,24 @@ footer a.text-primary:hover {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
+
+/* Ensure the Hero is below the Nav but behind the Menu Pull-up */
+.hero {
+  z-index: 10;
+}
+
+/* The Menu section pulls up over the Hero */
+#menu {
+  z-index: 20;
+}
+
+/* Navigation and Top Buttons stay on top of everything */
+.z-50 {
+  z-index: 50 !important;
+}
+
+/* Show Back to Top button when scrolling */
+.back-to-top-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}

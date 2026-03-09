@@ -66,34 +66,44 @@
     <script src="/env.js"></script>
     <button
       id="backToTop"
-      onclick="scrollToTop()"
-      class="fixed bottom-8 right-8 z-60 p-4 rounded-full bg-primary text-white shadow-2xl opacity-0 translate-y-10 transition-all duration-300 hover:scale-110 hover:bg-primary-dark cursor-pointer flex items-center justify-center border border-white/20"
-      aria-label="Back to top"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      class="fixed bottom-8 right-8 z-50 p-4 bg-primary text-white rounded-full shadow-2xl hover:scale-110 transition-all opacity-0 pointer-events-none"
     >
-      <i class="fa-solid fa-arrow-up text-xl"></i>
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2.5"
+          d="M5 10l7-7m0 0l7 7m-7-7v18"
+        ></path>
+      </svg>
     </button>
     <div class="fire-bg-animate"></div>
     <div class="relative z-10 bg-black/40 min-height-screen">
       <div id="header-placeholder"></div>
 
-      <main>
+      <main class="relative">
         <section
           id="hero"
-          class="hero relative h-[50vh] w-full overflow-hidden bg-neutral-900"
+          class="relative h-[50vh] w-full overflow-hidden bg-neutral-900 z-10"
         >
           <div
             class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[15s] scale-105 hover:scale-100"
             style="background-image: url(&quot;./images/hero.jpg&quot;)"
           ></div>
-
-          <!-- <div
-            class="hero-overlay relative z-10 flex h-full w-full items-center justify-center bg-gradient-to-b from-black/40 via-black/20 to-black/60"
-          >
-          </div> -->
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"
+          ></div>
         </section>
 
-        <div id="menu-placeholder"></div>
-        <div id="location-placeholder"></div>
+        <div id="menu-placeholder" class="relative z-20 -mt-24"></div>
+
+        <div id="location-placeholder" class="relative z-10"></div>
       </main>
 
       <div id="footer-placeholder"></div>

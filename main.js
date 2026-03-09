@@ -194,3 +194,12 @@ window.updateCheckoutUI = function () {
 document.addEventListener("DOMContentLoaded", () => {
   window.checkGPSLocation();
 });
+
+window.addEventListener("scroll", () => {
+  const btn = document.getElementById("backToTop");
+  if (window.scrollY > 500) {
+    btn.classList.add("back-to-top-visible");
+  } else {
+    btn.classList.remove("back-to-top-visible");
+  }
+});
