@@ -291,3 +291,29 @@ footer a.text-primary:hover {
   object-fit: cover; /* This prevents the BBQ from looking "squashed" */
   loading: lazy; /* Critical: only loads images as the user scrolls */
 }
+
+/* Ensure the menu controls (like category filters) are above the hero background */
+.menu-controls-container {
+  position: relative;
+  z-index: 10; /* Ensures it stays on top of the hero background */
+  margin-top: -150px; /* Adjust this value based on your hero height */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Ensure the Hero section doesn't hide the overlay */
+.hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Specific color for the search input background */
+.bg-smoke {
+  background-color: #262626;
+}
+
+/* Glassmorphism effect */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}

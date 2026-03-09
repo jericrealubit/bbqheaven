@@ -77,33 +77,22 @@
       <div id="header-placeholder"></div>
 
       <main>
-        <!-- <section id="hero" class="hero">
-          <div class="hero-slides">
-            <div
-              class="slide"
-              style="background-image: url(&quot;./images/image1.jpg&quot;)"
-              data-effect="zoom"
-            ></div>
-            <div
-              class="slide"
-              style="background-image: url(&quot;./images/image2.jpg&quot;)"
-              data-effect="fly-left"
-            ></div>
-            <div
-              class="slide"
-              style="background-image: url(&quot;./images/image3.jpg&quot;)"
-              data-effect="zoom"
-            ></div>
-            <div
-              class="slide"
-              style="background-image: url(&quot;./images/image4.jpg&quot;)"
-              data-effect="fly-right"
-            ></div>
+        <section id="hero" class="hero relative h-[30vh] w-full overflow-hidden bg-neutral-900">
+          <div></div>
+          <div
+            class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[15s] scale-105 hover:scale-100"
+            style="background-image: url('./images/hero.jpg');"
+          ></div>
+
+          <div class="hero-overlay relative z-10 flex h-full w-full items-center justify-center bg-gradient-to-b from-black/40 via-black/20 to-black/60">
+            <div id="hero-placeholder" class="text-center">
+              </div>
           </div>
-          <div class="hero-overlay">
+          </div>
+          <!-- <div class="hero-overlay">
             <div id="hero-placeholder"></div>
-          </div>
-        </section> -->
+          </div> -->
+        </section>
 
         <div id="menu-placeholder"></div>
         <div id="location-placeholder"></div>
@@ -204,7 +193,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="./main.js"></script>
 
-    <!-- <script src="/hero.js"></script> -->
     <script
       src="https://www.fbgcdn.com/embedder/js/ewm2.js"
       defer
