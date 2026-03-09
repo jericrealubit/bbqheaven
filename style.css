@@ -226,3 +226,27 @@ iframe {
 .relative.inline-flex.w-6.h-6 {
   overflow: visible !important;
 }
+
+/* --- Slow Hero Zoom (Ken Burns Effect) --- */
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15); /* Slow zoom in */
+  }
+  100% {
+    transform: scale(1); /* Slow zoom back out */
+  }
+}
+
+.animate-slow-zoom {
+  /* 30 seconds for a very subtle, professional feel */
+  animation: slowZoom 30s ease-in-out infinite;
+  will-change: transform; /* Optimization for smoother movement */
+}
+
+/* Ensure the hero container clips the zooming image */
+#hero {
+  overflow: hidden;
+}
