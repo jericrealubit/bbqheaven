@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bbqheaven.au/sitemap.xml
