@@ -1,9 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | BBQ Heaven Mandurah</title>
+    <title>About | BBQ Heaven Rockingham</title>
+    <meta
+      name="description"
+      content="Experience unique BBQ cooking tables, Friday Karaoke, and Live Bands in Rockingham. Home of Red Horse and authentic woodfire flavours."
+    />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./style.css" />
@@ -19,11 +23,11 @@
       .text-primary {
         color: #d97706;
       }
-      /* Glass effect for the info cards */
+      /* Glass effect consistent with the menu items */
       .glass-card {
-        background-color: rgba(26, 26, 26, 0.7) !important;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background-color: rgba(31, 31, 31, 0.7) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
     </style>
   </head>
@@ -32,76 +36,100 @@
     <script src="/env.js"></script>
     <div class="fire-bg-animate"></div>
 
-    <div class="relative z-10 min-h-screen bg-black/20">
+    <div class="relative z-10 min-h-screen">
       <div id="header-placeholder"></div>
 
       <main class="max-w-4xl mx-auto px-6 py-24">
         <div class="mb-16 border-l-8 border-primary pl-8">
           <h1
-            class="text-white font-display text-5xl md:text-7xl uppercase tracking-tighter mb-4"
+            class="text-white font-display text-5xl md:text-7xl uppercase tracking-tighter mb-2"
           >
-            Real Woodfire <span class="text-primary italic">BBQ</span>
+            WELCOME TO <span class="text-primary">BBQ HEAVEN</span>
           </h1>
           <p
-            class="text-xl text-white/80 font-semibold uppercase tracking-widest"
+            class="text-lg text-white/80 font-semibold uppercase tracking-widest flex items-center gap-3"
           >
-            Welcome to BBQ Heaven
+            <i class="fa-solid fa-location-dot text-primary"></i>
+            Rockingham, WA
           </p>
         </div>
 
-        <div
-          class="space-y-8 text-lg md:text-xl p-8 rounded-2xl glass-card border border-white/10"
-        >
-          <p>
-            An innovative restaurant as our
-            <strong class="text-white">BBQ cooking table</strong> is what makes
-            us unique. We serve Australian style BBQ to cater to everybody’s
-            taste, ranging from fresh salads and entrees to our signature hotpot
-            of the day.
-          </p>
+        <div class="space-y-12 text-lg leading-relaxed text-gray-200">
+          <section
+            class="menu-item p-8 rounded-2xl border border-white/10 backdrop-blur-md"
+          >
+            <h2 class="text-3xl font-display uppercase text-primary mb-4">
+              Our Unique Experience
+            </h2>
+            <p>
+              We are an innovative restaurant defined by our unique
+              <strong>BBQ cooking tables</strong>. We serve Australian-style BBQ
+              designed to cater to every taste, featuring marinated thick-sliced
+              meats prepared right on the grill at your table.
+            </p>
+            <p class="mt-4">
+              From fresh salads and daily hotpot specials to our famous
+              house-made spicy pickled vegetables and daily sweets, our goal is
+              to satisfy every visit with a diverse range of Asian and Western
+              delights.
+            </p>
+          </section>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-12">
-            <div class="p-8 rounded-lg border border-white/5 bg-black/30">
-              <h3
-                class="text-primary font-display uppercase tracking-wider mb-3"
-              >
-                The Experience
-              </h3>
-              <p class="text-sm">
-                Enjoy marinated thick-sliced meats on the grill, served with
-                house-made spicy pickled vegetables and seasonal sweets.
-              </p>
-            </div>
-            <div class="p-8 rounded-lg border border-white/5 bg-black/30">
-              <h3
-                class="text-primary font-display uppercase tracking-wider mb-3"
-              >
-                The Flavours
-              </h3>
-              <p class="text-sm">
-                Our menu spans classic food, Asian and Western delights, today’s
-                specials, and our famous curry of the day.
-              </p>
-            </div>
-          </div>
-
-          <p>
-            After a hard working week, we provide the ultimate chill-out spot.
-            We offer
-            <span class="text-white font-bold">Karaoke nights on Fridays</span>
-            and
-            <span class="text-white font-bold">Live Bands on Saturdays</span>
-            for entertainment until midnight.
-          </p>
-
-          <p class="border-t border-white/10 pt-8">
-            Chill with friends and enjoy our famous international drinks like
-            <span
-              class="text-primary font-bold uppercase underline decoration-primary/30 underline-offset-8"
+          <section class="grid md:grid-cols-2 gap-8">
+            <div
+              class="menu-item p-8 rounded-2xl border border-white/10 backdrop-blur-md"
             >
-              Red Horse </span
-            >, along side a premium selection of beer, house wine, and spirits.
-          </p>
+              <i
+                class="fa-solid fa-microphone-lines text-primary text-4xl mb-4"
+              ></i>
+              <h3 class="text-2xl font-display uppercase text-white mb-2">
+                Friday Karaoke
+              </h3>
+              <p class="text-sm text-gray-400">
+                Unwind after a hard working week with our legendary karaoke
+                nights every Friday.
+              </p>
+            </div>
+            <div
+              class="menu-item p-8 rounded-2xl border border-white/10 backdrop-blur-md"
+            >
+              <i class="fa-solid fa-guitar text-primary text-4xl mb-4"></i>
+              <h3 class="text-2xl font-display uppercase text-white mb-2">
+                Saturday Live Bands
+              </h3>
+              <p class="text-sm text-gray-400">
+                Join us for live entertainment until midnight every Saturday
+                night.
+              </p>
+            </div>
+          </section>
+
+          <section class="text-center py-12">
+            <h2 class="text-3xl font-display uppercase text-white mb-6">
+              International Drinks
+            </h2>
+            <p class="mb-8">
+              Chill with friends and enjoy our selection of world-famous drinks,
+              including the iconic
+              <span class="text-red-600 font-bold">RED HORSE</span>, along with
+              a variety of premium beers, house wines, and spirits.
+            </p>
+            <div class="flex justify-center gap-6 text-gray-400">
+              <i
+                class="fa-solid fa-beer-mug-empty text-3xl hover:text-primary transition-colors"
+              ></i>
+              <i
+                class="fa-solid fa-wine-glass text-3xl hover:text-primary transition-colors"
+              ></i>
+              <i
+                class="fa-solid fa-bottle-droplet text-3xl hover:text-primary transition-colors"
+              ></i>
+            </div>
+            <div class="mt-12 text-center text-sm text-gray-500">
+              <p>Unit 6, 6 Acute Court, Rockingham</p>
+              <p>Contact No: 08 9560 9804</p>
+            </div>
+          </section>
         </div>
       </main>
 
@@ -110,9 +138,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="./main.js"></script>
-
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
       defer
     ></script>
   </body>
