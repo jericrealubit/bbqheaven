@@ -9,17 +9,40 @@ let currentCategory = "all";
  * Filter and Category logic
  * Attached to window so HTML buttons can see them
  */
-window.setCategory = function (cat) {
+window.setCategory = function (cat, element) {
   currentCategory = cat;
 
   // UI: Update active state of category buttons
   document.querySelectorAll(".cat-btn").forEach((btn) => {
+    // 1. Remove the custom active class
     btn.classList.remove("active-cat");
-    // Match button by the category string in its onclick attribute
-    if (btn.getAttribute("onclick")?.includes(`'${cat}'`)) {
-      btn.classList.add("active-cat");
-    }
+
+    // 2. Explicitly remove Tailwind "active" colors to ensure the glass style returns
+    btn.classList.remove("bg-primary", "text-white", "scale-105");
+
+    // 3. Add back the inactive "glass" look
+    btn.classList.add("bg-white/5", "text-gray-400");
   });
+
+  // 4. Apply active style to the clicked button
+  // If element is passed directly (best practice), use it.
+  // Otherwise, fallback to attribute matching.
+  let targetBtn = element;
+  if (!targetBtn) {
+    targetBtn = Array.from(document.querySelectorAll(".cat-btn")).find((btn) =>
+      btn.getAttribute("onclick")?.includes(`'${cat}'`),
+    );
+  }
+
+  if (targetBtn) {
+    targetBtn.classList.add(
+      "active-cat",
+      "bg-primary",
+      "text-white",
+      "scale-105",
+    );
+    targetBtn.classList.remove("bg-white/5", "text-gray-400");
+  }
 
   filterMenu();
 };
