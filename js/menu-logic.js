@@ -1,32 +1,20 @@
 import { categoryMap } from "./config.js";
 import { addToOrderList } from "./order-system.js";
 
-// 1. Module-level variables (private to this file)
+// 1. Module-level variables
 let fullMenu = [];
 let currentCategory = "all";
 
-/**
- * Filter and Category logic
- * Attached to window so HTML buttons can see them
- */
 window.setCategory = function (cat, element) {
   currentCategory = cat;
 
-  // UI: Update active state of category buttons
+  // UI: Reset all buttons to the "inactive" glass state
   document.querySelectorAll(".cat-btn").forEach((btn) => {
-    // 1. Remove the custom active class
-    btn.classList.remove("active-cat");
-
-    // 2. Explicitly remove Tailwind "active" colors to ensure the glass style returns
-    btn.classList.remove("bg-primary", "text-white", "scale-105");
-
-    // 3. Add back the inactive "glass" look
+    btn.classList.remove("active-cat", "bg-primary", "text-white", "scale-105");
     btn.classList.add("bg-white/5", "text-gray-400");
   });
 
-  // 4. Apply active style to the clicked button
-  // If element is passed directly (best practice), use it.
-  // Otherwise, fallback to attribute matching.
+  // Apply the active state to the current selection
   let targetBtn = element;
   if (!targetBtn) {
     targetBtn = Array.from(document.querySelectorAll(".cat-btn")).find((btn) =>
@@ -66,7 +54,7 @@ window.filterMenu = function () {
 };
 
 /**
- * Fetches menu data from JSON files
+ * Fetches menu data from JSON files and flattens based on keys
  */
 export async function loadMenu() {
   const grid = document.getElementById("menuGrid");
@@ -80,12 +68,15 @@ export async function loadMenu() {
 
     fullMenu = [];
     [res1, res2].forEach((source) => {
-      for (const [category, items] of Object.entries(source)) {
+      // Logic adjusted for Object keys (starters, mains, etc.)
+      for (const [categoryKey, items] of Object.entries(source)) {
+        if (!Array.isArray(items)) continue;
+
         items.forEach((item) => {
           fullMenu.push({
             ...item,
-            originalCategory: category,
-            uiCategory: categoryMap[category] || "other",
+            originalCategory: categoryKey,
+            uiCategory: categoryMap[categoryKey] || "other",
           });
         });
       }
@@ -98,40 +89,32 @@ export async function loadMenu() {
 }
 
 /**
- * Helper to handle missing images with a placeholder
- * This version ensures the "Add" button stays visible
+ * Image error handler with SVG Sketch fallbacks
  */
 window.handleImageError = function (img) {
   const pathParts = img.src.split("/");
   const folder = (pathParts[pathParts.length - 2] || "").toLowerCase();
 
-  // 1. Determine if we show a "Drink" sketch or a "Food" sketch
   const isDrink =
     folder.includes("wine") ||
     folder.includes("beer") ||
     folder.includes("spirit");
 
-  // 2. Create the Sketch UI
   const sketchContainer = document.createElement("div");
   sketchContainer.className =
     "flex flex-col items-center justify-center w-full h-full bg-[#1a1a1a] text-primary/20 border border-white/5";
 
-  // SVG Sketches: Minimalist "Line Art"
   const foodSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-16 h-16 mb-2 opacity-40"><path d="M3 11h18M5 11V7a3 3 0 013-3h8a3 3 0 013 3v4M4 11v1a8 8 0 0016 0v-1M9 19v1M15 19v1"/></svg>`;
   const drinkSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-16 h-16 mb-2 opacity-40"><path d="M7 3h10l-1 9h-8l-1-9zM7 3L5 21h14l-2-18M9 21v-4M15 21v-4"/></svg>`;
 
-  sketchContainer.innerHTML = `
-    ${isDrink ? drinkSketch : foodSketch}
-    <span class="text-[8px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>
-  `;
+  sketchContainer.innerHTML = `${isDrink ? drinkSketch : foodSketch}
+    <span class="text-[8px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>`;
 
-  // 3. Swap the image for the sketch
-  // This ensures the sibling button (z-20) remains on top and clickable
   img.replaceWith(sketchContainer);
 };
 
 /**
- * Renders menu items into the grid based on the current filters
+ * Renders items with Badge Logic and 10px Glass Border compatibility
  */
 function renderMenu(items) {
   const grid = document.getElementById("menuGrid");
@@ -146,14 +129,24 @@ function renderMenu(items) {
       // Badge Logic
       const nameUpper = item.name.toUpperCase();
       const isGF = nameUpper.includes("(GF)");
-      const isSpicy = nameUpper.includes("SPICY") || nameUpper.includes("HOT");
+
+      // Updated Spicy Logic:
+      // Checks for "SPICY" or "HOT", but explicitly ignores "HOT POT"
+      const isSpicy =
+        (nameUpper.includes("SPICY") ||
+          nameUpper.includes("HOT") ||
+          nameUpper.includes("JALAPENO")) &&
+        !nameUpper.includes("HOT POT");
+
+      const isBBQTable = item.originalCategory === "bbq_table";
 
       return `
-        <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer transition border-l-4 rounded bg-smoke border-primary hover:scale-[1.01] overflow-hidden group shadow-lg relative">
+        <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer overflow-hidden group shadow-lg relative">
 
-          <div class="absolute top-2 left-2 z-30 flex flex-col gap-1">
-             ${isGF ? '<span class="bg-green-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md">GF</span>' : ""}
-             ${isSpicy ? '<span class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase flex items-center italic"><i class="fa-solid fa-pepper-hot mr-1"></i>Spicy</span>' : ""}
+          <div class="absolute top-4 left-4 z-30 flex flex-col gap-1">
+             ${isGF ? '<span class="bg-green-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md backdrop-blur-sm">GF</span>' : ""}
+             ${isSpicy ? '<span class="bg-red-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase flex items-center italic backdrop-blur-sm"><i class="fa-solid fa-pepper-hot mr-1"></i>Spicy</span>' : ""}
+             ${isBBQTable ? '<span class="bg-amber-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase backdrop-blur-sm">Shared Feast</span>' : ""}
           </div>
 
           <div class="aspect-video bg-black/20 relative overflow-hidden flex items-center justify-center">
@@ -174,7 +167,7 @@ function renderMenu(items) {
 
           <div class="p-4">
             <div class="flex items-start justify-between gap-2">
-              <h3 class="text-md font-display tracking-wide uppercase leading-tight">${item.name}</h3>
+              <h3 class="text-md font-display tracking-wide uppercase leading-tight text-white">${item.name}</h3>
               <span class="font-bold text-primary whitespace-nowrap">${item.price || ""}</span>
             </div>
           </div>
@@ -187,7 +180,7 @@ function renderMenu(items) {
 }
 
 /**
- * Modal Logic
+ * Modal Logic (Opening)
  */
 window.openMenuModal = function (index) {
   const item = window.currentRenderedItems[index];
@@ -198,29 +191,21 @@ window.openMenuModal = function (index) {
   const folderName = item.originalCategory || item.uiCategory;
   const modalImg = document.getElementById("modalImage");
 
-  // 1. Reset Modal State
-  // Remove hidden class and clear any previous sketch if it was injected
   modalImg.classList.remove("hidden");
   const existingSketch = modal.querySelector(".modal-sketch-placeholder");
   if (existingSketch) existingSketch.remove();
 
-  // 2. Set Basic Content
   document.getElementById("modalTitle").textContent = item.name;
   document.getElementById("modalDescription").textContent =
     item.description || "Authentic Smokehouse flavor.";
 
-  // 3. Image Handling with SVG Sketch Fallback
   modalImg.onerror = function () {
-    // Hide the broken image tag
     this.classList.add("hidden");
-
-    // Determine category for the right sketch
     const isDrink =
       folderName.toLowerCase().includes("wine") ||
       folderName.toLowerCase().includes("beer") ||
       folderName.toLowerCase().includes("spirit");
 
-    // Create the Sketch Container
     const sketchContainer = document.createElement("div");
     sketchContainer.className =
       "modal-sketch-placeholder flex flex-col items-center justify-center w-full aspect-video bg-[#1a1a1a] text-primary/20 border border-white/5 rounded-lg mb-4";
@@ -228,18 +213,14 @@ window.openMenuModal = function (index) {
     const foodSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-24 h-24 mb-2 opacity-40"><path d="M3 11h18M5 11V7a3 3 0 013-3h8a3 3 0 013 3v4M4 11v1a8 8 0 0016 0v-1M9 19v1M15 19v1"/></svg>`;
     const drinkSketch = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="w-24 h-24 mb-2 opacity-40"><path d="M7 3h10l-1 9h-8l-1-9zM7 3L5 21h14l-2-18M9 21v-4M15 21v-4"/></svg>`;
 
-    sketchContainer.innerHTML = `
-      ${isDrink ? drinkSketch : foodSketch}
-      <span class="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>
-    `;
+    sketchContainer.innerHTML = `${isDrink ? drinkSketch : foodSketch}
+      <span class="text-[10px] uppercase tracking-[0.4em] font-black opacity-30 italic">BBQ Heaven</span>`;
 
-    // Insert the sketch before the title
     this.parentElement.insertBefore(sketchContainer, this);
   };
 
   modalImg.src = `./images/${folderName}/${cleanName}.webp`;
 
-  // 4. Price & Options Logic
   const priceContainer = document.getElementById("modalPrice");
   const existingOptions = document.getElementById("price-options");
   if (existingOptions) existingOptions.remove();
@@ -268,7 +249,6 @@ window.openMenuModal = function (index) {
     priceContainer.textContent = item.price || "";
   }
 
-  // 5. Add to Order Action
   document.getElementById("modalAddBtn").onclick = () => {
     let selectedOption = null;
     if (item.options) {
@@ -277,12 +257,10 @@ window.openMenuModal = function (index) {
       ).value;
       selectedOption = item.options[selectedIndex];
     }
-
     addToOrderList(item, selectedOption);
     closeMenuModal();
   };
 
-  // 6. Show Modal
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
 };
@@ -292,7 +270,6 @@ window.closeMenuModal = function () {
   document.body.style.overflow = "";
 };
 
-// Helper for quick add (plus button on card)
 window.handleQuickAdd = function (index) {
   const item = window.currentRenderedItems[index];
   addToOrderList(item);

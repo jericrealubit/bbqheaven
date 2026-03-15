@@ -21,37 +21,37 @@
       <div class="flex flex-col items-center gap-8">
         <div id="category-filters" class="flex flex-wrap justify-center gap-3">
           <button
-            onclick="setCategory('all')"
+            onclick="setCategory('all', this)"
             class="cat-btn active-cat px-6 py-2 border border-primary text-primary font-bold uppercase text-[10px] tracking-widest rounded-full transition-all"
           >
             All
           </button>
           <button
-            onclick="setCategory('starters')"
+            onclick="setCategory('starters', this)"
             class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
           >
             Starters
           </button>
           <button
-            onclick="setCategory('mains')"
+            onclick="setCategory('mains', this)"
             class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
           >
             Mains
           </button>
           <button
-            onclick="setCategory('burgers_and_sandwiches')"
-            class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
-          >
-            Burgers
-          </button>
-          <button
-            onclick="setCategory('heaven_boards_family_to_share')"
+            onclick="setCategory('bbq_table', this)"
             class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
           >
             Platters
           </button>
           <button
-            onclick="setCategory('drinks')"
+            onclick="setCategory('kids_corner', this)"
+            class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
+          >
+            Kids Corner
+          </button>
+          <button
+            onclick="setCategory('drinks', this)"
             class="cat-btn px-6 py-2 border border-white/10 text-gray-400 font-bold uppercase text-[10px] tracking-widest rounded-full transition-all hover:border-primary"
           >
             Drinks
@@ -64,7 +64,7 @@
               class="w-4 h-4"
               fill="none"
               stroke="currentColor"
-              viewBox="0 0 24 24"
+              stroke-viewBox="0 0 24 24"
             >
               <path
                 stroke-linecap="round"

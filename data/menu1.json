@@ -64,10 +64,10 @@
     },
     {
       "name": "Krispy Chicken Wings (choice of flavor)",
-      "price": "$12 / $25",
+      "price": "$14 / $25",
       "description": "Jumbo wings fried crisp and tossed in your choice of our signature Pit sauces.",
       "options": [
-        { "label": "½ kg", "price": 12 },
+        { "label": "½ kg", "price": 14 },
         { "label": "1 kg", "price": 25 }
       ]
     },
@@ -75,9 +75,7 @@
       "name": "Tapas Board (To Share)",
       "price": "$50",
       "description": "A curated selection of our finest starters, perfect for sampling the best of the Pit with friends."
-    }
-  ],
-  "salad": [
+    },
     {
       "name": "Caesar Salad",
       "price": "$18",
@@ -139,9 +137,7 @@
       "name": "Slow Roasted Pork Ribs & BBQ Ribs",
       "price": "$37",
       "description": "A double hit of ribs: traditional slow-roasted pork paired with our glazed BBQ ribs."
-    }
-  ],
-  "poultry": [
+    },
     {
       "name": "Traditional Chicken Parmigiana",
       "price": "$28",
@@ -156,9 +152,7 @@
       "name": "Char Grill BBQ Half Chicken",
       "price": "$28",
       "description": "Succulent half chicken, marinated and char-grilled over open flames for a smoky, tender finish."
-    }
-  ],
-  "fishermans_catch": [
+    },
     {
       "name": "Grilled Tasmanian Salmon",
       "price": "$38",
@@ -178,9 +172,7 @@
       "name": "Creamy Garlic Prawn",
       "price": "$28",
       "description": "Plump, juicy prawns simmered in a rich and decadent garlic cream sauce."
-    }
-  ],
-  "burgers_and_sandwiches": [
+    },
     {
       "name": "Gourmet Beef Burger",
       "price": "$25",
@@ -207,7 +199,8 @@
       "description": "Crispy chicken schnitzel layered with smoky bacon, fresh lettuce, tomato, and melted cheese."
     }
   ],
-  "heaven_boards_family_to_share": [
+
+  "bbq_table": [
     {
       "name": "Heaven Board Family To Share",
       "price": "$300",
@@ -217,9 +210,7 @@
       "name": "Heaven Seafood Board Family To Share",
       "price": "$310",
       "description": "The ultimate ocean platter: grilled fish, prawns, calamari, and seafood gyozas for the whole table."
-    }
-  ],
-  "bbq_table": [
+    },
     {
       "name": "Unlimited Grill (per pax)",
       "price": "$45",
@@ -266,9 +257,7 @@
       "name": "Nugget & Chips (Kids)",
       "price": "$12",
       "description": "Classic golden chicken nuggets served with a side of crunchy fries."
-    }
-  ],
-  "sides": [
+    },
     {
       "name": "Basket of chips",
       "price": "$12",
@@ -288,9 +277,7 @@
       "name": "Broccoli & Cauliflower Gratin",
       "price": "$12",
       "description": "Tender broccoli and cauliflower baked in a creamy cheese sauce with a golden crust."
-    }
-  ],
-  "extras": [
+    },
     {
       "name": "Egg (extra)",
       "price": "$2",

@@ -4,15 +4,9 @@ export const SUPABASE_KEY = window.BBQ_CONFIG.SUPABASE_KEY;
 
 export const categoryMap = {
   starters: "starters",
-  salad: "starters",
-  sides: "starters",
   mains: "mains",
-  poultry: "mains",
-  fishermans_catch: "mains",
-  bbq_table: "mains",
-  kids_corner: "mains",
-  burgers_and_sandwiches: "burgers_and_sandwiches",
-  heaven_boards_family_to_share: "heaven_boards_family_to_share",
+  bbq_table: "bbq_table",
+  kids_corner: "kids_corner",
   white_wine: "drinks",
   red_wine: "drinks",
   sparkling_wines: "drinks",
