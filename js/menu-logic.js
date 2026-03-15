@@ -122,31 +122,46 @@ function renderMenu(items) {
 
   grid.innerHTML = items
     .map((item, index) => {
-      let cleanName = item.name.split("(")[0].trim();
+      // Logic to match partial names to filenames:
+      // 1. Remove anything in parentheses: "Jalapeno Poppers (6pcs)" -> "Jalapeno Poppers"
+      // 2. Remove anything after a comma: "BBQ Mix Grill, Mini Steak..." -> "BBQ Mix Grill"
+      let baseName = item.name.split("(")[0];
+      let cleanName = baseName.split(",")[0].trim();
+
       const folderName = item.originalCategory || item.uiCategory;
       const imagePath = `./images/${folderName}/${cleanName}.webp`;
 
       // Badge Logic
       const nameUpper = item.name.toUpperCase();
-      const isGF = nameUpper.includes("(GF)");
 
-      // Updated Spicy Logic:
-      // Checks for "SPICY" or "HOT", but explicitly ignores "HOT POT"
+      // 1. Standard Badges
+      const isGF = nameUpper.includes("(GF)");
       const isSpicy =
         (nameUpper.includes("SPICY") ||
           nameUpper.includes("HOT") ||
           nameUpper.includes("JALAPENO")) &&
         !nameUpper.includes("HOT POT");
 
-      const isBBQTable = item.originalCategory === "bbq_table";
+      // 2. Specialized Badges
+      const isBBQTable =
+        item.originalCategory === "bbq_table" ||
+        nameUpper.includes("BBQ TABLE");
+      const isNoSharing = nameUpper.includes("NO SHARING");
+      const isFamilyShare = nameUpper.includes("FAMILY TO SHARE");
 
       return `
         <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer overflow-hidden group shadow-lg relative">
 
-          <div class="absolute top-4 left-4 z-30 flex flex-col gap-1">
+          <div class="absolute top-4 left-4 z-30 flex flex-col gap-1.5">
              ${isGF ? '<span class="bg-green-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md backdrop-blur-sm">GF</span>' : ""}
+
              ${isSpicy ? '<span class="bg-red-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase flex items-center italic backdrop-blur-sm"><i class="fa-solid fa-pepper-hot mr-1"></i>Spicy</span>' : ""}
-             ${isBBQTable ? '<span class="bg-amber-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase backdrop-blur-sm">Shared Feast</span>' : ""}
+
+             ${isBBQTable ? '<span class="bg-amber-500 text-black text-[10px] font-black px-2 py-1 rounded shadow-md uppercase backdrop-blur-sm">BBQ Table</span>' : ""}
+
+             ${isFamilyShare ? '<span class="bg-blue-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase backdrop-blur-sm">Family to Share</span>' : ""}
+
+             ${isNoSharing ? '<span class="bg-zinc-800/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md uppercase backdrop-blur-sm">No Sharing</span>' : ""}
           </div>
 
           <div class="aspect-video bg-black/20 relative overflow-hidden flex items-center justify-center">
@@ -185,12 +200,16 @@ function renderMenu(items) {
 window.openMenuModal = function (index) {
   const item = window.currentRenderedItems[index];
   const modal = document.getElementById("menuModal");
-  if (!modal) return;
+  if (!modal || !item) return;
 
-  const cleanName = item.name.split("(")[0].trim();
+  // 1. MATCHING LOGIC (Must match renderMenu exactly)
+  let baseName = item.name.split("(")[0];
+  let cleanName = baseName.split(",")[0].trim();
+
   const folderName = item.originalCategory || item.uiCategory;
   const modalImg = document.getElementById("modalImage");
 
+  // Reset Modal State
   modalImg.classList.remove("hidden");
   const existingSketch = modal.querySelector(".modal-sketch-placeholder");
   if (existingSketch) existingSketch.remove();
@@ -199,12 +218,19 @@ window.openMenuModal = function (index) {
   document.getElementById("modalDescription").textContent =
     item.description || "Authentic Smokehouse flavor.";
 
+  // Error Handler for missing images
   modalImg.onerror = function () {
     this.classList.add("hidden");
+    const nameUpper = item.name.toUpperCase();
+    const folderLower = folderName.toLowerCase();
+
     const isDrink =
-      folderName.toLowerCase().includes("wine") ||
-      folderName.toLowerCase().includes("beer") ||
-      folderName.toLowerCase().includes("spirit");
+      folderLower.includes("wine") ||
+      folderLower.includes("beer") ||
+      folderLower.includes("spirit") ||
+      folderLower.includes("drinks") ||
+      nameUpper.includes("JUICE") ||
+      nameUpper.includes("COCKTAIL");
 
     const sketchContainer = document.createElement("div");
     sketchContainer.className =
@@ -219,8 +245,10 @@ window.openMenuModal = function (index) {
     this.parentElement.insertBefore(sketchContainer, this);
   };
 
+  // Set Source using the updated cleanName
   modalImg.src = `./images/${folderName}/${cleanName}.webp`;
 
+  // Price & Options Handling
   const priceContainer = document.getElementById("modalPrice");
   const existingOptions = document.getElementById("price-options");
   if (existingOptions) existingOptions.remove();
@@ -229,14 +257,14 @@ window.openMenuModal = function (index) {
     priceContainer.textContent = "Select Size";
     const optionsDiv = document.createElement("div");
     optionsDiv.id = "price-options";
-    optionsDiv.className = "flex gap-3 mb-6";
+    optionsDiv.className = "flex flex-wrap gap-3 mb-6"; // Added flex-wrap for mobile safety
     optionsDiv.innerHTML = item.options
       .map(
         (opt, i) => `
-      <label class="flex-1">
+      <label class="flex-1 min-w-[100px]">
         <input type="radio" name="menu-option" value="${i}" class="hidden peer" ${i === 0 ? "checked" : ""}>
         <div class="cursor-pointer text-center py-3 border border-white/10 rounded-lg peer-checked:border-primary peer-checked:bg-primary/10 transition-all">
-          <div class="text-xs uppercase text-gray-400">${opt.label}</div>
+          <div class="text-[10px] uppercase text-gray-400">${opt.label}</div>
           <div class="text-lg font-bold text-white">$${opt.price}</div>
         </div>
       </label>
@@ -249,13 +277,16 @@ window.openMenuModal = function (index) {
     priceContainer.textContent = item.price || "";
   }
 
+  // Add to Order Logic
   document.getElementById("modalAddBtn").onclick = () => {
     let selectedOption = null;
     if (item.options) {
-      const selectedIndex = document.querySelector(
+      const checkedInput = document.querySelector(
         'input[name="menu-option"]:checked',
-      ).value;
-      selectedOption = item.options[selectedIndex];
+      );
+      if (checkedInput) {
+        selectedOption = item.options[checkedInput.value];
+      }
     }
     addToOrderList(item, selectedOption);
     closeMenuModal();

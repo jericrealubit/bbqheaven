@@ -29,11 +29,11 @@
     },
     {
       "name": "Hardys The Riddle Sauvignon Blanc (Australia)",
-      "price": "$8 / $29",
+      "price": "$7.5 / $23",
       "description": "A lively Sauvignon Blanc showcasing tropical fruit aromas and a clean, herbaceous palate.",
       "options": [
-        { "label": "Glass", "price": 8 },
-        { "label": "Bottle", "price": 29 }
+        { "label": "Glass", "price": 7.5 },
+        { "label": "Bottle", "price": 23 }
       ]
     },
     {
@@ -64,12 +64,12 @@
       ]
     },
     {
-      "name": "Brookland Valley Discovery Chardonnay (Margaret River, WA)",
-      "price": "$9 / $32",
+      "name": "Benchmark Chardonnay (Margaret River, WA)",
+      "price": "$10 / $29",
       "description": "A refined Chardonnay with delicate stone fruit flavors and a subtle hint of French oak.",
       "options": [
-        { "label": "Glass", "price": 9 },
-        { "label": "Bottle", "price": 32 }
+        { "label": "Glass", "price": 10 },
+        { "label": "Bottle", "price": 29 }
       ]
     }
   ],
@@ -94,11 +94,11 @@
     },
     {
       "name": "Days of Rose (South Australia)",
-      "price": "$8 / $32",
+      "price": "$9 / $34",
       "description": "A dry and pale South Australian Rosé with crisp notes of raspberry and pomegranate.",
       "options": [
-        { "label": "Glass", "price": 8 },
-        { "label": "Bottle", "price": 32 }
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 34 }
       ]
     },
     {
@@ -112,7 +112,7 @@
     },
     {
       "name": "Jumpin Jack Merlot (Victoria)",
-      "price": "$7.50 / $29",
+      "price": "$7.5 / $29",
       "description": "A soft and approachable Victorian Merlot with plum fruit flavors and a velvety finish.",
       "options": [
         { "label": "Glass", "price": 7.5 },
@@ -130,7 +130,7 @@
     },
     {
       "name": "Hardys The Riddle Cabernet Merlot (Australia)",
-      "price": "$7.50 / $23",
+      "price": "$7.5 / $23",
       "description": "A medium-bodied blend with structured tannins and ripe blackcurrant fruit.",
       "options": [
         { "label": "Glass", "price": 7.5 },
@@ -148,26 +148,30 @@
     },
     {
       "name": "Hardys The Riddle Shiraz (Australia)",
-      "price": "$7.50 / $29",
+      "price": "$7.5 / $23",
       "description": "A classic Australian Shiraz with bold plum flavors and a hint of cracked black pepper.",
       "options": [
         { "label": "Glass", "price": 7.5 },
-        { "label": "Bottle", "price": 29 }
+        { "label": "Bottle", "price": 23 }
       ]
     },
     {
       "name": "St Hallett Black Clay Shiraz (Barossa Valley South Australia)",
-      "price": "$9 / $40",
+      "price": "$9 / $35",
       "description": "A quintessential Barossa Shiraz, rich and generous with dark chocolate and spicy cherry notes.",
       "options": [
         { "label": "Glass", "price": 9 },
-        { "label": "Bottle", "price": 40 }
+        { "label": "Bottle", "price": 35 }
       ]
     },
     {
       "name": "Penfolds Shiraz (South Australia)",
-      "price": "$12",
-      "description": "A world-renowned Shiraz offering impeccable balance and deep, complex berry characters."
+      "price": "$9 / $40",
+      "description": "A world-renowned Shiraz offering impeccable balance and deep, complex berry characters.",
+      "options": [
+        { "label": "Glass", "price": 9 },
+        { "label": "Bottle", "price": 40 }
+      ]
     }
   ],
   "sparkling_wines": [
@@ -319,17 +323,17 @@
   "tap_beers": [
     {
       "name": "Matso Ginger",
-      "price": "$13.50",
+      "price": "$14.50",
       "description": "An iconic Kimberley ginger beer, famous for its spicy kick and refreshing zing."
     },
     {
       "name": "Single Fin",
-      "price": "$12.50",
+      "price": "$13.50",
       "description": "A refreshing summer ale with vibrant tropical fruit and citrus aromas."
     },
     {
-      "name": "Great Northern (tap)",
-      "price": "$12.50",
+      "name": "Great Northern",
+      "price": "$13.50",
       "description": "Crisp and refreshing Australian lager, served ice-cold straight from the tap."
     }
   ],
@@ -401,7 +405,7 @@
     },
     {
       "name": "Lipton Iced Tea",
-      "price": "$4",
+      "price": "$5",
       "description": "Refreshing iced tea brewed with sun-ripened tea leaves for a smooth finish."
     },
     {
@@ -413,27 +417,27 @@
   "juices": [
     {
       "name": "Apple Juice",
-      "price": "$5",
+      "price": "$4",
       "description": "100% pure apple juice, naturally sweet and packed with crisp orchard flavor."
     },
     {
       "name": "Mango Juice",
-      "price": "$5",
+      "price": "$4",
       "description": "Thick and luscious mango juice with a rich, tropical sweetness."
     },
     {
       "name": "Orange Juice",
-      "price": "$5",
+      "price": "$4",
       "description": "Zesty orange juice, freshly squeezed for a bright and citrusy morning boost."
     },
     {
       "name": "Pineapple Juice",
-      "price": "$5",
+      "price": "$4",
       "description": "Tangy and refreshing pineapple juice, like a tropical vacation in a glass."
     },
     {
       "name": "Cranberry Juice",
-      "price": "$5",
+      "price": "$4",
       "description": "A tart and refreshing juice with a deep ruby color and antioxidant benefits."
     }
   ],
