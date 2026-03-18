@@ -68,15 +68,23 @@ export async function loadMenu() {
 
     fullMenu = [];
     [res1, res2].forEach((source) => {
-      // Logic adjusted for Object keys (starters, mains, etc.)
       for (const [categoryKey, items] of Object.entries(source)) {
         if (!Array.isArray(items)) continue;
 
         items.forEach((item) => {
+          // --- UPDATED LOGIC START ---
+          let targetUiCategory = categoryMap[categoryKey] || "other";
+
+          // Force BBQ Table items to appear in the Mains section
+          if (categoryKey === "bbq_table") {
+            targetUiCategory = "mains";
+          }
+          // --- UPDATED LOGIC END ---
+
           fullMenu.push({
             ...item,
             originalCategory: categoryKey,
-            uiCategory: categoryMap[categoryKey] || "other",
+            uiCategory: targetUiCategory,
           });
         });
       }
