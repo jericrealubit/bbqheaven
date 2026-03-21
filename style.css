@@ -213,3 +213,22 @@ iframe {
   border-color: rgba(255, 255, 255, 0.18) !important;
   transform: translateY(-8px) !important;
 }
+
+@keyframes heatHaze {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.1;
+  }
+}
+
+.group:hover .heat-overlay {
+  animation: heatHaze 2s infinite ease-in-out;
+}

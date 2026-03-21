@@ -158,7 +158,11 @@ function renderMenu(items) {
       const isFamilyShare = nameUpper.includes("FAMILY TO SHARE");
 
       return `
-        <div onclick="openMenuModal(${index})" class="menu-item cursor-pointer overflow-hidden group shadow-lg relative">
+        <div onclick="openMenuModal(${index})"
+             class="menu-item cursor-pointer overflow-hidden group shadow-lg relative
+                    transition-all duration-300 ease-out
+                    hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(217,119,6,0.3)]
+                    border border-white/5 hover:border-amber-500/50">
 
           <div class="absolute top-4 left-4 z-30 flex flex-col gap-1.5">
              ${isGF ? '<span class="bg-green-600/90 text-white text-[10px] font-bold px-2 py-1 rounded shadow-md backdrop-blur-sm">GF</span>' : ""}

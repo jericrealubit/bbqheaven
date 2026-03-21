@@ -220,11 +220,7 @@ function updateTotals(subtotal) {
     <button onclick="handlePlaceOrder()" id="submitOrderBtn" class="w-full py-6 bg-primary text-white text-2xl font-black uppercase rounded-2xl shadow-xl hover:bg-red-500 active:scale-[0.97] transition-all flex flex-col items-center justify-center leading-tight">
       <span>PLACE ORDER</span>
       <span class="text-[10px] opacity-80 font-bold tracking-[0.2em]">SENDS TO KITCHEN DASHBOARD</span>
-    </button>
-
-    <p class="text-center text-[10px] text-zinc-500 uppercase mt-4 font-bold tracking-widest">
-      No WhatsApp? No problem. Just watch the screen!
-    </p>`;
+    </button>`;
 
   // 2. CRITICAL FIX: Re-apply the location lock to the NEW button
   // Make sure this function name matches exactly what we defined earlier
