@@ -170,18 +170,14 @@ body {
   }
 }
 
+/* Ensure the button transitions smoothly */
 #backToTop {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(10px); /* Starts slightly lower */
 }
 
-#backToTop.back-to-top-visible {
-  opacity: 1 !important;
-  pointer-events: auto !important;
+#backToTop.opacity-100 {
+  transform: translateY(0); /* Slides up into position */
 }
 
 /* Map Dark Mode */
@@ -231,4 +227,94 @@ iframe {
 
 .group:hover .heat-overlay {
   animation: heatHaze 2s infinite ease-in-out;
+}
+
+/* 1. Desktop Nav Underline - Growing from Left to Right */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #d97706; /* primary amber */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* 2. Glass-morphism Mobile Menu Core */
+#mobile-menu {
+  /* Added a subtle radial gradient to mimic grill heat behind the glass */
+  background-image: radial-gradient(
+    circle at center,
+    rgba(217, 119, 6, 0.08) 0%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+}
+
+/* 3. Link Animation: Fade In and Up */
+#mobile-menu.flex .mobile-link {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered Delay for the "Rising" Effect */
+.mobile-link:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.mobile-link:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.mobile-link:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.mobile-link:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* 4. Subtle Pulse for the Order FAB */
+@keyframes pulse-subtle {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(217, 119, 6, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(217, 119, 6, 0.4);
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+/* 5. Sticky Nav scroll effect (Triggered via JS) */
+.nav-scrolled {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  background-color: rgba(0, 0, 0, 0.95) !important;
+  border-bottom: 1px solid rgba(217, 119, 6, 0.3) !important;
+  backdrop-blur: 10px;
 }

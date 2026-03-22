@@ -3,24 +3,20 @@ import { loadSections } from "./js/ui-loaders.js";
 import { updateOrderCounter } from "./js/order-system.js";
 
 /**
- * The Master Init Function
- * This runs once when the browser is ready.
+ * Master Init Function
+ * Ensures HTML is loaded before initializing UI listeners.
  */
 async function init() {
   try {
-    // 1. Inject the Construction Banner
-    showConstructionBanner();
-
-    // 1. Load all HTML components (Header, Menu, Footer, etc.)
-    // Note: loadSections handles initializing the burger menu,
-    // business status, and live counter once those sections exist.
+    // 1. Load HTML components (Header, Menu, Footer)
     await loadSections();
 
-    // 2. Initialize the Global Order Counter (Badge)
+    // 2. Initialize Order Counter Badge
     updateOrderCounter();
 
-    // 3. Setup Global Event Listeners (UI elements that aren't inside placeholders)
+    // 3. Setup UI listeners for elements now present in the DOM
     setupGlobalListeners();
+    setupMobileMenu();
 
     console.log("BBQ Heaven App Initialized Successfully.");
   } catch (error) {
@@ -29,112 +25,110 @@ async function init() {
 }
 
 /**
- * Creates and injects a sticky banner at the top of the page
+ * Global UI Listeners
+ * Handles Scroll-based effects for navigation and the Back to Top button.
  */
-function showConstructionBanner() {
-  const banner = document.createElement("div");
-  banner.id = "construction-banner";
-  // Styling: High visibility yellow/black theme
-  banner.className =
-    "bg-amber-400 text-black py-2 px-4 text-center text-xs font-bold uppercase tracking-widest sticky top-0 z-[3000] border-b border-black/10 flex items-center justify-center gap-3";
+function setupGlobalListeners() {
+  const backToTopBtn = document.getElementById("backToTop");
+  const nav = document.getElementById("main-nav");
 
-  banner.innerHTML = `
-    <i class="fa-solid fa-triangle-exclamation animate-pulse text-sm"></i>
-    <span>Site Under Construction - Online Ordering is currently in Testing Mode</span>
-    <i class="fa-solid fa-triangle-exclamation animate-pulse text-sm"></i>
-  `;
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
 
-  // Insert it as the first child of the body
-  document.body.prepend(banner);
+    // Toggle Back to Top visibility after 400px
+    if (backToTopBtn) {
+      if (scrollY > 400) {
+        backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.add(
+          "opacity-100",
+          "pointer-events-auto",
+          "translate-y-0",
+        );
+      } else {
+        backToTopBtn.classList.add("opacity-0", "pointer-events-none");
+        backToTopBtn.classList.remove(
+          "opacity-100",
+          "pointer-events-auto",
+          "translate-y-0",
+        );
+      }
+    }
+
+    // Optional: Add a class to the nav for a scrolled styling effect
+    if (nav) {
+      scrollY > 50
+        ? nav.classList.add("nav-scrolled")
+        : nav.classList.remove("nav-scrolled");
+    }
+  });
 }
 
 /**
- * Setup listeners for elements that exist on the base index.html
+ * Mobile Menu Logic
+ * Handles opening/closing the mobile overlay and locking body scroll.
  */
-function setupGlobalListeners() {
-  // Back to Top Button Logic
-  const backToTopBtn = document.getElementById("backToTop");
+function setupMobileMenu() {
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.getElementById("menu-icon");
 
-  window.onscroll = () => {
-    if (backToTopBtn) {
-      window.scrollY > 300
-        ? backToTopBtn.classList.add("show")
-        : backToTopBtn.classList.remove("show");
+  if (!menuBtn || !mobileMenu) return;
+
+  const toggleMenu = (forceClose = false) => {
+    const isOpening = forceClose
+      ? false
+      : mobileMenu.classList.contains("hidden");
+
+    if (isOpening) {
+      mobileMenu.classList.remove("hidden");
+      mobileMenu.classList.add("flex");
+      menuIcon.classList.replace("fa-bars-staggered", "fa-xmark");
+      document.body.style.overflow = "hidden"; // Lock background scroll
+    } else {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("flex");
+      menuIcon.classList.replace("fa-xmark", "fa-bars-staggered");
+      document.body.style.overflow = ""; // Unlock background scroll
     }
   };
 
-  // Helper for smooth scroll back to top
-  window.scrollToTop = function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  menuBtn.onclick = () => toggleMenu();
+
+  // Close when a mobile link is clicked (useful for anchor navigation)
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.onclick = () => toggleMenu(true);
+  });
 }
 
-// 2. Fire the init function
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init);
-} else {
-  init();
-}
-
-/**
- * Global function to check user's region and show a pickup disclaimer if they're outside WA
- * This is called from the header component after it loads, ensuring it runs early in the user journey.
- */
 // --- LOCATION SECURITY SYSTEM (GPS GEOFENCING) ---
-
-// 1. Store Coordinates (Unit 6/6 Acute Court, Rockingham WA 6168)
 const STORE_LAT = -32.2858;
 const STORE_LON = 115.7533;
-const MAX_RADIUS_KM = 60; // Allows orders from Perth to Mandurah
-
-// 2. Global Safety Lock
-window.isOutsideServiceArea = false;
+const MAX_RADIUS_KM = 60;
 
 window.checkGPSLocation = function () {
-  if (!navigator.geolocation) {
-    console.log("Geolocation is not supported by this browser.");
-    return;
-  }
-
-  const geoOptions = {
-    enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 0,
-  };
+  if (!navigator.geolocation) return;
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      const userLat = position.coords.latitude;
-      const userLon = position.coords.longitude;
-
       const distance = calculateDistance(
         STORE_LAT,
         STORE_LON,
-        userLat,
-        userLon,
+        position.coords.latitude,
+        position.coords.longitude,
       );
-      console.log(`User is ${distance.toFixed(2)}km away from the smokehouse.`);
-
-      // If user is further than 60km, lock the checkout
       if (distance > MAX_RADIUS_KM) {
         window.isOutsideServiceArea = true;
         showPickupWarning("Outside Service Area");
-        window.updateCheckoutUI(); // Lock the button immediately
+        if (window.updateCheckoutUI) window.updateCheckoutUI();
       }
     },
-    (error) => {
-      console.warn(
-        "GPS Access Denied. Defaulting to safe state for local users.",
-      );
-      // We don't lock the UI if GPS is denied, as many local users prefer privacy.
-      // We just show a reminder.
+    (err) => {
       showPickupWarning("Location Hidden");
     },
-    geoOptions,
+    { enableHighAccuracy: true, timeout: 10000 },
   );
 };
 
-// 3. Distance Calculation (Haversine Formula)
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Earth's radius in km
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -145,61 +139,28 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
       Math.cos((lat2 * Math.PI) / 180) *
       Math.sin(dLon / 2) *
       Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
+  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
 function showPickupWarning(status) {
   if (document.getElementById("location-banner")) return;
-
   const warning = document.createElement("div");
   warning.id = "location-banner";
   warning.className =
     "bg-amber-600 text-white text-[10px] py-2 px-4 text-center font-bold uppercase tracking-widest sticky top-0 z-[100]";
-
-  warning.innerHTML =
+  warning.innerText =
     status === "Outside Service Area"
-      ? `📍 OUTSIDE RADIUS: Orders are LOCAL PICKUP ONLY in Rockingham.`
-      : `📍 LOCAL PICKUP ONLY: Please ensure you can collect from Rockingham.`;
-
+      ? `📍 OUTSIDE RADIUS: LOCAL PICKUP ONLY IN ROCKINGHAM.`
+      : `📍 LOCAL PICKUP ONLY: PLEASE ENSURE YOU CAN COLLECT FROM ROCKINGHAM.`;
   document.body.prepend(warning);
 }
 
-window.updateCheckoutUI = function () {
-  const submitBtn = document.getElementById("submitOrderBtn");
+// Fire the init function
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
 
-  if (submitBtn && window.isOutsideServiceArea) {
-    submitBtn.disabled = true;
-    submitBtn.classList.remove("bg-primary", "hover:bg-red-500");
-    submitBtn.classList.add("bg-zinc-800", "cursor-not-allowed", "opacity-50");
-
-    submitBtn.innerHTML = `
-      <span>PICKUP ONLY (OUTSIDE AREA)</span>
-      <span class="text-[10px] opacity-80 font-bold tracking-[0.2em]">ROCKINGHAM, WA LOCAL ORDERS ONLY</span>
-    `;
-
-    if (!document.getElementById("location-error-msg")) {
-      const errorMsg = document.createElement("p");
-      errorMsg.id = "location-error-msg";
-      errorMsg.className =
-        "text-red-500 text-[10px] font-bold mt-2 uppercase text-center animate-pulse";
-      errorMsg.innerText =
-        "⚠️ This site is for local pickup in Rockingham, WA only.";
-      submitBtn.after(errorMsg);
-    }
-  }
-};
-
-// --- INITIALIZE ON LOAD ---
-document.addEventListener("DOMContentLoaded", () => {
-  window.checkGPSLocation();
-});
-
-window.addEventListener("scroll", () => {
-  const btn = document.getElementById("backToTop");
-  if (window.scrollY > 500) {
-    btn.classList.add("back-to-top-visible");
-  } else {
-    btn.classList.remove("back-to-top-visible");
-  }
-});
+// Initial GPS Check
+window.checkGPSLocation();
