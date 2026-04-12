@@ -37,6 +37,13 @@ BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management e
 
 ## ✨ Core Features
 
+This project implements advanced security and real-time synchronization logic. For a deep dive into the code implementation, see the [Technical Architecture Gist](https://gist.github.com/jericrealubit/d7db5b86621bc62f49cbb740bb1a9475).
+
+### 🔒 Role-Based Access Control (RBAC)
+
+- **Orders Node:** Public Write-Only access for customers; Staff/Admin Read/Write access via UID validation.
+- **Users Node:** Scoped to auth.uid to protect staff profile data.
+
 ### 📍 Precise GPS Geofencing (NEW)
 
 To solve "Mobile IP Routing" errors where WA users incorrectly appear in Melbourne/Sydney, the system utilizes the **Web Geolocation API**.
