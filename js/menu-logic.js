@@ -130,14 +130,14 @@ function renderMenu(items) {
 
   grid.innerHTML = items
     .map((item, index) => {
-      // Logic to match partial names to filenames:
-      // 1. Remove anything in parentheses: "Jalapeno Poppers (6pcs)" -> "Jalapeno Poppers"
-      // 2. Remove anything after a comma: "BBQ Mix Grill, Mini Steak..." -> "BBQ Mix Grill"
-      let baseName = item.name.split("(")[0];
-      let cleanName = baseName.split(",")[0].trim();
-
+      // Get the folder based on your loadMenu logic
       const folderName = item.originalCategory || item.uiCategory;
-      const imagePath = `./images/${folderName}/${cleanName}.webp`;
+
+      // FIX: Use the ABSOLUTE name from the JSON.
+      // Do not split by "(" or "," because your files have those in the name.
+      let fileName = item.name.trim();
+
+      const imagePath = `./images/${folderName}/${fileName}.webp`;
 
       // Badge Logic
       const nameUpper = item.name.toUpperCase();
@@ -214,11 +214,12 @@ window.openMenuModal = function (index) {
   const modal = document.getElementById("menuModal");
   if (!modal || !item) return;
 
-  // 1. MATCHING LOGIC (Must match renderMenu exactly)
-  let baseName = item.name.split("(")[0];
-  let cleanName = baseName.split(",")[0].trim();
-
+  // --- FIX START: Match filename exactly to JSON name ---
+  // We remove the split("(") and split(",") logic so it finds the full filename.
+  let fileName = item.name.trim();
   const folderName = item.originalCategory || item.uiCategory;
+  // --- FIX END ---
+
   const modalImg = document.getElementById("modalImage");
 
   // Reset Modal State
@@ -257,8 +258,8 @@ window.openMenuModal = function (index) {
     this.parentElement.insertBefore(sketchContainer, this);
   };
 
-  // Set Source using the updated cleanName
-  modalImg.src = `./images/${folderName}/${cleanName}.webp`;
+  // Set Source using the exact JSON name
+  modalImg.src = `./images/${folderName}/${fileName}.webp`;
 
   // Price & Options Handling
   const priceContainer = document.getElementById("modalPrice");
@@ -269,7 +270,7 @@ window.openMenuModal = function (index) {
     priceContainer.textContent = "Select Size";
     const optionsDiv = document.createElement("div");
     optionsDiv.id = "price-options";
-    optionsDiv.className = "flex flex-wrap gap-3 mb-6"; // Added flex-wrap for mobile safety
+    optionsDiv.className = "flex flex-wrap gap-3 mb-6";
     optionsDiv.innerHTML = item.options
       .map(
         (opt, i) => `
