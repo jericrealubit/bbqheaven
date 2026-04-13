@@ -3,6 +3,7 @@
 **Authentic Low & Slow Woodfire BBQ Ordering System** 📍 Unit 6/6 Acute Court, Rockingham WA 6168
 
 🌐 **Live Site:** [bbqheaven.au](https://bbqheaven.au)
+📺 **Watch the Demo:** [demo](https://www.youtube.com/watch?v=jTFAfbdnLL4)
 
 ---
 
@@ -35,6 +36,13 @@ BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management e
 ---
 
 ## ✨ Core Features
+
+This project implements advanced security and real-time synchronization logic. For a deep dive into the code implementation, see the [Technical Architecture Gist](https://gist.github.com/jericrealubit/d7db5b86621bc62f49cbb740bb1a9475).
+
+### 🔒 Role-Based Access Control (RBAC)
+
+- **Orders Node:** Public Write-Only access for customers; Staff/Admin Read/Write access via UID validation.
+- **Users Node:** Scoped to auth.uid to protect staff profile data.
 
 ### 📍 Precise GPS Geofencing (NEW)
 
