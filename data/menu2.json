@@ -2,38 +2,38 @@
   "white_wine": [
     {
       "name": "Hardys The Riddle Moscato (Australia)",
-      "price": "$8 / $23",
+      "price": "$8 / $28",
       "description": "A light and refreshing Australian Moscato featuring sweet floral notes and a zesty finish.",
       "options": [
         { "label": "Glass", "price": 8 },
-        { "label": "Bottle", "price": 23 }
+        { "label": "Bottle", "price": 28 }
       ]
     },
     {
       "name": "Amberley Kiss and Tell Moscato (Margaret River, WA)",
-      "price": "$8 / $32",
+      "price": "$9 / $32",
       "description": "A premium Margaret River Moscato with vibrant fruit flavors of peach and rose petals.",
       "options": [
-        { "label": "Glass", "price": 8 },
+        { "label": "Glass", "price": 9 },
         { "label": "Bottle", "price": 32 }
       ]
     },
     {
       "name": "Tatachilla White Admiral Pinot Grigio (Australia)",
-      "price": "$8 / $29",
+      "price": "$9 / $29",
       "description": "A crisp and dry Pinot Grigio with elegant pear and citrus undertones.",
       "options": [
-        { "label": "Glass", "price": 8 },
+        { "label": "Glass", "price": 9 },
         { "label": "Bottle", "price": 29 }
       ]
     },
     {
-      "name": "Hardys The Riddle Sauvignon Blanc (Australia)",
-      "price": "$7.5 / $23",
+      "name": "Hardys the Riddle Moscato (Australia) #2",
+      "price": "$8 / $28",
       "description": "A lively Sauvignon Blanc showcasing tropical fruit aromas and a clean, herbaceous palate.",
       "options": [
-        { "label": "Glass", "price": 7.5 },
-        { "label": "Bottle", "price": 23 }
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 28 }
       ]
     },
     {
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "name": "Jumpin Jack Semillon Sauvignon Blanc (Victoria)",
+      "name": "Jumpin Jack Semillon Sauvingnon Blanc (Victoria)",
       "price": "$8 / $29",
       "description": "A well-balanced Victorian blend with bright acidity and a smooth citrus profile.",
       "options": [
@@ -65,11 +65,11 @@
     },
     {
       "name": "Benchmark Chardonnay (Margaret River, WA)",
-      "price": "$10 / $29",
+      "price": "$10 / $30",
       "description": "A refined Chardonnay with delicate stone fruit flavors and a subtle hint of French oak.",
       "options": [
         { "label": "Glass", "price": 10 },
-        { "label": "Bottle", "price": 29 }
+        { "label": "Bottle", "price": 30 }
       ]
     }
   ],
@@ -112,10 +112,10 @@
     },
     {
       "name": "Jumpin Jack Merlot (Victoria)",
-      "price": "$7.5 / $29",
+      "price": "$8 / $29",
       "description": "A soft and approachable Victorian Merlot with plum fruit flavors and a velvety finish.",
       "options": [
-        { "label": "Glass", "price": 7.5 },
+        { "label": "Glass", "price": 8 },
         { "label": "Bottle", "price": 29 }
       ]
     },
@@ -130,11 +130,11 @@
     },
     {
       "name": "Hardys The Riddle Cabernet Merlot (Australia)",
-      "price": "$7.5 / $23",
+      "price": "$8 / $29",
       "description": "A medium-bodied blend with structured tannins and ripe blackcurrant fruit.",
       "options": [
-        { "label": "Glass", "price": 7.5 },
-        { "label": "Bottle", "price": 23 }
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 29 }
       ]
     },
     {
@@ -147,12 +147,12 @@
       ]
     },
     {
-      "name": "Hardys The Riddle Shiraz (Australia)",
-      "price": "$7.5 / $23",
+      "name": "Hardy’s The Riddle Shiraz (Australia)",
+      "price": "$8 / $29",
       "description": "A classic Australian Shiraz with bold plum flavors and a hint of cracked black pepper.",
       "options": [
-        { "label": "Glass", "price": 7.5 },
-        { "label": "Bottle", "price": 23 }
+        { "label": "Glass", "price": 8 },
+        { "label": "Bottle", "price": 29 }
       ]
     },
     {
@@ -166,10 +166,19 @@
     },
     {
       "name": "Penfolds Shiraz (South Australia)",
-      "price": "$9 / $40",
+      "price": "$10 / $40",
       "description": "A world-renowned Shiraz offering impeccable balance and deep, complex berry characters.",
       "options": [
-        { "label": "Glass", "price": 9 },
+        { "label": "Glass", "price": 10 },
+        { "label": "Bottle", "price": 40 }
+      ]
+    },
+    {
+      "name": "Pepper Jack Shiraz",
+      "price": "$10 / $40",
+      "description": "",
+      "options": [
+        { "label": "Glass", "price": 10 },
         { "label": "Bottle", "price": 40 }
       ]
     }
@@ -177,7 +186,7 @@
   "sparkling_wines": [
     {
       "name": "Tatachilla Brut (House Sparkling) (South Australia)",
-      "price": "$28",
+      "price": "$29",
       "description": "A refreshing house sparkling with bright citrus notes and a clean, crisp finish."
     },
     {
@@ -223,11 +232,6 @@
       "description": "The world's finest Bourbon, aged for 4 years for a smooth, sweet flavor."
     },
     {
-      "name": "Fundador Sherry Cask",
-      "price": "$10",
-      "description": "A Spanish Brandy matured in sherry-soaked casks for a deep, complex sweetness."
-    },
-    {
       "name": "Glenshiel",
       "price": "$10",
       "description": "A traditional blended Scotch whisky with a smooth, peaty character."
@@ -271,52 +275,42 @@
   "beer": [
     {
       "name": "San Miguel Lights",
-      "price": "$10",
+      "price": "$11",
       "description": "A low-calorie, crisp Filipino lager with a smooth and refreshing taste."
     },
     {
       "name": "San Miguel Pale Pilsen",
-      "price": "$10",
+      "price": "$11",
       "description": "An iconic, full-bodied pilsner with a rich, malty flavor and pleasant hop aroma."
     },
     {
-      "name": "San Miguel Special",
-      "price": "$10",
-      "description": "A premium international lager with a golden color and a balanced, clean finish."
-    },
-    {
       "name": "Red Horse",
-      "price": "$12",
+      "price": "$16.50",
       "description": "A world-famous high-gravity beer, known for its strong alcohol kick and rich flavor."
     },
     {
       "name": "Corona",
-      "price": "$10",
+      "price": "$11",
       "description": "The famous Mexican pale lager, typically served with a fresh lime wedge."
     },
     {
       "name": "Miller",
-      "price": "$10",
+      "price": "$11",
       "description": "A classic American-style lager known for its exceptionally smooth, light taste."
     },
     {
-      "name": "Great Northern",
-      "price": "$10",
-      "description": "The ultimate Australian refreshment, brewed for a clean, crisp, and refreshing finish."
-    },
-    {
       "name": "Gage Pink Lady Apple Cider",
-      "price": "$9",
+      "price": "$10",
       "description": "A naturally sweet and tart cider made from fresh Western Australian Pink Lady apples."
     },
     {
       "name": "Gage Yeah Boy",
-      "price": "$9",
+      "price": "$10",
       "description": "A vibrant and hoppy non-alcoholic XPA, perfect for a guilt-free refreshment."
     },
     {
       "name": "Guinness Draught",
-      "price": "$12",
+      "price": "$16.50",
       "description": "A rich and creamy Irish stout with a dark body and a velvety smooth head."
     }
   ],
@@ -335,62 +329,67 @@
       "name": "Great Northern",
       "price": "$13.50",
       "description": "Crisp and refreshing Australian lager, served ice-cold straight from the tap."
+    },
+    {
+      "name": "ALBY",
+      "price": "$12.50",
+      "description": "A refreshing and crisp local Western Australian lager, served ice-cold straight from the tap."
     }
   ],
   "soft_drinks_cans": [
     {
       "name": "Coke No Sugar",
-      "price": "$4",
+      "price": "$5",
       "description": "The classic Coca-Cola taste you love, without any of the sugar."
     },
     {
       "name": "Coke Classic",
-      "price": "$4",
+      "price": "$5",
       "description": "The original sparkling soft drink, refreshing since 1886."
     },
     {
       "name": "Sprite",
-      "price": "$4",
+      "price": "$5",
       "description": "A lemon-lime flavored soft drink with a clean, crisp, and refreshing taste."
     },
     {
       "name": "Fanta",
-      "price": "$4",
+      "price": "$5",
       "description": "Bubbly and refreshing orange-flavored soda, perfect for a fruit boost."
     },
     {
       "name": "Sunkist",
-      "price": "$4",
+      "price": "$5",
       "description": "Bold and refreshing orange soda made with real fruit flavors."
     },
     {
       "name": "Solo",
-      "price": "$4",
+      "price": "$5",
       "description": "The original hard-earned lemon thirst crusher, made with real lemon juice."
     },
     {
       "name": "Schweppes Lemonade",
-      "price": "$4",
+      "price": "$5",
       "description": "A classic, high-quality lemonade made with a signature blend of lemon oils."
     },
     {
       "name": "Mountain Dew",
-      "price": "$4",
+      "price": "$5",
       "description": "A high-energy citrus soda with a unique and bold flavor profile."
     },
     {
       "name": "Pepsi",
-      "price": "$4",
+      "price": "$5",
       "description": "A classic cola with a slightly sweeter, citrus-forward flavor profile."
     },
     {
       "name": "Pepsi Max",
-      "price": "$4",
+      "price": "$5",
       "description": "Maximum Pepsi taste with zero sugar, perfect for a calorie-free pick-me-up."
     },
     {
-      "name": "Lemon, Lime & Bitters (glass)",
-      "price": "$10",
+      "name": "Lemon, Lime & Bitters",
+      "price": "$14/TALL GLASS",
       "description": "A refreshing pub classic made with aromatic bitters and fresh citrus juices."
     },
     {
@@ -400,12 +399,12 @@
     },
     {
       "name": "Coconut Water",
-      "price": "$6.5",
+      "price": "$7",
       "description": "Pure and hydrating coconut water, packed with natural electrolytes."
     },
     {
       "name": "Lipton Iced Tea",
-      "price": "$5",
+      "price": "$7",
       "description": "Refreshing iced tea brewed with sun-ripened tea leaves for a smooth finish."
     },
     {

@@ -11,16 +11,16 @@
     },
     {
       "name": "Oyster Kilpatrick",
-      "price": "$20 / $39",
+      "price": "$26 / $45",
       "description": "Freshly shucked oysters topped with crispy bacon and our signature tangy Worcestershire-based sauce.",
       "options": [
-        { "label": "½ Dozen", "price": 20 },
-        { "label": "1 Dozen", "price": 39 }
+        { "label": "½ Dozen", "price": 26 },
+        { "label": "1 Dozen", "price": 45 }
       ]
     },
     {
       "name": "Jalapeno Poppers (6pcs)",
-      "price": "$14",
+      "price": "$16",
       "description": "Spicy jalapenos stuffed with rich cream cheese, breaded and fried until golden and crunchy."
     },
     {
@@ -50,11 +50,11 @@
     },
     {
       "name": "Krispy Lemon Pepper Calamari",
-      "price": "$17 / $26",
+      "price": "$18 / $29",
       "description": "Tender calamari rings lightly dusted in lemon pepper seasoning and fried for a light, zesty crunch.",
       "options": [
-        { "label": "Entree", "price": 17 },
-        { "label": "Main", "price": 26 }
+        { "label": "Entree", "price": 18 },
+        { "label": "Main", "price": 29 }
       ]
     },
     {
@@ -64,11 +64,11 @@
     },
     {
       "name": "Krispy Chicken Wings (choice of flavor)",
-      "price": "$14 / $25",
+      "price": "$14 / $27",
       "description": "Choice of flavor/ Hot & Spicy/ Southern Portugese/ BBQ",
       "options": [
         { "label": "½ kg", "price": 14 },
-        { "label": "1 kg", "price": 25 }
+        { "label": "1 kg", "price": 27 }
       ]
     },
     {
@@ -83,20 +83,20 @@
     },
     {
       "name": "Add Prawn (to salad)",
-      "price": "$8",
+      "price": "$12",
       "description": "Succulent grilled prawns to add a touch of the ocean to your greens."
     },
     {
       "name": "Add Chicken (to salad)",
-      "price": "$8",
+      "price": "$12",
       "description": "Tender grilled chicken breast strips to make your salad a hearty meal."
     }
   ],
   "mains": [
     {
       "name": "300g Pitch Black Angus Porterhouse Steak",
-      "price": "$41.50",
-      "description": "Choice of sausce: Garlic/ Pepper/ Mushrooms/ Redwine (add Creamy Garlic Prawn for $9)"
+      "price": "$42.5",
+      "description": "Choice of sausce: Garlic/ Pepper/ Mushrooms/ Redwine (add Creamy Garlic Prawn for $12)"
     },
     {
       "name": "300g BBQ Pitch Black Angus Porterhouse Steak & BBQ Pork Ribs",
@@ -105,12 +105,17 @@
     },
     {
       "name": "Sticky Pork Bourbon BBQ Ribs",
-      "price": "$39.50",
+      "price": "$43.50",
       "description": "Fall-off-the-bone pork ribs basted in a rich, sweet Bourbon-infused BBQ glaze."
     },
     {
+      "name": "Sticky bourbon pork ribs & prawn (G)",
+      "price": "$43.50",
+      "description": "Served with corn on the cob wilted spinach, broccoli, haricot beans, beer batter chips"
+    },
+    {
       "name": "Sticky Pork BBQ Ribs and Wings",
-      "price": "$32",
+      "price": "$34",
       "description": "A double dose of BBQ goodness: tender pork ribs and crispy wings coated in our signature sticky sauce."
     },
     {
@@ -120,18 +125,28 @@
     },
     {
       "name": "Heaven Board (BBQ Beef & Pork Ribs & Chicken)",
-      "price": "$56",
+      "price": "$59",
       "description": "The ultimate sampler: a massive helping of beef ribs, pork ribs, and wood-fired chicken."
     },
     {
       "name": "BBQ Mix Grill, Mini Steak, Porterhouse, Pork Steak, Pork Sausage, Chicken Thigh, Chicken Breast",
-      "price": "$48.5",
+      "price": "$55",
       "description": "A carnivore's dream featuring a selection of our best wood-fired meats and smoked sausages."
     },
     {
       "name": "Slow Roasted BBQ Beef Brisket",
-      "price": "$35",
+      "price": "$35.50",
       "description": "Served with truffle mash potato or chips & baby carrots broccolini"
+    },
+    {
+      "name": "Beef ribs - Slow roast prime beef ribs",
+      "price": "$45.50",
+      "description": "Served with truffle mash potato and wilted spinach, broccoli, haricot beans"
+    },
+    {
+      "name": "Roast beef ribs & reef slow roast BBQ Beef ribs and bourbon creamy garlic prawn (G)",
+      "price": "$45.50",
+      "description": "Served with truffle mash potato wilted spinach, broccoli, haricot beans"
     },
     {
       "name": "Slow Roasted Pork Ribs (GF)",
@@ -140,23 +155,28 @@
     },
     {
       "name": "Slow Roasted Lamb Shank (GF)",
-      "price": "$37",
+      "price": "$39.50",
       "description": "Served with truffle mash potato broccolini root vegetables"
     },
     {
       "name": "Traditional Chicken Parmigiana",
-      "price": "$28",
+      "price": "$29",
       "description": "Served with Salad beer batter chips"
     },
     {
       "name": "Chicken Schnitzel Salad and Beer Battered Chips",
-      "price": "$26",
+      "price": "$27",
       "description": "Choice of sauce, Garlic/ Pepper/ Mushroom/ Red Wine"
     },
     {
       "name": "Char Grill BBQ Half Chicken",
-      "price": "$28",
+      "price": "$30",
       "description": "Succulent half chicken, marinated and char-grilled over open flames for a smoky, tender finish."
+    },
+    {
+      "name": "Ocean dou grilled Tasmanian salmon & 80g Cray fish",
+      "price": "$49.50",
+      "description": "Served with wilted spinach, broccoli, haricot beans and mushroom sauce"
     },
     {
       "name": "Grilled Tasmanian Salmon",
@@ -165,32 +185,32 @@
     },
     {
       "name": "Grilled WA Barramundi",
-      "price": "$39",
+      "price": "$48.50",
       "description": "Served with creamy garlic prawn, truffle mash potato or chips + salad"
     },
     {
       "name": "Snapper Fish & Chips",
-      "price": "$24",
+      "price": "$29",
       "description": "With salad and tartar sauce"
     },
     {
       "name": "Creamy Garlic Prawn",
-      "price": "$38",
+      "price": "$39",
       "description": "Served with garlic bread/ Chips or rice + salad/ Option sizzling"
     },
     {
       "name": "Gourmet Beef Burger",
-      "price": "$25",
+      "price": "$30.50",
       "description": "With egg, caramelized onion, greens, tomato, bacon, cheese, house dressings, milk bun & beef batter chips"
     },
     {
       "name": "Chicken Burger",
-      "price": "$22",
+      "price": "$29.50",
       "description": "With bacon, caramelized onion, tomato, greens, cheese, served with chips option/ grill or crumb"
     },
     {
       "name": "Steak Sandwich",
-      "price": "$24",
+      "price": "$31.50",
       "description": "Caramelized onion, tomato, greens, bacon, cheese, house dressings & Turkish bread"
     },
     {
@@ -207,32 +227,27 @@
   "bbq_table": [
     {
       "name": "Heaven Board (Family To Share)",
-      "price": "$300",
+      "price": "$350",
       "description": "HOT POT OF THE DAY (up to 6 served), 1 SERVED BBQ PORK RIBS, 1 SERVED SLOW ROAST BEEF RIBS, 1 SERVED BBQ, ROAST CHICKEN, 1 SERVED BBQ MIX GRILL, 6 PCS SLIDER OF THE DAY, 1 SERVED CAULIFLOWER & BROCOLLI GRATIN, 1 SERVED ONION RING, 6 PCS ARANCINI OF THE DAY, 6 PCS JALAPENO POPPERS, 12 PCS CHICKEN NUGGETS, 6 SALAD, 6 SERVED CHIPS OR RICE"
     },
     {
-      "name": "Heaven Seafood Board (Family To Share)",
-      "price": "$310",
-      "description": "HOT POT OF THE DAY (up to 6 served), 1 SERVED CHILLI MUSSELS, 1 SERVED PRAWN PASTA, 1 SERVED CREAMY GARLIC PRAWN, 1 SERVED LEMON PEPPER CALAMARI, 1 SERVED BEER BATTER SNAPPER, 1 DOZEN OYSTER KILPATRICK, 1 SERVED SEAFOOD GYOZA, 6 PCS SALMON SLIDER, 6 PCS ARANCINI OF THE DAY, 6 PCS JALAPENO POPPERS, 1 SERVED CAULIFLOWER & BROCOLI GRATIN, 6 SERVED SALAD, 6 SERVED CHIPS OR RICE"
-    },
-    {
       "name": "Unlimited Grill (NO SHARING)",
-      "price": "$45",
-      "description": "Hot pot of the day, Entree: Beer Battered Fish, Krispy Wings, Mini Steak Black Angus Porterhouse, Chicken Breast, Chicken Thigh, Pork Scotch, BBQ Sausage/ Chorizo, Prawn, Calamari, Salad/ Spicy pickled Cabbage, Chips or Rice, Choice of Sauce: Chilli Sauce, Garlic, Mushroom, Pepper, Redwine, Teriyaki, BBQ, Honey soy, Home made chilli sauce"
+      "price": "$60 PER PAX",
+      "description": "Hot pot of the day, Entree: Beer Battered Fish, Krispy Wings, Mini Steak Black Angus Porterhouse, Chicken Breast, Chicken Thigh, Pork Scotch, BBQ Sausage/ Chorizo, Prawn, Calamari, Salad/ Spicy pickled Cabbage, Chips or Rice, Choice of Sauce: Chilli Sauce, Garlic, Mushroom, Pepper, Redwine, Teriyaki, BBQ, Honey soy, Home made chilli sauce. Note: (90min start when all items are in the table. left over cook food will be charged $15 per 100g)"
     },
     {
       "name": "Grill for 2 (BBQ Table)",
-      "price": "$80",
+      "price": "$90",
       "description": "Hot pot of the day, 180g Chicken Breast, 180g Scotch Pork Steak, 2 PCS Chicken Thigh, 180g Black Angus Porterhouse, Chorizo, Chips or Rice, Kimchi, Salad, Sauce"
     },
     {
       "name": "Grill for 3 (BBQ Table)",
-      "price": "$120",
+      "price": "$135",
       "description": "250g Chicken Breast, 250g Pork Scotch Steak, 250g Black Angus Porterhouse, 3 PCS Chicken Thigh, Chorizo, Hot pot of the day, Chips or Rice, Kimchi, Salad, Sauce"
     },
     {
       "name": "Grill for 4 (BBQ Table)",
-      "price": "$160",
+      "price": "$180",
       "description": "350g Chicken Breast, 350g Scotch Pork Steak, 350g Black Angus Porterhouse, 4 PCS Chicken Thigh, Chorizo, Hot pot of the day, Chips or Rice, Kimchi, Salad, Sauce"
     },
     {
@@ -244,58 +259,58 @@
   "kids_corner": [
     {
       "name": "Kids Burger & Chips",
-      "price": "$12",
+      "price": "$14",
       "description": "A junior-sized beef burger with cheese, served with a side of golden chips."
     },
     {
       "name": "Kids Steak & Chips",
-      "price": "$12",
+      "price": "$15",
       "description": "A junior-sized steak with cheese, served with a side of golden chips."
     },
     {
       "name": "Kids Fish & Chips",
-      "price": "$12",
+      "price": "$14",
       "description": "A small portion of battered fish and chips, perfect for little explorers."
     },
     {
       "name": "Nugget & Chips",
-      "price": "$12",
+      "price": "$14",
       "description": "Classic golden chicken nuggets served with a side of crunchy fries."
     },
     {
       "name": "Basket of chips",
-      "price": "$12",
+      "price": "$14",
       "description": "A generous basket of our signature thick-cut, beer-battered golden fries."
     },
     {
       "name": "Basket of Wedges",
-      "price": "$12",
+      "price": "$16",
       "description": "A hearty basket of crispy potato wedges, seasoned to perfection and served with a side of our signature sauce."
     },
     {
       "name": "Basket Onion Rings",
-      "price": "$12",
+      "price": "$16",
       "description": "Thick-cut onion rings dipped in batter and fried until ultra-crunchy."
     },
     {
+      "name": "Rice (extra)",
+      "price": "$4",
+      "description": "A side of fluffy, steamed white rice."
+    },
+    {
       "name": "Buttered Vegetables",
-      "price": "$12",
+      "price": "$14",
       "description": "A selection of fresh seasonal vegetables tossed in rich, melted butter."
     },
     {
       "name": "Broccoli & Cauliflower Gratin",
-      "price": "$12",
+      "price": "$14",
       "description": "Tender broccoli and cauliflower baked in a creamy cheese sauce with a golden crust."
     },
     {
       "name": "Egg (extra)",
       "price": "$4",
       "description": "A perfectly fried egg to top off any burger or steak."
-    },
-    {
-      "name": "Rice (extra)",
-      "price": "$4",
-      "description": "A side of fluffy, steamed white rice."
     },
     {
       "name": "Bacon (extra)",
