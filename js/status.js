@@ -65,20 +65,20 @@ export function updateBusinessStatus() {
   const schedule = {
     Monday: [[17, 21]],
     Tuesday: [[17, 21]],
-    Wednesday: [
-      [11.5, 14.5],
-      [17, 21],
-    ],
-    Thursday: [
-      [11.5, 14.5],
-      [17, 21],
-    ],
+    Wednesday: [[17, 21]],
+    Thursday: [[17, 21]],
     Friday: [
       [11.5, 14.5],
       [17, 21],
     ],
-    Saturday: [[11.5, 21]],
-    Sunday: [[11.5, 21]],
+    Saturday: [
+      [11.5, 14.5],
+      [17, 21],
+    ],
+    Sunday: [
+      [11.5, 14.5],
+      [17, 21],
+    ],
   };
 
   const todayHours = schedule[day];
@@ -111,4 +111,8 @@ export function updateBusinessStatus() {
       }
     }
   }
+  //+ temporary closure
+  statusText.textContent = "Temporary Closed";
+  hoursHint.textContent = "We will be back mid-July";
+  //- temporary closure
 }
