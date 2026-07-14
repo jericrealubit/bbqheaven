@@ -103,7 +103,12 @@ export function updateBusinessStatus() {
     if (statusDot) statusDot.className = "h-3 w-3 rounded-full bg-red-500";
 
     if (hoursHint) {
-      if (day === "Monday" || day === "Tuesday") {
+      if (
+        day === "Monday" ||
+        day === "Tuesday" ||
+        day === "Wednesday" ||
+        day === "Thursday"
+      ) {
         hoursHint.textContent = "Opens at 5:00 PM";
       } else {
         hoursHint.textContent =
@@ -111,8 +116,4 @@ export function updateBusinessStatus() {
       }
     }
   }
-  //+ temporary closure
-  statusText.textContent = "Temporary Closed";
-  hoursHint.textContent = "We will be back mid-July";
-  //- temporary closure
 }
