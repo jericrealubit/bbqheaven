@@ -107,6 +107,7 @@ BBQHEAVEN/
 
 ## 📚 Documentation
 
+- [Handover Options](docs/HANDOVER_OPTIONS.md) — the owner's three choices: transfer together, transfer with their developer, or a managed plan
 - [Website Transfer Plan](docs/TRANSFER_PLAN.md) — step-by-step handover of code, database, hosting and domain
 - [Owner Guide](docs/OWNER_GUIDE.md) — running and maintaining the website
 - [Menu & Price Update Guide](docs/MENU_UPDATE_GUIDE.md) — changing menu items, prices and photos
