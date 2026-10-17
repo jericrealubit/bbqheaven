@@ -401,6 +401,7 @@ If the site breaks after the switch:
 - Contact: `<<DEVELOPER EMAIL / PHONE>>`
 
 Client documentation provided:
+- [`HANDOVER_OPTIONS.md`](./HANDOVER_OPTIONS.md) — the three handover options (this plan applies to Options 1 and 2)
 - [`OWNER_GUIDE.md`](./OWNER_GUIDE.md) — how to run and maintain the website
 - [`MENU_UPDATE_GUIDE.md`](./MENU_UPDATE_GUIDE.md) — how to change menu items and prices
 - [`CREDENTIALS_HANDOVER_TEMPLATE.md`](./CREDENTIALS_HANDOVER_TEMPLATE.md) — email template for sending logins (fill in a copy, never commit real values)
