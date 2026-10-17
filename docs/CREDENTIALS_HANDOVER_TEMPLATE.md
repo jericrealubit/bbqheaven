@@ -51,7 +51,7 @@ website uses, plus links to your guides.
 | Email | `<<EMAIL>>` |
 | Password | `<<PASSWORD>>` |
 | 2FA / recovery codes | `<<2FA DETAILS>>` |
-| Pages project name | `<<PROJECT NAME, e.g. bbqheaven>>` |
+| Worker name | `<<WORKER NAME, e.g. bbqheaven>>` |
 
 ### Google account / Firebase — online orders and kitchen staff logins
 | | |
@@ -114,7 +114,7 @@ You can add or remove staff logins in Firebase → Authentication → Users (see
 ## 2. Website settings (keep secret)
 
 These connect the website to Firebase and Supabase. They're already entered in
-**Cloudflare → Workers & Pages → `<<PROJECT>>` → Settings → Variables and Secrets**. You only
+**Cloudflare → Workers & Pages → `<<WORKER NAME>>` → Settings → Build → Variables and secrets**. You only
 need them if the website is ever rebuilt or moved. **Don't change or share them.**
 
 | Name | Value |

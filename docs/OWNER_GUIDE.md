@@ -124,12 +124,14 @@ The Open/Closed status is calculated automatically from Perth time (AWST) using 
 
 1. You commit a change on GitHub.
 2. Cloudflare sees it and rebuilds the site automatically.
-3. Check: Cloudflare → **Workers & Pages → bbqheaven → Deployments** — ✅ green = live.
+3. Check: Cloudflare → **Workers & Pages → bbqheaven → Deployments** (the build log is under
+   **Settings → Build** / the latest build) — ✅ green = live.
 
-**To undo a bad change instantly:** Deployments → the last good deployment → **⋯ → Rollback to
-this deployment**. Then fix the file on GitHub.
+**To undo a bad change instantly:** Deployments → the last good version → **⋯ → Rollback**.
+Then fix the file on GitHub.
 
-> ⚠️ Don't delete or change the **Environment variables** in Cloudflare (Settings → Variables).
+> ⚠️ Don't delete or change the **Build variables** in Cloudflare (bbqheaven → Settings → Build →
+> Variables and secrets).
 > They connect the site to Firebase and Supabase. Without them orders stop working.
 
 ---
@@ -219,7 +221,7 @@ this deployment**. Then fix the file on GitHub.
 | What | Where |
 |------|-------|
 | Hostmate support | Hostmate client area → Support / Tickets |
-| Cloudflare help | https://developers.cloudflare.com/pages/ · https://community.cloudflare.com |
+| Cloudflare help | https://developers.cloudflare.com/workers/ · https://community.cloudflare.com |
 | Firebase help | https://firebase.google.com/support |
 | Supabase help | https://supabase.com/docs |
 | GitHub help | https://docs.github.com |

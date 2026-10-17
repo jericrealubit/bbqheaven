@@ -30,7 +30,7 @@ BBQ Heaven Rockingham is a bespoke, full-stack ordering and kitchen management e
 
 ### Deployment & DevOps
 
-- **Platform:** Cloudflare Pages (CI/CD + SSL + Global CDN).
+- **Platform:** Cloudflare Workers static assets, deployed by Workers Builds (CI/CD + SSL + Global CDN).
 - **Package Management:** `pnpm` for efficient dependency handling.
 
 ---
