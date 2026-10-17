@@ -389,6 +389,7 @@ If the site breaks after the switch:
 Client documentation provided:
 - [`OWNER_GUIDE.md`](./OWNER_GUIDE.md) — how to run and maintain the website
 - [`MENU_UPDATE_GUIDE.md`](./MENU_UPDATE_GUIDE.md) — how to change menu items and prices
+- [`CREDENTIALS_HANDOVER_TEMPLATE.md`](./CREDENTIALS_HANDOVER_TEMPLATE.md) — email template for sending logins (fill in a copy, never commit real values)
 
 ---
 
