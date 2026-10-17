@@ -227,7 +227,7 @@ click **Validate JSON**. "Valid JSON" means it's safe to commit.
 
 **Option B — instant rollback in Cloudflare:**
 1. Cloudflare → **Workers & Pages → bbqheaven → Deployments**.
-2. Find the last deployment that worked → **⋯ → Rollback to this deployment**.
+2. Find the last version that worked → **⋯ → Rollback**.
 3. The old menu is live again within seconds. Then fix the file on GitHub calmly (your next
    commit will deploy normally).
 

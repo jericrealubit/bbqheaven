@@ -26,12 +26,12 @@ Each step says **who** does it and how to **✅ verify** it worked before moving
 | # | Asset | Provider | What it does | Current owner | New owner | Transfer method | Done |
 |---|-------|----------|--------------|---------------|-----------|-----------------|------|
 | 1 | Source code | GitHub (`jericrealubit/bbqheaven`) | All website files, menu, images | Developer | Client | GitHub repository transfer | ☐ |
-| 2 | Website hosting | Cloudflare Pages (project `bbqheaven`) | Serves the site, SSL, CDN, auto-deploy | Developer | Client | Re-create project in client's Cloudflare account | ☐ |
+| 2 | Website hosting | Cloudflare Workers (Worker `bbqheaven`, deployed by Workers Builds) | Serves the site, SSL, CDN, auto-deploy | Developer | Client | Re-create the Worker in client's Cloudflare account | ☐ |
 | 3 | Orders database + staff logins | Firebase (Realtime Database + Authentication) | Stores customer orders, kitchen dashboard logins | Developer | Client | Add client as Owner, then remove developer | ☐ |
 | 4 | Live visitor counter | Supabase (Realtime presence only, no tables) | "People viewing now" counter | Developer | Client | New project in client's account (or transfer org) | ☐ |
 | 5 | Domain name `bbqheaven.au` | Hostmate (registrar) | The web address | `<<REGISTRANT NAME>>` | Client | Hostmate account push + auDA change of registrant if needed | ☐ |
 | 6 | DNS records | Cloudflare (nameservers) | Points the domain at the site (+ any email) | Developer | Client | Re-create zone in client's Cloudflare | ☐ |
-| 7 | Environment variables (9 keys) | Cloudflare Pages settings | Connects the site to Firebase & Supabase | Developer | Client | Re-entered in client's Cloudflare | ☐ |
+| 7 | Environment variables (9 keys) | Cloudflare Worker → Settings → Build (build variables) | Connects the site to Firebase & Supabase | Developer | Client | Re-entered in client's Cloudflare | ☐ |
 | 8 | Google Search Console / Google Business Profile | Google | Search listing & Maps | `<<OWNER>>` | Client | Add client as Owner | ☐ |
 | 9 | Social links (Facebook, Instagram, TikTok, YouTube) | Meta / TikTok / Google | Linked from site footer | Client | Client | No change — just confirm URLs | ☐ |
 
@@ -39,10 +39,15 @@ Each step says **who** does it and how to **✅ verify** it worked before moving
 
 - **Site type:** static HTML + vanilla JavaScript (no server to move). Tailwind, Firebase SDK and
   Supabase SDK load from CDNs.
+- **Hosting:** a Cloudflare **Worker** named `bbqheaven` that serves the repository's files as
+  static assets (`wrangler.jsonc` → `assets.directory: "."`). **Workers Builds** connects it to
+  GitHub and redeploys on every push to `main`; other branches get `*.workers.dev` preview URLs.
 - **Build command:** `npm run build` → runs `generate-env.js`, which writes `env.js` from
-  environment variables. **Output directory:** `.` (repository root). See `wrangler.jsonc`.
-- **Environment variables required by the build** (values are *not* in the repo — `.env` and
-  `env.js` are git-ignored):
+  environment variables. **Deploy command:** `npx wrangler deploy`. Files listed in
+  `.wranglerignore` are not uploaded.
+- **Build variables required by the build** (values are *not* in the repo — `.env` and
+  `env.js` are git-ignored). Because `env.js` is generated during the build, these must be
+  **build** variables (Worker → Settings → Build → Variables and secrets), not runtime variables:
 
   | Variable | Source |
   |----------|--------|
@@ -109,8 +114,9 @@ Complete these **before** the handover day.
 6. **List staff logins:** Firebase → Authentication → Users → note each email (not passwords).
 7. **Export the DNS zone:** Cloudflare → `bbqheaven.au` → DNS → Records → **Import and Export →
    Export**. Also take a screenshot of the records page.
-8. **Record current settings:** Cloudflare Pages → project → Settings → screenshot the build
-   settings and the list of environment variable *names*.
+8. **Record current settings:** Cloudflare → **Workers & Pages → `bbqheaven` → Settings → Build**
+   → screenshot the Git repository, build command, deploy command and the list of build
+   variable *names*; also screenshot **Settings → Domains & Routes**.
 9. Put all backups (ZIP, JSON, rules, DNS export, screenshots) in a folder and share it with the
    client via their storage (Google Drive / OneDrive). **Do not include secret keys** in this folder.
 
@@ -138,7 +144,7 @@ git push --mirror https://github.com/<client>/bbqheaven.git`.
 ✅ **Verify:** repo appears at `https://github.com/<client>/bbqheaven`; commit history and the
 `v1.0-handover` tag are present.
 
-> Note: The existing Cloudflare Pages project is linked to the old repo location. The site keeps
+> Note: The existing Cloudflare Worker's Git connection points at the old repo location. The site keeps
 > serving its last deployment, so nothing breaks — the new Cloudflare project in Phase 3 connects
 > to the new repo.
 
@@ -158,7 +164,8 @@ no changes.
    settings → Modify plan** and link the client's own billing account. (On the free *Spark*
    plan, skip this.)
 4. **Client:** Authentication → **Settings → Authorized domains** — confirm `bbqheaven.au` and
-   the new `<project>.pages.dev` domain are listed (add the pages.dev one after Phase 3).
+   the new `bbqheaven.<subdomain>.workers.dev` domain are listed (add the workers.dev one after
+   Phase 3).
 5. **Client:** Authentication → Users — add an account for each staff member who should use the
    kitchen dashboard; remove any the developer created for testing.
 6. **Client (after Phase 6 sign-off):** remove the developer from Users and permissions.
@@ -187,28 +194,35 @@ then leaves the organisation — values stay the same.
 
 ---
 
-## 6. Phase 3 — Hosting (Cloudflare Pages) (Day 0)
+## 6. Phase 3 — Hosting (Cloudflare Workers) (Day 0)
 
-Cloudflare Pages projects cannot be moved between accounts, so the client creates a fresh project
-connected to their GitHub repo. The old project stays live until DNS is switched.
+The site runs as a Cloudflare **Worker** (static assets) deployed by **Workers Builds**. Workers
+can't be moved between Cloudflare accounts, so the client creates a fresh Worker connected to
+their GitHub repo. The developer's Worker stays live until DNS is switched.
 
-1. **Client:** Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
+1. **Client:** Cloudflare dashboard → **Workers & Pages → Create → Import a repository**
+   (Workers tab).
 2. Authorise Cloudflare to access the client's GitHub and select the `bbqheaven` repo.
 3. **Build settings:**
-   - Project name: `bbqheaven` (or `bbqheaven-site` if taken)
+   - Project (Worker) name: `bbqheaven` — must match `"name"` in `wrangler.jsonc`
+     (if you choose another name, change it in `wrangler.jsonc` too)
    - Production branch: `main`
-   - Framework preset: **None**
    - Build command: `npm run build`
-   - Build output directory: `.`
-4. **Environment variables** (Production *and* Preview): add all 9 variables listed in
-   section 1 — values come from Phase 2. Mark keys as **Encrypt/Secret**.
-5. Click **Save and Deploy**.
-6. Open the preview address `https://<project>.pages.dev` and run the **smoke test** in Phase 5
-   (all items except custom-domain ones).
-7. Add `<project>.pages.dev` to Firebase **Authorized domains** (Phase 2a step 4).
+   - Deploy command: `npx wrangler deploy`
+   - Non-production branch builds: **enabled** (gives preview URLs for other branches)
+4. **Build variables:** under *Advanced settings → Build variables* (or later in
+   **Settings → Build → Variables and secrets**) add all 9 variables listed in section 1 —
+   values come from Phase 2. Use the **Secret** type for the keys.
+5. Click **Create and deploy** and wait for the build log to finish with ✅.
+6. Open the Worker's preview address `https://bbqheaven.<client-subdomain>.workers.dev`
+   (shown on the Worker's overview page) and run the **smoke test** in Phase 5 (all items except
+   custom-domain ones). If the menu loads but orders fail, a build variable is missing — fix it
+   and **Retry build**.
+7. Add `bbqheaven.<client-subdomain>.workers.dev` to Firebase **Authorized domains**
+   (Phase 2a step 4).
 
-✅ **Verify:** the `pages.dev` site loads the menu, the live counter shows a number, and a test
-order appears in the kitchen dashboard opened on the `pages.dev` address.
+✅ **Verify:** the `workers.dev` site loads the menu, the live counter shows a number, and a test
+order appears in the kitchen dashboard opened on the `workers.dev` address.
 
 **Do not continue to Phase 4 until this works.**
 
@@ -265,8 +279,8 @@ this if the client prefers another registrar; it adds risk and cost.
 4. **Client (or developer with client):** Hostmate → `bbqheaven.au` → **Nameservers / Manage
    DNS** → replace the current nameservers with the client's two Cloudflare nameservers → Save.
 5. Wait for Cloudflare to show the domain as **Active** (minutes to 24 hours; up to 48 hours).
-6. **Client:** Workers & Pages → the new project → **Custom domains → Set up a custom domain** →
-   add `bbqheaven.au`, then add `www.bbqheaven.au`. Cloudflare creates the DNS records and SSL
+6. **Client:** Workers & Pages → the new `bbqheaven` Worker → **Settings → Domains & Routes → Add
+   → Custom domain** → add `bbqheaven.au`, then add `www.bbqheaven.au`. Cloudflare creates the DNS records and SSL
    certificate automatically.
 7. **Client:** Rules → **Redirect Rules** → redirect `www.bbqheaven.au/*` →
    `https://bbqheaven.au/$1` (301) so there is one main address.
@@ -275,7 +289,7 @@ this if the client prefers another registrar; it adds risk and cost.
 ✅ **Verify:** `https://bbqheaven.au` and `https://www.bbqheaven.au` both load the site with a
 padlock; https://dnschecker.org shows the new Cloudflare nameservers; email (if any) still works.
 
-> Keep the developer's old Cloudflare Pages project **running for 14 days** after the switch as a
+> Keep the developer's old Cloudflare Worker **running for 14 days** after the switch as a
 > fallback. Only after Phase 6 sign-off should the developer remove the domain from their
 > Cloudflare account and delete the old project.
 
@@ -326,7 +340,7 @@ Once everything is verified, make sure **only the client** holds the keys.
    - [ ] Cloudflare account members (if added)
    - [ ] Hostmate account / contacts
    - [ ] Google Search Console & Business Profile
-4. **Developer:** delete the old Cloudflare Pages project and the old `bbqheaven.au` zone from
+4. **Developer:** delete the old Cloudflare Worker (Settings → Delete) and the old `bbqheaven.au` zone from
    their Cloudflare account; delete the old Supabase project (if a new one was made); delete local
    `.env` files and any copies of keys.
 5. **Developer:** send written confirmation that all copies of credentials have been deleted.
@@ -341,9 +355,9 @@ If the site breaks after the switch:
 
 | Problem | Rollback |
 |---------|----------|
-| New Cloudflare deployment broken | Cloudflare Pages → Deployments → previous working deployment → **Rollback to this deployment** |
+| New Cloudflare deployment broken | Worker → **Deployments** → previous working version → **⋯ → Rollback** |
 | Domain not loading after nameserver change | In Hostmate, set nameservers back to the **old** values recorded in Phase 0/7a. The old Cloudflare project is still live and serves the site. |
-| Orders not reaching the dashboard | Check the 9 environment variables in Cloudflare Pages, then redeploy. Check Firebase Authorized domains. |
+| Orders not reaching the dashboard | Check the 9 build variables (Worker → Settings → Build), then **Retry build**. Check Firebase Authorized domains. |
 | Missing email after DNS move | Re-add MX/TXT records from the Phase 0 DNS export |
 | Code lost / bad change | Restore from tag `v1.0-handover` or the ZIP backup |
 
@@ -356,7 +370,7 @@ If the site breaks after the switch:
 | −7 | Both | Agree date, review this plan, client starts pre-transfer checklist |
 | −2 | Developer | Phase 0 backups, lower DNS TTL, confirm domain registrant/expiry |
 | 0 (AM) | Both | Phase 1 GitHub transfer, Phase 2 Firebase/Supabase |
-| 0 (PM) | Client + Dev | Phase 3 Cloudflare Pages, test on `pages.dev` |
+| 0 (PM) | Client + Dev | Phase 3 Cloudflare Worker, test on `workers.dev` |
 | 0 (PM, after close) | Client + Dev | Phase 4 nameserver switch at Hostmate |
 | +1 | Both | Phase 5 smoke test, Google Search Console |
 | +1 → +5 | Developer/Hostmate | Hostmate account push / change of registrant completes |
@@ -370,7 +384,7 @@ If the site breaks after the switch:
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Downtime during DNS switch | Low | Medium | Lowered TTL, switch while shop is closed, old project kept live |
-| Missing environment variable → orders fail | Medium | High | Test full order flow on `pages.dev` before switching DNS |
+| Missing environment variable → orders fail | Medium | High | Test full order flow on `workers.dev` before switching DNS |
 | Email stops working | Low | High | Compare DNS records with Phase 0 export before switching nameservers |
 | Domain expires during transfer | Low | High | Check expiry first; renew if within 30 days; turn on auto-renew |
 | `.au` eligibility rejected | Low | High | Use the business ABN and exact legal name |
@@ -389,6 +403,7 @@ If the site breaks after the switch:
 Client documentation provided:
 - [`OWNER_GUIDE.md`](./OWNER_GUIDE.md) — how to run and maintain the website
 - [`MENU_UPDATE_GUIDE.md`](./MENU_UPDATE_GUIDE.md) — how to change menu items and prices
+- [`CREDENTIALS_HANDOVER_TEMPLATE.md`](./CREDENTIALS_HANDOVER_TEMPLATE.md) — email template for sending logins (fill in a copy, never commit real values)
 
 ---
 
@@ -397,7 +412,7 @@ Client documentation provided:
 | Item | Received by client | Date |
 |------|--------------------|------|
 | GitHub repository owned by client | ☐ | |
-| Cloudflare Pages project in client account, site live on bbqheaven.au | ☐ | |
+| Cloudflare Worker in client account, site live on bbqheaven.au | ☐ | |
 | Firebase project owned by client, staff logins working | ☐ | |
 | Supabase project owned by client | ☐ | |
 | `bbqheaven.au` in client's Hostmate account, registrant = client, auto-renew on | ☐ | |
